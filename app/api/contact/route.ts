@@ -1,6 +1,7 @@
+export const runtime = "edge";
+
 import { NextRequest, NextResponse } from "next/server";
 
-/* ─── Types ──────────────────────────────────────────────────────────────── */
 interface ContactFormData {
   companyName: string;
   contactPerson?: string;
@@ -16,7 +17,6 @@ interface ValidationError {
   message: string;
 }
 
-/* ─── Helpers ────────────────────────────────────────────────────────────── */
 function validatePayload(body: unknown): {
   data?: ContactFormData;
   errors?: ValidationError[];
@@ -35,18 +35,10 @@ function validatePayload(body: unknown): {
 
   if (!companyName) {
     errors.push({ field: "companyName", message: "Numele firmei este obligatoriu." });
-  } else if (companyName.length < 2) {
-    errors.push({ field: "companyName", message: "Numele firmei trebuie să aibă minim 2 caractere." });
   }
 
   if (!phone) {
     errors.push({ field: "phone", message: "Telefonul este obligatoriu." });
-  } else if (!/^[0-9\s\+\-\(\)]{7,20}$/.test(phone)) {
-    errors.push({ field: "phone", message: "Număr de telefon invalid." });
-  }
-
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errors.push({ field: "email", message: "Adresă de email invalidă." });
   }
 
   if (errors.length > 0) return { errors };
@@ -64,17 +56,13 @@ function validatePayload(body: unknown): {
   };
 }
 
-/* ─── POST /api/contact ──────────────────────────────────────────────────── */
 export async function POST(request: NextRequest) {
   let body: unknown;
 
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      { success: false, message: "JSON invalid." },
-      { status: 400 }
-    );
+    return NextResponse.json({ success: false, message: "JSON invalid." }, { status: 400 });
   }
 
   const { data, errors } = validatePayload(body);
@@ -86,29 +74,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  /*
-   * TODO: implementare reală SMTP (ex. Nodemailer + Resend / SendGrid):
-   *
-   * await transporter.sendMail({
-   *   from: "site@plastdu.ro",
-   *   to: "office@plastdu.ro",
-   *   subject: `Cerere ofertă — ${data!.companyName}`,
-   *   text: formatEmailBody(data!),
-   * });
-   */
-
-  console.info("[contact/route] New inquiry from:", data!.companyName, "|", data!.phone);
+  console.info("[contact] New inquiry from:", data!.companyName, "|", data!.phone);
 
   return NextResponse.json(
-    {
-      success: true,
-      message: "Mesajul a fost trimis cu succes. Vă vom contacta în cel mai scurt timp.",
-    },
+    { success: true, message: "Mesajul a fost trimis. Vă vom contacta în cel mai scurt timp." },
     { status: 200 }
   );
 }
 
-/* ─── Method guard ───────────────────────────────────────────────────────── */
 export async function GET() {
   return NextResponse.json({ message: "Method not allowed." }, { status: 405 });
 }

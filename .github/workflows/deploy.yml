@@ -25,9 +25,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npx @cloudflare/next-on-pages
-        env:
-          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+        run: npx @cloudflare/next-on-pages@1
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

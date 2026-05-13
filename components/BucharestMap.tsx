@@ -48,7 +48,9 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
     (async () => {
       // Dynamic imports — Leaflet rulează numai în browser
       L = (await import("leaflet")).default;
-      const { MarkerClusterGroup } = await import("leaflet.markercluster");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const MCG = await import("leaflet.markercluster") as any;
+      const MarkerClusterGroup = MCG.MarkerClusterGroup ?? MCG.default?.MarkerClusterGroup ?? MCG.default;
 
       // Fix default icon paths broken by webpack
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -99,7 +101,8 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
 
       // Cluster icon custom — cerc albastru #006EB6 cu număr alb
       const clusterGroup = new MarkerClusterGroup({
-        iconCreateFunction(cluster) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        iconCreateFunction(cluster: any) {
           const count = cluster.getChildCount();
           const size = count < 10 ? 38 : count < 100 ? 44 : 50;
           return L.divIcon({
