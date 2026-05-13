@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import CookieConsent from "@/components/CookieConsent";
 
 /* ─── Site-wide metadata ─────────────────────────────────────────────────── */
 export const metadata: Metadata = {
@@ -99,6 +100,7 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen">
         {children}
         <WhatsAppFloat />
+        <CookieConsent />
         {/* Protecție imagini — dezactivează meniu contextual pe imagini */}
         <script dangerouslySetInnerHTML={{ __html: `
           document.addEventListener('contextmenu', function(e) {
