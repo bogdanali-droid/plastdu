@@ -181,7 +181,7 @@ export default function FlansaOsbPage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Imagine */}
               <div className="flex flex-col gap-3">
-                <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-slate-200 border border-neutral-border">
+                <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-slate-200 border border-neutral-border img-watermark">
                   <Image
                     src="/images/produse/flansa-osb/01.jpg"
                     alt="Flanșă OSB cu Capac Snap-on TSF-F55 — Plast Du IV"
@@ -193,7 +193,7 @@ export default function FlansaOsbPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-2 max-w-lg mx-auto lg:mx-0 w-full">
                   {[2,3].map((n) => (
-                    <div key={n} className="relative aspect-square rounded-lg overflow-hidden border border-neutral-border bg-slate-100">
+                    <div key={n} className="relative aspect-square rounded-lg overflow-hidden border border-neutral-border bg-slate-100 img-watermark">
                       <Image
                         src={`/images/produse/flansa-osb/0${n}.jpg`}
                         alt={`Flanșă OSB — imagine ${n}`}

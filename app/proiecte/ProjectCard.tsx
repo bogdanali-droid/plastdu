@@ -5,7 +5,7 @@ import type { Project } from "@/components/BucharestMap";
 export default function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="bg-white rounded-2xl shadow-card border border-neutral-border overflow-hidden hover:shadow-card-hover transition-shadow">
-      <div className="aspect-video bg-slate-100 flex items-center justify-center overflow-hidden">
+      <div className="aspect-video bg-slate-100 flex items-center justify-center overflow-hidden img-watermark">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={project.photo}

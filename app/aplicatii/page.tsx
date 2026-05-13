@@ -364,7 +364,7 @@ export default function AplicatiiPage() {
                   </div>
 
                   {/* Imagine aplicatie */}
-                  <div className="w-full h-56 rounded-2xl overflow-hidden relative mb-8 bg-slate-100">
+                  <div className="w-full h-56 rounded-2xl overflow-hidden relative mb-8 bg-slate-100 img-watermark">
                     <Image
                       src={ap.imagine}
                       alt={ap.titlu}

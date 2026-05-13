@@ -132,7 +132,7 @@
 }
 
 .img-watermark::after {
-  content: "PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV";
+  content: "plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro  plastdu.ro";
   position: absolute;
   inset: -50%;
   width: 200%;
