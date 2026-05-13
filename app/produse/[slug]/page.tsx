@@ -4,6 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GalerieProduse from "./GalerieProduse";
 
+export const runtime = 'edge';
+
 const PRODUSE: Record<
   string,
   {
@@ -21,7 +23,7 @@ const PRODUSE: Record<
     categorie: "Dibluri",
     descriere:
       "Diblu termoizolant cu cui din poliamidă Ø5.5mm, corp PP Ø10mm, rozetă Ø55mm. " +
-      "Ideal pentru fixarea polistirenului pe fațade termoizolate. Fabricat în România, conform standardelor europene pentru sisteme ETICS.",
+      "Ideal pentru fixarea polistirenului pe fațade termoizolate. Fabricat în România, conform standardelor europene.",
     specificatii: [
       "Corp: Polipropilenă (PP)",
       "Cui: Poliamidă Ø5.5mm — termoizolant",
@@ -115,14 +117,12 @@ export default function PagProdusDetal({
         <section className="section-padding bg-white">
           <div className="container-site">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-              {/* Galerie imagini */}
               <GalerieProduse
                 slug={params.slug}
                 imagini={produs.imagini}
                 titlu={produs.titlu}
               />
 
-              {/* Info produs */}
               <div className="flex flex-col gap-6">
                 <div>
                   <div className="flex items-center gap-2 mb-3">
@@ -135,7 +135,6 @@ export default function PagProdusDetal({
                   <p className="text-slate-600 leading-relaxed">{produs.descriere}</p>
                 </div>
 
-                {/* Specificații tehnice */}
                 <div className="bg-neutral-surface rounded-xl p-5 border border-neutral-border">
                   <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
                     Specificații tehnice
@@ -150,7 +149,6 @@ export default function PagProdusDetal({
                   </ul>
                 </div>
 
-                {/* Variante & livrare */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-blue-50 rounded-xl p-4">
                     <p className="text-xs font-semibold text-brand-blue uppercase tracking-wide mb-1">Variante</p>
@@ -162,7 +160,6 @@ export default function PagProdusDetal({
                   </div>
                 </div>
 
-                {/* CTA */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <Link
                     href="/contact?subiect=cerere-oferta"
@@ -185,7 +182,6 @@ export default function PagProdusDetal({
           </div>
         </section>
 
-        {/* CTA contact */}
         <section className="section-padding bg-brand-blue text-white">
           <div className="container-site text-center">
             <h2 className="text-white mb-4">Aveți nevoie de cantități mari sau ofertă personalizată?</h2>
