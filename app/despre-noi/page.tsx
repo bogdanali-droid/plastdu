@@ -20,7 +20,7 @@ const CIFRE = [
 ];
 
 const SPECIALIZARI = [
-  "Producția de dibluri pentru polistiren (sisteme ETICS)",
+  "Producția de dibluri pentru polistiren (sisteme de termoizolație exterioară)",
   "Producția de dibluri pentru vată minerală",
   "Producția de distanțieri pentru beton",
   "Distribuția de materiale de construcții și organe de asamblare",
@@ -107,7 +107,7 @@ export default function DespreNoiPage() {
                   <p>
                     Oferim soluții complete și de calitate pentru diverse proiecte din domeniul
                     construcțiilor de asamblare, cu un focus special pe sisteme de termoizolație
-                    exterioară (ETICS) și reabilitare termică a clădirilor.
+                    exterioară  și reabilitare termică a clădirilor.
                   </p>
                   <p>
                     Ne adresăm întregului lanț de aprovizionare din industria construcțiilor — de la

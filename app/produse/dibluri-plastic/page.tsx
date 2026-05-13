@@ -6,14 +6,14 @@ import Footer from "@/components/Footer";
 
 /* ─── Metadata + Schema.org ──────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  title: "Dibluri Cui Plastic (Poliamidă) — Fixare Termoizolație ETICS",
+  title: "Dibluri Cui Plastic (Poliamidă) — Fixare Termoizolație",
   description:
     "Dibluri termoizolante cu cui din poliamidă Ø5.5mm, corp polipropilenă Ø10mm, rozetă Ø55mm. " +
     "Fabricate în România. Variante 10x70…10x260ZM. Livrare 100 buc/cutie.",
   keywords: [
     "dibluri plastic poliamida",
     "dibluri termoizolatie",
-    "dibluri ETICS",
+    "dibluri",
     "diblu cui plastic",
     "fixare polistiren fatada",
   ],
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Dibluri Cui Plastic (Poliamidă) | Plast Du IV",
     description:
-      "Dibluri termoizolante cu cui din poliamidă, fabricate în România. Soluție optimă pentru sisteme ETICS.",
+      "Dibluri termoizolante cu cui din poliamidă, fabricate în România. Soluție optimă pentru sisteme de termoizolație exterioară.",
     url: "https://plastdu.ro/produse/dibluri-plastic",
     images: [{ url: "/images/produse/diblu-plastic.jpg", width: 1200, height: 630 }],
   },
@@ -34,7 +34,7 @@ const productSchema = {
   name: "Diblu Cui Plastic Poliamidă — Plast Du IV",
   description:
     "Diblu termoizolant cu cui din poliamidă Ø5.5mm, corp din polipropilenă Ø10mm, rozetă Ø55mm / 2mm. " +
-    "Utilizat pentru fixarea termoizolațiilor din polistiren pe fațade în sisteme ETICS. " +
+    "Utilizat pentru fixarea termoizolațiilor din polistiren pe fațade în sisteme de termoizolație exterioară. " +
     "Compatibil cu cărămidă plină, BCA și beton.",
   image: "https://plastdu.ro/images/produse/diblu-plastic.jpg",
   brand: {
@@ -81,9 +81,9 @@ const VARIANTE = [
 
 const APLICATII = [
   {
-    titlu: "Sisteme ETICS (fațade termoizolate)",
+    titlu: "Termoizolație exterioară (fațade termoizolate)",
     descriere:
-      "Fixarea plăcilor de polistiren expandat (EPS) pe fațade în cadrul sistemelor ETICS. " +
+      "Fixarea plăcilor de polistiren expandat (EPS) pe fațade termoizolate. " +
       "Cuiul din poliamidă elimină punțile termice, menținând performanța anvelopei termice.",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -197,7 +197,7 @@ export default function DiblurPlasticPage() {
                 <h1 className="mb-4">Dibluri Cui Plastic (Poliamidă)</h1>
                 <p className="text-lg text-slate-600 mb-6">
                   Diblu termoizolant cu cui din poliamidă, proiectat pentru fixarea
-                  termoizolațiilor din polistiren (EPS) pe fațade în sisteme ETICS.
+                  termoizolațiilor din polistiren (EPS) pe fațade în sisteme de termoizolație exterioară.
                   Corpul din polipropilenă asigură rezistență mecanică, iar cuiul din PA
                   elimină complet punțile termice.
                 </p>
@@ -348,7 +348,7 @@ export default function DiblurPlasticPage() {
             <h2 className="mb-3">Aplicații recomandate</h2>
             <p className="text-slate-500 mb-10 max-w-xl">
               Diblurile cu cui din poliamidă sunt soluția standard în proiectele de reabilitare
-              termică și construcție nouă care implică sisteme ETICS.
+              termică și construcție nouă care implică sisteme de termoizolație exterioară.
             </p>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -113,7 +113,7 @@ const BENEFICII = [
 
 const APLICATII = [
   {
-    titlu: "Sisteme ETICS cu vată minerală",
+    titlu: "Termoizolație exterioară cu vată minerală",
     descriere:
       "Fixarea plăcilor de vată minerală lamelă sau tablie pe fațade în sisteme termoizolante certificate. " +
       "Flanșa extinsă previne tăierea fibrelor minerale și asigură o prindere stabilă.",

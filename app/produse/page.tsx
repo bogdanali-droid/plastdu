@@ -16,7 +16,7 @@ const PRODUSE_FABRICATE = [
     fabricat: true,
     descriere:
       "Diblu termoizolant cu cui din poliamidă Ø5.5mm, corp PP Ø10mm, rozetă Ø55mm. " +
-      "Ideal pentru fixarea polistirenului pe fațade ETICS.",
+      "Ideal pentru fixarea polistirenului pe fațade termoizolate.",
     specificatii: ["Corp: Polipropilenă", "Cui: Poliamidă Ø5.5mm", "Rozetă: Ø55mm / 2mm"],
     variante: "10x70 … 10x260ZM",
     livrare: "100 buc/pungă–cutie",
@@ -124,7 +124,7 @@ export default function ProdusePage() {
           </h1>
           <p className="text-lg text-blue-100 max-w-2xl">
             Plast Du IV SRL produce și distribuie elemente de fixare pentru industria construcțiilor.
-            Soluții tehnice certificate pentru sisteme ETICS, termoizolații și lucrări de finisaj —
+            Soluții tehnice certificate pentru sisteme de termoizolație exterioară, termoizolații și lucrări de finisaj —
             livrate direct la depozit sau șantier.
           </p>
         </div>

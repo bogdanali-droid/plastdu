@@ -20,7 +20,7 @@ const PRODUSE = [
     titlu: "Dibluri Cui Plastic",
     descriere:
       "Corp polipropilenă Ø10mm cu cui poliamidă Ø5.5mm și rozetă Ø55mm. " +
-      "Conceput pentru fixarea polistirenului în sisteme ETICS.",
+      "Conceput pentru fixarea polistirenului în sisteme de termoizolație exterioară.",
     variante: "10×70 — 10×260mm",
     specificatii: ["Corp: Polipropilenă (PP)", "Cui: Poliamidă Ø5.5mm", "Rozetă: Ø55mm / 2mm"],
     imagine: "/images/produse/dibluri-plastic/01.jpg",
@@ -92,7 +92,7 @@ const ARGUMENTE = [
 const APLICATII = [
   {
     titlu: "Termoizolație Polistiren",
-    descriere: "Fixare placă EPS/XPS pe fațade ETICS cu dibluri cui plastic sau metalic zincat.",
+    descriere: "Fixare placă EPS/XPS pe fațade termoizolate cu dibluri cui plastic sau metalic zincat.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
         <path d="M2.25 12 11.204 3.045a1.125 1.125 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
