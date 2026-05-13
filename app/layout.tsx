@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 /* ─── Site-wide metadata ─────────────────────────────────────────────────── */
 export const metadata: Metadata = {
@@ -98,6 +99,7 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen">
         {/* Navbar and Footer are rendered at page level for flexibility */}
         {children}
+        <WhatsAppFloat />
       </body>
     </html>
   );
