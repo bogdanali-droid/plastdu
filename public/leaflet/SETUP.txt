@@ -1,0 +1,37 @@
+LEAFLET MARKER ICONS — SETUP
+============================
+
+Leaflet's default marker icons are broken when bundled by webpack/Next.js
+because the CSS references relative paths that no longer resolve correctly.
+
+RomaniaMap.tsx already overrides L.Icon.Default to load icons from this
+public/leaflet/ directory. You must copy the three PNG files here before
+deploying.
+
+SOURCE FILES (inside node_modules after `npm install`):
+-------------------------------------------------------
+  node_modules/leaflet/dist/images/marker-icon.png      → public/leaflet/marker-icon.png
+  node_modules/leaflet/dist/images/marker-icon-2x.png   → public/leaflet/marker-icon-2x.png
+  node_modules/leaflet/dist/images/marker-shadow.png    → public/leaflet/marker-shadow.png
+
+ONE-TIME COPY COMMAND (run from project root):
+----------------------------------------------
+  cp node_modules/leaflet/dist/images/marker-icon.png     public/leaflet/marker-icon.png
+  cp node_modules/leaflet/dist/images/marker-icon-2x.png  public/leaflet/marker-icon-2x.png
+  cp node_modules/leaflet/dist/images/marker-shadow.png   public/leaflet/marker-shadow.png
+
+NOTE: These files are not committed to git by default. Add the copy command
+to your CI pipeline (e.g. a `postinstall` npm script) so they are always
+present after `npm install`:
+
+  // package.json
+  "scripts": {
+    "postinstall": "cp node_modules/leaflet/dist/images/marker-icon*.png public/leaflet/ && cp node_modules/leaflet/dist/images/marker-shadow.png public/leaflet/"
+  }
+
+Alternatively, add public/leaflet/*.png to your .gitignore exceptions and
+commit the files directly.
+
+NOTE 2: RomaniaMap.tsx uses a custom red divIcon for individual markers, so
+the default blue marker icons are only needed as a fallback. The cluster
+icons are fully custom SVG/div — no image files required for clustering.
