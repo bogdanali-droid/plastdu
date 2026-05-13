@@ -64,7 +64,7 @@ export default function ContactForm() {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          access_key: "399ba668-3352-4f7b-aeb3-dba45cc9e804",
           subject: `Cerere ofertă — ${d.companyName}`,
           from_name: d.companyName,
           email: d.email || "noreply@plastdu.ro",
