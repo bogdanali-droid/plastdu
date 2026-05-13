@@ -97,9 +97,17 @@ export default function RootLayout({
   return (
     <html lang="ro" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="flex flex-col min-h-screen">
-        {/* Navbar and Footer are rendered at page level for flexibility */}
         {children}
         <WhatsAppFloat />
+        {/* Protecție imagini — dezactivează meniu contextual pe imagini */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          document.addEventListener('contextmenu', function(e) {
+            if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+          });
+          document.addEventListener('dragstart', function(e) {
+            if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+          });
+        `}} />
       </body>
     </html>
   );

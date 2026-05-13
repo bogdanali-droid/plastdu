@@ -74,6 +74,7 @@ const PRODUSE_DISTRIBUITE = [
   {
     titlu: "Dibluri universale pentru BCA",
     categorie: "Dibluri",
+    imagine: "/images/produse/dibluri-plastic/02.jpg",
     descriere: "Dibluri cu expansiune controlată pentru fixări în BCA și zidărie ușoară.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
@@ -81,6 +82,7 @@ const PRODUSE_DISTRIBUITE = [
   {
     titlu: "Șuruburi autoforante",
     categorie: "Fixare",
+    imagine: "/images/produse/suruburi/01.jpg",
     descriere: "Șuruburi pentru profile metalice, carton-gips și aplicații uscate.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
@@ -88,6 +90,7 @@ const PRODUSE_DISTRIBUITE = [
   {
     titlu: "Dibluri pentru fixare gips-carton",
     categorie: "Dibluri",
+    imagine: "/images/produse/dibluri-metalice/02.jpg",
     descriere: "Soluții de fixare pentru pereți din gips-carton, profile și montanți.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
@@ -95,6 +98,7 @@ const PRODUSE_DISTRIBUITE = [
   {
     titlu: "Ancore chimice",
     categorie: "Fixare",
+    imagine: "/images/produse/ancore/01.jpg",
     descriere: "Ancore cu rășină epoxidică sau poliester pentru fixări structurale în beton și zidărie.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
@@ -170,7 +174,7 @@ export default function ProdusePage() {
                 key={p.slug}
                 className="card flex flex-col group hover:border-brand-blue/30"
               >
-                <div className="w-full h-44 bg-gradient-to-br from-blue-50 to-slate-100 rounded-xl mb-4 overflow-hidden relative">
+                <div className="w-full h-44 bg-gradient-to-br from-blue-50 to-slate-100 rounded-xl mb-4 overflow-hidden relative img-watermark">
                   {p.imagine ? (
                     <Image
                       src={p.imagine}
@@ -246,8 +250,14 @@ export default function ProdusePage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {PRODUSE_DISTRIBUITE.map((p) => (
                 <article key={p.titlu} className="card flex flex-col">
-                  <div className="w-full h-32 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl mb-4 flex items-center justify-center">
-                    <div className="text-3xl text-slate-200">📦</div>
+                  <div className="w-full h-36 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl mb-4 overflow-hidden relative img-watermark">
+                    <Image
+                      src={p.imagine}
+                      alt={p.titlu}
+                      fill
+                      className="object-contain p-3"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
                   </div>
 
                   <div className="flex items-center gap-2 mb-2">
