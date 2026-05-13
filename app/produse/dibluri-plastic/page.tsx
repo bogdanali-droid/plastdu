@@ -158,18 +158,29 @@ export default function DiblurPlasticPage() {
           <div className="container-site">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Imagine */}
-              <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-slate-100 border border-neutral-border">
-                <Image
-                  src="/images/produse/diblu-plastic.jpg"
-                  alt="Diblu Cui Plastic Poliamidă — Plast Du IV"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
-                <div className="absolute inset-0 flex items-center justify-center text-slate-200 text-8xl select-none pointer-events-none"
-                  aria-hidden="true">
-                  {/* Fallback vizual dacă imaginea lipsește */}
+              <div className="flex flex-col gap-3">
+                <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-slate-100 border border-neutral-border">
+                  <Image
+                    src="/images/produse/dibluri-plastic/01.jpg"
+                    alt="Diblu Cui Plastic Poliamidă — Plast Du IV"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+                <div className="grid grid-cols-5 gap-2 max-w-lg mx-auto lg:mx-0 w-full">
+                  {[2,3,4,5,6].map((n) => (
+                    <div key={n} className="relative aspect-square rounded-lg overflow-hidden border border-neutral-border bg-slate-100">
+                      <Image
+                        src={`/images/produse/dibluri-plastic/0${n}.jpg`}
+                        alt={`Diblu Cui Plastic — imagine ${n}`}
+                        fill
+                        className="object-cover"
+                        sizes="20vw"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
 
