@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: "Aplicații Tehnice — Termoizolație, Vată Minerală, OSB, Gips-Carton",
   description:
     "Ghid tehnic pentru alegerea diblurilor și flanșelor în funcție de aplicație: " +
-    "termoizolație polistiren ETICS, fixare vată minerală, plăci OSB, gips-carton. " +
+    "termoizolație polistiren, fixare vată minerală, plăci OSB, gips-carton. " +
     "Informații pentru ingineri, șefi de șantier și firme de construcții.",
   keywords: [
     "aplicatii dibluri constructii",
-    "termoizolatie polistiren ETICS",
+    "termoizolatie polistiren",
     "fixare vata minerala",
     "placi OSB diblu",
     "gips carton fixare",
@@ -54,7 +54,7 @@ const APLICATII: Aplicatie[] = [
   /* ── 1. Termoizolatie Polistiren ──────────────────────────────────────── */
   {
     id: "termoizolatie-polistiren",
-    titlu: "Termoizolație Polistiren (ETICS)",
+    titlu: "Termoizolație Polistiren ",
     subtitlu: "Sisteme de termoizolație exterioară cu polistiren expandat",
     culoareAccent: "text-brand-blue",
     culoareBg: "bg-brand-blue/5",
@@ -62,7 +62,7 @@ const APLICATII: Aplicatie[] = [
     culoareDot: "bg-brand-blue",
     imagine: "/images/proiecte/blocuri/02.jpg",
     descriereTehnica: [
-      "Sistemele ETICS (External Thermal Insulation Composite System) sunt soluția standard pentru reabilitarea termică a clădirilor și construcțiile noi cu cerințe ridicate de eficiență energetică. Polistirenul expandat (EPS) este materialul izolant dominant datorită raportului optim performanță / cost / ușurință de montaj.",
+      "Sistemele (External Thermal Insulation Composite System) sunt soluția standard pentru reabilitarea termică a clădirilor și construcțiile noi cu cerințe ridicate de eficiență energetică. Polistirenul expandat (EPS) este materialul izolant dominant datorită raportului optim performanță / cost / ușurință de montaj.",
       "Numărul de dibluri pe m² variază între 4 și 12 în funcție de: zona climatică (viteza vântului), înălțimea clădirii (presiunea vântului crește cu înălțimea), tipul suportului (beton > cărămidă plină > BCA) și grosimea stratului de izolație.",
       "Diblul este montat după aplicarea adezivului și înainte de aplicarea tencuielii armate. Cuiul se bate sau se înșurubează până când rozeta stă flush cu suprafața plăcii EPS. Variantele ZM sunt obligatorii pe zidărie cu cărămidă cu goluri.",
     ],
@@ -78,7 +78,7 @@ const APLICATII: Aplicatie[] = [
       {
         href: "/produse/dibluri-plastic",
         titlu: "Dibluri Cui Plastic (Poliamidă)",
-        descriere: "Soluție standard pentru ETICS — cuiul PA elimină punțile termice. Variante 10x70…10x260ZM.",
+        descriere: "Soluție standard pentru — cuiul PA elimină punțile termice. Variante 10x70…10x260ZM.",
         principal: true,
       },
       {
@@ -477,9 +477,9 @@ export default function AplicatiiPage() {
                 </thead>
                 <tbody className="divide-y divide-white/10">
                   {[
-                    ["ETICS standard", "EPS / EPS-G", "Beton, cărămidă, BCA", "Dibluri Cui Plastic (PA)"],
-                    ["ETICS cu solicitări mari", "EPS / EPS-G", "Beton, clădiri înalte", "Dibluri Cui Metalic Zincat"],
-                    ["ETICS cărămidă cu goluri", "EPS / Vată", "Cărămidă cu goluri", "Dibluri ZM (Zonă Mare)"],
+                    ["Termoizolație exterioară standard", "EPS / EPS-G", "Beton, cărămidă, BCA", "Dibluri Cui Plastic (PA)"],
+                    ["Termoizolație exterioară — solicitări mari", "EPS / EPS-G", "Beton, clădiri înalte", "Dibluri Cui Metalic Zincat"],
+                    ["Termoizolație exterioară — cărămidă cu goluri", "EPS / Vată", "Cărămidă cu goluri", "Dibluri ZM (Zonă Mare)"],
                     ["Vată minerală fațadă", "MW lamelă / tablie", "Orice suport", "Diblu metalic + Flanșă Ø140–160mm"],
                     ["OSB pe structură lemn", "—", "Grinzi / montanți lemn", "Flanșă OSB TSF-F55 + șurub galvanizat"],
                     ["Gips-carton (profile)", "—", "Beton, zidărie", "Dibluri Ø10mm (plastic sau metalic)"],

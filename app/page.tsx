@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -19,7 +20,7 @@ const PRODUSE = [
     titlu: "Dibluri Cui Plastic",
     descriere:
       "Corp polipropilenă Ø10mm cu cui poliamidă Ø5.5mm și rozetă Ø55mm. " +
-      "Conceput pentru fixarea polistirenului în sisteme ETICS.",
+      "Conceput pentru fixarea polistirenului în sisteme de termoizolație exterioară.",
     variante: "10×70 — 10×260mm",
     specificatii: ["Corp: Polipropilenă (PP)", "Cui: Poliamidă Ø5.5mm", "Rozetă: Ø55mm / 2mm"],
     imagine: "/images/produse/dibluri-plastic/01.jpg",
@@ -91,7 +92,7 @@ const ARGUMENTE = [
 const APLICATII = [
   {
     titlu: "Termoizolație Polistiren",
-    descriere: "Fixare placă EPS/XPS pe fațade ETICS cu dibluri cui plastic sau metalic zincat.",
+    descriere: "Fixare placă EPS/XPS pe fațade termoizolate cu dibluri cui plastic sau metalic zincat.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6" aria-hidden="true">
         <path d="M2.25 12 11.204 3.045a1.125 1.125 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -430,7 +431,76 @@ export default function HomePage() {
         </section>
 
         {/* ══════════════════════════════════════════════════════════════
-            5. CTA FINAL
+            5. DESPRE NOI — strip producător
+        ══════════════════════════════════════════════════════════════ */}
+        <section className="py-16 md:py-20 bg-neutral-surface border-t border-neutral-border">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-widest text-orange-500 mb-3">Producător român</p>
+                <h2 className="text-3xl md:text-[2rem] font-bold text-[#1a3c5e] leading-tight mb-5">
+                  Fabricăm la Jilava, Ilfov din 2017
+                </h2>
+                <p className="text-slate-600 leading-relaxed mb-4">
+                  Plast Du IV SRL produce dibluri și flanșe prin injecție în matrițe proprii.
+                  Controlăm calitatea la fiecare lot — de la materia primă PP/PA până la ambalare și livrare.
+                </p>
+                <p className="text-slate-600 leading-relaxed mb-6">
+                  Ne adresăm firmelor de construcții, antreprenorilor, distribuitorilor și depozitelor de materiale
+                  din toată țara. Livrăm în București, Ilfov, Dolj, Argeș, Prahova, Brașov și alte județe.
+                </p>
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {["Producție proprie PP/PA", "Livrare națională", "B2B direct fabrică", "Prețuri volum"].map(tag => (
+                    <span key={tag} className="text-xs font-semibold bg-brand-blue/8 text-brand-blue px-3 py-1.5 rounded-full border border-brand-blue/15">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  href="/despre-noi"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-orange-500 transition-colors"
+                >
+                  Despre Plast Du IV
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="col-span-2 relative h-52 rounded-2xl overflow-hidden bg-slate-100 img-watermark">
+                  <Image
+                    src="/images/proiecte/blocuri/03.jpg"
+                    alt="Proiect reabilitare termică Plast Du IV"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="relative h-32 rounded-xl overflow-hidden bg-slate-100 img-watermark">
+                  <Image
+                    src="/images/produse/dibluri-plastic/04.jpg"
+                    alt="Dibluri plastic fabricate de Plast Du IV"
+                    fill
+                    className="object-contain p-2"
+                    sizes="25vw"
+                  />
+                </div>
+                <div className="relative h-32 rounded-xl overflow-hidden bg-slate-100 img-watermark">
+                  <Image
+                    src="/images/produse/dibluri-metalice/01.jpg"
+                    alt="Dibluri metalice fabricate de Plast Du IV"
+                    fill
+                    className="object-contain p-2"
+                    sizes="25vw"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/*
+            6. CTA FINAL
         ══════════════════════════════════════════════════════════════ */}
         <section
           className="relative overflow-hidden bg-[#1a3c5e] text-white py-16 md:py-20 lg:py-24"

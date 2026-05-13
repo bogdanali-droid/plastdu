@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "diblu cui metalic",
     "fixare vata minerala",
     "diblu otel zincat",
-    "dibluri ETICS metalice",
+    "dibluri metalice",
   ],
   alternates: { canonical: "https://plastdu.ro/produse/dibluri-metalice" },
   openGraph: {
@@ -106,9 +106,9 @@ const AVANTAJE = [
 
 const APLICATII = [
   {
-    titlu: "Sisteme ETICS cu vată minerală",
+    titlu: "Termoizolație exterioară cu vată minerală",
     descriere:
-      "Fixarea plăcilor de vată minerală (lamelă sau standard) pe fațade ETICS. " +
+      "Fixarea plăcilor de vată minerală (lamelă sau standard) pe fațade termoizolate. " +
       "Cuiul metalic traversează vata fără a o comprima sau deplasa, menținând grosimea nominală.",
     icon: "🏗️",
   },
@@ -406,7 +406,7 @@ export default function DiblurMetalicePage() {
                     ["Forță extragere", "Standard", "Ridicată"],
                     ["Cărămidă cu goluri", "Nu (standard)", "Da (versiune ZM)"],
                     ["Cost unitar", "Mai redus", "Superior"],
-                    ["Recomandare principală", "ETICS standard, eficiență termică maximă", "Vată minerală, zone cu solicitări mari"],
+                    ["Recomandare principală", "Termoizolație exterioară standard, eficiență termică maximă", "Vată minerală, zone cu solicitări mari"],
                   ].map(([criteriu, plastic, metalic], i) => (
                     <tr key={criteriu} className={i % 2 === 0 ? "bg-white" : "bg-neutral-surface/50"}>
                       <td className="px-5 py-3.5 font-medium text-slate-700">{criteriu}</td>

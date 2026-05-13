@@ -8,11 +8,12 @@ import CTAButton from "./CTAButton";
 
 /* ─── Nav Links ──────────────────────────────────────────────────────────── */
 const NAV_LINKS = [
-  { href: "/",          label: "Acasă" },
-  { href: "/produse",   label: "Produse" },
-  { href: "/aplicatii", label: "Aplicații" },
-  { href: "/proiecte",  label: "Proiecte" },
-  { href: "/contact",   label: "Contact" },
+  { href: "/",           label: "Acasă" },
+  { href: "/produse",    label: "Produse" },
+  { href: "/aplicatii",  label: "Aplicații" },
+  { href: "/proiecte",   label: "Proiecte" },
+  { href: "/despre-noi", label: "Despre noi" },
+  { href: "/contact",    label: "Contact" },
 ] as const;
 
 /* ─── Logo ───────────────────────────────────────────────────────────────── */
