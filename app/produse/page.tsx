@@ -45,9 +45,9 @@ const PRODUSE_FABRICATE = [
     categorie: "Flanșe",
     fabricat: true,
     descriere:
-      "Disc plastic cu rozeta extinsă Ø140–160mm, model spite duble. Distribuție uniformă a forței de prindere " +
+      "Disc plastic cu rozeta extinsă Ø120–140mm, model spite duble. Distribuție uniformă a forței de prindere " +
       "pe vată minerală și polistiren. Gri închis.",
-    specificatii: ["Material: PP", "Diametru rozetă: Ø140–160mm", "Model: spite duble"],
+    specificatii: ["Material: PP", "Diametru rozetă: Ø120–140mm", "Model: spite duble"],
     variante: "Standard",
     livrare: "La cerere",
     badge: "Produs propriu",
@@ -114,7 +114,7 @@ const PRODUSE_DISTRIBUITE = [
   {
     titlu: "Colțar PVC cu plasă",
     categorie: "Profile",
-    imagine: "/images/produse/coltar-pvc/01.webp",
+    imagine: "/images/produse/coltar-pvc/01.jpg",
     descriere: "Profil de colț din PVC cu plasă din fibră de sticlă pentru armarea muchiilor fațadei.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",

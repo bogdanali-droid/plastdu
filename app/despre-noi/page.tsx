@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const CIFRE = [
   { val: "2017", label: "An înființare" },
   { val: "8+", label: "Județe deservite" },
-  { val: "4", label: "Linii de producție" },
+  { val: "5", label: "Linii de producție" },
   { val: "B2B", label: "Focus exclusiv" },
 ];
 
@@ -253,11 +253,11 @@ export default function DespreNoiPage() {
                 <div className="space-y-2 text-sm text-slate-600">
                   <div className="flex justify-between">
                     <span>Luni — Vineri</span>
-                    <span className="font-medium text-slate-800">08:00 — 18:00</span>
+                    <span className="font-medium text-slate-800">08:00 — 17:00</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Sâmbătă</span>
-                    <span className="font-medium text-slate-800">08:00 — 14:00</span>
+                    <span className="font-medium text-slate-500">Închis</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Duminică</span>
