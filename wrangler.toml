@@ -1,0 +1,14 @@
+name = "plastdu"
+main = "src/worker.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[env.staging]
+name = "plastdu-staging"
+
+[env.production]
+name = "plastdu"
+
+[[rules]]
+type = "ESModule"
+globs = ["**/*.ts"]
