@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -159,6 +160,14 @@ const PRODUSE_DISTRIBUITE = [
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
   },
+  {
+    titlu: "Șaibe",
+    categorie: "Fixare",
+    imagine: "/images/produse/saibe/03.jpg",
+    descriere: "Șaibe plate și elastice din oțel zincat pentru distribuirea sarcinii și prevenirea slăbirii conexiunilor.",
+    badge: "Distribuit",
+    badgeColor: "bg-slate-100 text-slate-600",
+  },
 ];
 
 type Filtru = "toate" | "fabricate";
@@ -307,10 +316,9 @@ export default function ProdusePage() {
               {PRODUSE_DISTRIBUITE.map((p) => (
                 <article key={p.titlu} className="card flex flex-col">
                   <div className="w-full h-36 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl mb-4 overflow-hidden relative img-watermark">
-                    <Image
+                    <ImageWithFallback
                       src={p.imagine}
                       alt={p.titlu}
-                      fill
                       className="object-contain p-3"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />

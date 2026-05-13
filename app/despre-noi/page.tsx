@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ImageWithFallback from "@/components/ImageWithFallback";
 
 export const metadata: Metadata = {
   title: "Despre Noi — Plast Du IV SRL",
@@ -131,28 +132,25 @@ export default function DespreNoiPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2 relative h-56 rounded-2xl overflow-hidden bg-slate-100 img-watermark">
-                  <Image
+                  <ImageWithFallback
                     src="/images/fabrica/01.jpg"
                     alt="Fabrică Plast Du IV — Jilava, Ilfov"
-                    fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
                 <div className="relative h-36 rounded-xl overflow-hidden bg-slate-100 img-watermark">
-                  <Image
+                  <ImageWithFallback
                     src="/images/fabrica/04.jpg"
                     alt="Producție dibluri Plast Du IV"
-                    fill
                     className="object-cover"
                     sizes="25vw"
                   />
                 </div>
                 <div className="relative h-36 rounded-xl overflow-hidden bg-slate-100 img-watermark">
-                  <Image
+                  <ImageWithFallback
                     src="/images/fabrica/05.jpg"
                     alt="Matriță producție Plast Du IV"
-                    fill
                     className="object-cover"
                     sizes="25vw"
                   />
