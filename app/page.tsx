@@ -22,7 +22,7 @@ const PRODUSE = [
       "Conceput pentru fixarea polistirenului în sisteme ETICS.",
     variante: "10×70 — 10×260mm",
     specificatii: ["Corp: Polipropilenă (PP)", "Cui: Poliamidă Ø5.5mm", "Rozetă: Ø55mm / 2mm"],
-    imagine: "/images/produse/diblu-plastic.jpg",
+    imagine: "/images/produse/dibluri-plastic/01.jpg",
   },
   {
     slug: "dibluri-metalice",
@@ -32,7 +32,7 @@ const PRODUSE = [
       "compatibil cu polistiren și vată minerală.",
     variante: "10×120 — 10×260mm",
     specificatii: ["Corp: Polipropilenă (PP)", "Cui: Oțel zincat Ø5.5mm", "Rozetă: Ø55mm / 2mm"],
-    imagine: "/images/produse/diblu-metalic.jpg",
+    imagine: "/images/produse/dibluri-metalice/01.jpg",
   },
   {
     slug: "flansa-vata",
@@ -42,7 +42,7 @@ const PRODUSE = [
       "Distribuție uniformă a forței de prindere pe suprafețe mari.",
     variante: "Standard",
     specificatii: ["Material: PP", "Diametru rozetă: Ø140–160mm", "Model: spite duble"],
-    imagine: "/images/produse/flansa-vata-minerala.jpg",
+    imagine: "/images/produse/flansa-vata/01.jpg",
   },
   {
     slug: "flansa-osb",
@@ -52,7 +52,7 @@ const PRODUSE = [
       "Șurub galvanizat inclus. Finisaj îngrijit, cod TSF-F55.",
     variante: "TSF-F55",
     specificatii: ["Cod: TSF-F55", "Capac snap-on inclus", "Șurub galvanizat inclus"],
-    imagine: "/images/produse/flansa-osb.jpg",
+    imagine: "/images/produse/flansa-osb/01.jpg",
   },
 ] as const;
 
