@@ -166,32 +166,29 @@ export default function FlansaVataPage() {
           <div className="container-site">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Imagine */}
-              <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 border border-neutral-border flex items-center justify-center">
-                <Image
-                  src="/images/produse/flansa-vata.jpg"
-                  alt="Flanșă Vată Minerală Ø140-160mm — Plast Du IV"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
-                {/* Vizual placeholder când imaginea lipsește */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
-                  <svg viewBox="0 0 200 200" className="w-48 h-48 text-slate-300" fill="currentColor">
-                    <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" strokeWidth="6" />
-                    <circle cx="100" cy="100" r="12" />
-                    {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle) => {
-                      const rad = (angle * Math.PI) / 180;
-                      const x1 = 100 + 14 * Math.cos(rad);
-                      const y1 = 100 + 14 * Math.sin(rad);
-                      const x2 = 100 + 88 * Math.cos(rad);
-                      const y2 = 100 + 88 * Math.sin(rad);
-                      return (
-                        <line key={angle} x1={x1} y1={y1} x2={x2} y2={y2} stroke="currentColor" strokeWidth="4" />
-                      );
-                    })}
-                    <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" strokeWidth="3" />
-                  </svg>
+              <div className="flex flex-col gap-3">
+                <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 border border-neutral-border">
+                  <Image
+                    src="/images/produse/flansa-vata/01.jpg"
+                    alt="Flanșă Vată Minerală Ø140-160mm — Plast Du IV"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-2 max-w-lg mx-auto lg:mx-0 w-full">
+                  {[2,3].map((n) => (
+                    <div key={n} className="relative aspect-square rounded-lg overflow-hidden border border-neutral-border bg-slate-100">
+                      <Image
+                        src={`/images/produse/flansa-vata/0${n}.jpg`}
+                        alt={`Flanșă Vată Minerală — imagine ${n}`}
+                        fill
+                        className="object-cover"
+                        sizes="25vw"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
 

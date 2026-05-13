@@ -21,52 +21,52 @@ const BucharestMap = dynamic(() => import("../../components/BucharestMap"), {
   loading: () => <MapSkeleton />,
 });
 
-/* ─── Date de test — 5 proiecte în cartiere diferite ────────────────────── */
+/* ─── Proiecte reale ─────────────────────────────────────────────────────── */
 const DEMO_PROJECTS: Project[] = [
   {
     id: 1,
-    name: "Reabilitare termică bloc A12 — Aviației",
-    district: "Sector 1 – Aviației",
-    year: 2024,
-    lat: 44.4734,
-    lng: 26.0785,
-    photo: "/images/proiecte/aviatiei-a12.jpg",
+    name: "Reabilitare termică — Str. Baicului",
+    district: "Sector 2 – Str. Baicului",
+    year: 2026,
+    lat: 44.4520,
+    lng: 26.1180,
+    photo: "/images/proiecte/baicului/01.jpg",
   },
   {
     id: 2,
-    name: "Izolare bloc P+8 — Colentina",
-    district: "Sector 2 – Colentina",
-    year: 2023,
-    lat: 44.4523,
-    lng: 26.1456,
-    photo: "/images/proiecte/colentina-p8.jpg",
+    name: "Reabilitare bloc — Buhuși",
+    district: "Buhuși, Bacău",
+    year: 2026,
+    lat: 46.7167,
+    lng: 26.7167,
+    photo: "/images/proiecte/buhusi/01.jpg",
   },
   {
     id: 3,
-    name: "Reabilitare complex Vitan — 3 scări",
-    district: "Sector 3 – Vitan",
-    year: 2024,
-    lat: 44.4089,
-    lng: 26.1234,
-    photo: "/images/proiecte/vitan-complex.jpg",
+    name: "Reabilitare termică — Str. Octavian Goga",
+    district: "Sector 3 – Str. Octavian Goga",
+    year: 2026,
+    lat: 44.4200,
+    lng: 26.1350,
+    photo: "/images/proiecte/octavian-goga/01.jpg",
   },
   {
     id: 4,
-    name: "Ansamblu Berceni — reabilitare termică",
-    district: "Sector 4 – Berceni",
-    year: 2023,
-    lat: 44.3812,
-    lng: 26.1023,
-    photo: "/images/proiecte/berceni-ansamblu.jpg",
+    name: "Izolare bloc — Str. Ghica",
+    district: "Sector 2 – Str. Ghica",
+    year: 2026,
+    lat: 44.4600,
+    lng: 26.1050,
+    photo: "/images/proiecte/ghica/01.jpg",
   },
   {
     id: 5,
-    name: "Bloc P+10 Drumul Taberei — izolare",
-    district: "Sector 6 – Drumul Taberei",
-    year: 2022,
-    lat: 44.4198,
-    lng: 26.0234,
-    photo: "/images/proiecte/drumul-taberei-p10.jpg",
+    name: "Reabilitare blocuri — proiect multiplu",
+    district: "București",
+    year: 2026,
+    lat: 44.4400,
+    lng: 26.0900,
+    photo: "/images/proiecte/blocuri/01.jpg",
   },
 ];
 
@@ -84,7 +84,7 @@ export default function ProiectePage() {
           </h1>
           <p className="text-brand-blue-200 text-lg max-w-3xl mx-auto">
             Produsele noastre sunt utilizate în reabilitarea termică a blocurilor din
-            București — de la Aviației la Berceni, de la Colentina la Drumul Taberei.
+            București și din toată țara — Baicului, Ghica, Octavian Goga, Buhuși și multe altele.
           </p>
         </div>
       </section>
@@ -125,6 +125,45 @@ export default function ProiectePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {DEMO_PROJECTS.map((project) => (
               <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </section>
+
+        {/* ── Galerie extinsă ──────────────────────────────────────────── */}
+        <section aria-labelledby="gallery-extra-heading">
+          <h2
+            id="gallery-extra-heading"
+            className="text-display-sm font-bold text-brand-blue-700 mb-6"
+          >
+            Mai multe imagini din șantier
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {[
+              "/images/proiecte/baicului/01.jpg",
+              "/images/proiecte/buhusi/01.jpg",
+              "/images/proiecte/buhusi/02.jpg",
+              "/images/proiecte/buhusi/03.jpg",
+              "/images/proiecte/octavian-goga/01.jpg",
+              "/images/proiecte/octavian-goga/02.jpg",
+              "/images/proiecte/octavian-goga/03.jpg",
+              "/images/proiecte/octavian-goga/04.jpg",
+              "/images/proiecte/octavian-goga/05.jpg",
+              "/images/proiecte/ghica/01.jpg",
+              "/images/proiecte/blocuri/01.jpg",
+              "/images/proiecte/blocuri/02.jpg",
+              "/images/proiecte/blocuri/03.jpg",
+              "/images/proiecte/blocuri/04.jpg",
+              "/images/proiecte/blocuri/05.jpg",
+            ].map((src, i) => (
+              <div key={i} className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 border border-neutral-border">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={src}
+                  alt={`Imagine șantier reabilitare termică ${i + 1}`}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
             ))}
           </div>
         </section>

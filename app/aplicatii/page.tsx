@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -36,6 +37,7 @@ interface Aplicatie {
   culoareBg: string;
   culoareBorder: string;
   culoareDot: string;
+  imagine: string;
   descriereTehnica: string[];
   parametriTehnici: { param: string; val: string }[];
   produse: {
@@ -58,6 +60,7 @@ const APLICATII: Aplicatie[] = [
     culoareBg: "bg-brand-blue/5",
     culoareBorder: "border-brand-blue/20",
     culoareDot: "bg-brand-blue",
+    imagine: "/images/proiecte/blocuri/02.jpg",
     descriereTehnica: [
       "Sistemele ETICS (External Thermal Insulation Composite System) sunt soluția standard pentru reabilitarea termică a clădirilor și construcțiile noi cu cerințe ridicate de eficiență energetică. Polistirenul expandat (EPS) este materialul izolant dominant datorită raportului optim performanță / cost / ușurință de montaj.",
       "Numărul de dibluri pe m² variază între 4 și 12 în funcție de: zona climatică (viteza vântului), înălțimea clădirii (presiunea vântului crește cu înălțimea), tipul suportului (beton > cărămidă plină > BCA) și grosimea stratului de izolație.",
@@ -102,6 +105,7 @@ const APLICATII: Aplicatie[] = [
     culoareBg: "bg-brand-accent/5",
     culoareBorder: "border-brand-accent/20",
     culoareDot: "bg-brand-accent",
+    imagine: "/images/produse/flansa-vata/01.jpg",
     descriereTehnica: [
       "Vata minerală (MW — Mineral Wool) oferă avantaje suplimentare față de EPS: rezistență la foc (clasa A1/A2), izolație fonică superioară și permeabilitate la vapori. Este obligatorie în clădirile înalte (peste 10 etaje) și în zonele cu cerințe sporite de comportament la foc.",
       "Specificul fixării cu vată minerală față de polistiren: vata are rezistență la penetrare semnificativ mai redusă față de EPS. Rozeta standard Ø55mm poate intra în izolant dacă forța de strângere este prea mare. Este obligatorie utilizarea flanșei cu rozetă extinsă Ø140–160mm care distribuie forța pe o suprafață mult mai mare.",
@@ -147,6 +151,7 @@ const APLICATII: Aplicatie[] = [
     culoareBg: "bg-emerald-50",
     culoareBorder: "border-emerald-200",
     culoareDot: "bg-emerald-600",
+    imagine: "/images/produse/flansa-osb/01.jpg",
     descriereTehnica: [
       "Plăcile OSB (Oriented Strand Board) sunt utilizate extensiv în construcțiile cu structură din lemn (timber frame, CLT) pentru realizarea pereților, planșeelor și acoperișurilor. Sunt folosite și ca strat structural în sisteme de izolație pe structuri ușoare.",
       "Fixarea OSB diferă de fixarea pe zidărie prin natura suportului: pe structuri din lemn (grinzi, montanți) se utilizează șuruburi autoforante, nu dibluri cu expansiune. Pe beton sau zidărie, se utilizează dibluri standard + șurub. Flanșa TSF-F55 cu capac snap-on este soluția optimă când capul de fixare rămâne vizibil sau când suprafața trebuie să fie plană.",
@@ -186,6 +191,7 @@ const APLICATII: Aplicatie[] = [
     culoareBg: "bg-slate-50",
     culoareBorder: "border-slate-200",
     culoareDot: "bg-slate-600",
+    imagine: "/images/produse/dibluri-plastic/03.jpg",
     descriereTehnica: [
       "Sistemele din gips-carton (GC) sunt utilizate pentru pereți despărțitori, tavane false, căptușeli interioare și sisteme de izolație acustică. Fixarea plăcilor de gips-carton pe profile metalice (montanți și rigle) se realizează cu șuruburi autoforante care nu necesită preforare.",
       "Diblurile sunt necesare în cazul fixărilor profilelor metalice pe pereți existenți (beton/zidărie) sau pentru ancorarea suspensiunilor de tavan. Pe suporturi de beton, se utilizează dibluri cu expansiune Ø8–10mm cu forță de extragere ≥ 400N. Pe zidărie, diblurile cu expansiune controlată PP sunt soluția standard.",
@@ -357,14 +363,15 @@ export default function AplicatiiPage() {
                     ))}
                   </div>
 
-                  {/* Imagine placeholder aplicatie */}
-                  <div className={`w-full h-48 rounded-2xl ${ap.culoareBg} border ${ap.culoareBorder} flex items-center justify-center mb-8`}>
-                    <div className="text-center">
-                      <div className={`${ap.culoareAccent} opacity-30 mb-2 text-5xl`} aria-hidden="true">
-                        {idx === 0 ? "🏢" : idx === 1 ? "🔥" : idx === 2 ? "📋" : "🔲"}
-                      </div>
-                      <p className="text-xs text-slate-400">Imagine aplicație — {ap.titlu}</p>
-                    </div>
+                  {/* Imagine aplicatie */}
+                  <div className="w-full h-56 rounded-2xl overflow-hidden relative mb-8 bg-slate-100">
+                    <Image
+                      src={ap.imagine}
+                      alt={ap.titlu}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                    />
                   </div>
 
                   {/* Parametri tehnici */}
