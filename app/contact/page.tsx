@@ -19,7 +19,7 @@ const PHONES = [
 ];
 const EMAIL = "office@plastdu.ro";
 const ADDRESS = "Strada Ana Ipătescu nr. 44, Jilava, Ilfov";
-const SCHEDULE = "Luni – Sâmbătă, 8:00 – 18:00";
+const SCHEDULE = "Luni – Vineri, 08:00 – 17:00 | Sâmbătă – Duminică: Închis";
 const WHATSAPP_URL = "https://wa.me/40724658491";
 // URL generat cu query "Strada Ana Ipătescu 44, Jilava, Ilfov"
 // Înlocuiți cu embed-ul generat din Google Maps Share > Embed dacă diferă
