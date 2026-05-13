@@ -166,7 +166,6 @@ export default function DiblurPlasticPage() {
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
-                  onError={undefined}
                 />
                 <div className="absolute inset-0 flex items-center justify-center text-slate-200 text-8xl select-none pointer-events-none"
                   aria-hidden="true">

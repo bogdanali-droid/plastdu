@@ -69,44 +69,6 @@ const DEMO_PROJECTS: Project[] = [
   },
 ];
 
-/* ─── Grid photo card ────────────────────────────────────────────────────── */
-function ProjectCard({ project }: { project: Project }) {
-  return (
-    <article className="bg-white rounded-2xl shadow-card border border-neutral-border overflow-hidden hover:shadow-card-hover transition-shadow">
-      <div className="aspect-video bg-slate-100 flex items-center justify-center overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={project.photo}
-          alt={project.name}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          onError={(e) => {
-            const target = e.currentTarget as HTMLImageElement;
-            target.style.display = "none";
-            const parent = target.parentElement!;
-            parent.classList.add(
-              "bg-gradient-to-br",
-              "from-blue-100",
-              "to-blue-200"
-            );
-            parent.innerHTML =
-              '<span style="font-size:2.5rem;">🏗️</span>';
-          }}
-        />
-      </div>
-      <div className="p-5">
-        <h3 className="font-bold text-brand-blue-700 text-base leading-snug mb-1">
-          {project.name}
-        </h3>
-        <p className="text-sm text-slate-500">
-          <span className="font-medium text-slate-700">{project.district}</span>
-          &nbsp;·&nbsp;{project.year}
-        </p>
-      </div>
-    </article>
-  );
-}
-
 /* ─── Page ───────────────────────────────────────────────────────────────── */
 export default function ProiectePage() {
   return (
