@@ -1,0 +1,2 @@
+# Copiaza in .dev.vars si completeaza pentru development local
+NEXT_PUBLIC_SITE_URL=http://localhost:3000

@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Leaflet CSS (must be imported globally — required by react-leaflet) ── */
+@import "leaflet/dist/leaflet.css";
+@import "leaflet.markercluster/dist/MarkerCluster.css";
+@import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────── */
+:root {
+  --color-brand-blue:   #1a3c5e;
+  --color-brand-orange: #f97316;
+  --nav-height: 4rem; /* 64px */
+}
+
+/* ─── Base Resets & Typography ───────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-white text-slate-800 font-sans text-base leading-relaxed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold leading-tight text-brand-blue;
+  }
+
+  h1 { @apply text-display-lg; }
+  h2 { @apply text-display-md; }
+  h3 { @apply text-display-sm; }
+  h4 { @apply text-xl; }
+
+  p {
+    @apply text-slate-600 leading-relaxed;
+  }
+
+  a {
+    @apply text-brand-blue transition-colors duration-150;
+  }
+
+  a:hover {
+    @apply text-brand-accent;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Focus visible ring — accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-orange);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ─── Utility Components ─────────────────────────────────────────────────── */
+@layer components {
+  /* Consistent container */
+  .container-site {
+    @apply max-w-container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section vertical padding */
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  /* Section heading group */
+  .section-label {
+    @apply text-sm font-semibold uppercase tracking-widest text-brand-accent mb-2;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-neutral-border;
+  }
+
+  /* Card base */
+  .card {
+    @apply bg-white rounded-2xl border border-neutral-border shadow-card p-6
+           transition-shadow duration-200 hover:shadow-card-hover;
+  }
+
+  /* Leaflet map container */
+  .map-container {
+    @apply w-full h-[400px] rounded-2xl overflow-hidden border border-neutral-border;
+  }
+}
+
+/* ─── Leaflet Overrides ──────────────────────────────────────────────────── */
+.leaflet-container {
+  font-family: var(--font-geist-sans), Inter, system-ui, sans-serif;
+  z-index: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
+}
+
+.leaflet-popup-tip {
+  background: white;
+}
+
+/* ─── Print ──────────────────────────────────────────────────────────────── */
+@media print {
+  .no-print { display: none !important; }
+}
