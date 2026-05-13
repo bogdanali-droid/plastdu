@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import CTAButton from "./CTAButton";
 
@@ -14,30 +15,17 @@ const NAV_LINKS = [
   { href: "/contact",   label: "Contact" },
 ] as const;
 
-/* ─── Logo SVG (placeholder — înlocuiește cu <Image> când ai fișierul) ───── */
-function LogoPlaceholder() {
+/* ─── Logo ───────────────────────────────────────────────────────────────── */
+function Logo() {
   return (
-    <span
-      aria-label="Plast Du IV"
-      className="flex items-center gap-2 select-none"
-    >
-      {/* Square icon mark */}
-      <span
-        className="flex items-center justify-center w-9 h-9 rounded-lg bg-brand-accent text-white font-bold text-base leading-none"
-        aria-hidden="true"
-      >
-        PD
-      </span>
-      {/* Wordmark */}
-      <span className="hidden xs:inline-flex flex-col leading-none">
-        <span className="text-brand-blue font-bold text-base tracking-tight">
-          PLAST DU IV
-        </span>
-        <span className="text-slate-500 text-[0.65rem] font-medium tracking-widest uppercase">
-          Construcții
-        </span>
-      </span>
-    </span>
+    <Image
+      src="/logo.png"
+      alt="Plast Du IV"
+      width={140}
+      height={57}
+      priority
+      className="h-10 w-auto"
+    />
   );
 }
 
@@ -133,7 +121,7 @@ export default function Header() {
         <div className="container-site flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" aria-label="Plast Du IV — Acasă">
-            <LogoPlaceholder />
+            <Logo />
           </Link>
 
           {/* Desktop nav links */}
