@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,6 +10,7 @@ import Footer from "@/components/Footer";
 const PRODUSE_FABRICATE = [
   {
     slug: "dibluri-plastic",
+    imagine: "/images/produse/dibluri-plastic/01.jpg",
     titlu: "Dibluri Cui Plastic (Poliamidă)",
     categorie: "Dibluri",
     fabricat: true,
@@ -23,6 +25,7 @@ const PRODUSE_FABRICATE = [
   },
   {
     slug: "dibluri-metalice",
+    imagine: "/images/produse/dibluri-metalice/01.jpg",
     titlu: "Dibluri Cui Metalic Zincat",
     categorie: "Dibluri",
     fabricat: true,
@@ -37,6 +40,7 @@ const PRODUSE_FABRICATE = [
   },
   {
     slug: "flansa-vata",
+    imagine: "/images/produse/flansa-vata/01.jpg",
     titlu: "Flanșă Vată Minerală",
     categorie: "Flanșe",
     fabricat: true,
@@ -51,6 +55,7 @@ const PRODUSE_FABRICATE = [
   },
   {
     slug: "flansa-osb",
+    imagine: "/images/produse/flansa-osb/01.jpg",
     titlu: "Flanșă OSB / Capac (TSF-F55)",
     categorie: "Flanșe",
     fabricat: true,
@@ -165,11 +170,20 @@ export default function ProdusePage() {
                 key={p.slug}
                 className="card flex flex-col group hover:border-brand-blue/30"
               >
-                {/* Imagine placeholder */}
-                <div className="w-full h-44 bg-gradient-to-br from-blue-50 to-slate-100 rounded-xl mb-4 flex items-center justify-center overflow-hidden">
-                  <div className="text-4xl text-slate-300">
-                    {p.categorie === "Dibluri" ? "🔩" : "⚙️"}
-                  </div>
+                <div className="w-full h-44 bg-gradient-to-br from-blue-50 to-slate-100 rounded-xl mb-4 overflow-hidden relative">
+                  {p.imagine ? (
+                    <Image
+                      src={p.imagine}
+                      alt={p.titlu}
+                      fill
+                      className="object-contain p-4"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-4xl text-slate-300">
+                      {p.categorie === "Dibluri" ? "🔩" : "⚙️"}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-2 mb-2">
