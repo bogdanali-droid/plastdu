@@ -21,10 +21,10 @@ function Logo() {
     <Image
       src="/logo.png"
       alt="Plast Du IV"
-      width={140}
-      height={57}
+      width={200}
+      height={81}
       priority
-      className="h-10 w-auto"
+      className="h-14 w-auto"
     />
   );
 }
