@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 
 /* ─── Metadata + Schema.org ──────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  title: "Flanșă Vată Minerală — Disc Plastic Ø140-160mm pentru Termoizolație",
+  title: "Flanșă Vată Minerală — Disc Plastic Ø120-140mm pentru Termoizolație",
   description:
-    "Flanșă plastic cu rozetă extinsă Ø140–160mm pentru fixarea vatei minerale și polistirenului. " +
+    "Flanșă plastic cu rozetă extinsă Ø120–140mm pentru fixarea vatei minerale și polistirenului. " +
     "Model cu spite duble, distribuție uniformă a forței de prindere. Fabricată în România.",
   keywords: [
     "flansa vata minerala",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Flanșă Vată Minerală | Plast Du IV",
     description:
-      "Disc plastic cu rozetă Ø140–160mm pentru distribuție uniformă a forței pe vată minerală și polistiren.",
+      "Disc plastic cu rozetă Ø120–140mm pentru distribuție uniformă a forței pe vată minerală și polistiren.",
     url: "https://plastdu.ro/produse/flansa-vata",
     images: [{ url: "/images/produse/flansa-vata.jpg", width: 1200, height: 630 }],
   },
@@ -33,7 +33,7 @@ const productSchema = {
   "@type": "Product",
   name: "Flanșă Vată Minerală — Plast Du IV",
   description:
-    "Disc plastic circular cu diametru Ø140–160mm, model cu spite duble, gri închis. " +
+    "Disc plastic circular cu diametru Ø120–140mm, model cu spite duble, gri închis. " +
     "Utilizat pentru fixarea vatei minerale și polistirenului pe fațade. " +
     "Suprafața mare a rozetei asigură distribuție uniformă a forței și previne tăierea izolantului.",
   image: "https://plastdu.ro/images/produse/flansa-vata.jpg",
@@ -64,7 +64,7 @@ const BENEFICII = [
   {
     titlu: "Suprafață de contact mare",
     descriere:
-      "Diametrul de Ø140–160mm al rozetei distribuie forța de fixare pe o suprafață de cca 154–200cm². " +
+      "Diametrul de Ø120–140mm al rozetei distribuie forța de fixare pe o suprafață de cca 113–154cm². " +
       "Previne penetrarea diblului prin stratul de vată minerală sau EPS și menține planietatea fațadei.",
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -113,7 +113,7 @@ const BENEFICII = [
 
 const APLICATII = [
   {
-    titlu: "Sisteme ETICS cu vată minerală",
+    titlu: "Termoizolație exterioară cu vată minerală",
     descriere:
       "Fixarea plăcilor de vată minerală lamelă sau tablie pe fațade în sisteme termoizolante certificate. " +
       "Flanșa extinsă previne tăierea fibrelor minerale și asigură o prindere stabilă.",
@@ -167,10 +167,10 @@ export default function FlansaVataPage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Imagine */}
               <div className="flex flex-col gap-3">
-                <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 border border-neutral-border">
+                <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 border border-neutral-border img-watermark">
                   <Image
                     src="/images/produse/flansa-vata/01.jpg"
-                    alt="Flanșă Vată Minerală Ø140-160mm — Plast Du IV"
+                    alt="Flanșă Vată Minerală Ø120-140mm — Plast Du IV"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -179,7 +179,7 @@ export default function FlansaVataPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-2 max-w-lg mx-auto lg:mx-0 w-full">
                   {[2,3].map((n) => (
-                    <div key={n} className="relative aspect-square rounded-lg overflow-hidden border border-neutral-border bg-slate-100">
+                    <div key={n} className="relative aspect-square rounded-lg overflow-hidden border border-neutral-border bg-slate-100 img-watermark">
                       <Image
                         src={`/images/produse/flansa-vata/0${n}.jpg`}
                         alt={`Flanșă Vată Minerală — imagine ${n}`}
@@ -204,7 +204,7 @@ export default function FlansaVataPage() {
                 </div>
                 <h1 className="mb-4">Flanșă Vată Minerală</h1>
                 <p className="text-lg text-slate-600 mb-6">
-                  Disc plastic circular cu rozetă extinsă Ø140–160mm, model cu spite duble, gri închis.
+                  Disc plastic circular cu rozetă extinsă Ø120–140mm, model cu spite duble, gri închis.
                   Proiectat pentru fixarea vatei minerale și a polistirenului pe fațade —
                   suprafața mare de contact previne penetrarea stratului izolant și asigură
                   o distribuție uniformă a forței de prindere.
@@ -214,7 +214,7 @@ export default function FlansaVataPage() {
                 <dl className="grid grid-cols-2 gap-3 mb-8">
                   {[
                     { label: "Material", value: "Polipropilenă (PP) stabilizată UV" },
-                    { label: "Diametru rozetă", value: "Ø140–160mm" },
+                    { label: "Diametru rozetă", value: "Ø120–140mm" },
                     { label: "Model", value: "Disc circular cu spite duble" },
                     { label: "Culoare", value: "Gri închis" },
                     { label: "Compatibil cu", value: "Vată minerală + EPS / EPS-G" },
@@ -263,7 +263,7 @@ export default function FlansaVataPage() {
                 a capului diblului în izolant, reducând capacitatea de prindere și deformând fața plăcii.
               </p>
               <p className="text-slate-600">
-                Flanșa cu diametru Ø140–160mm mărește suprafața de contact de cca 7–8 ori față de
+                Flanșa cu diametru Ø120–140mm mărește suprafața de contact de cca 7–8 ori față de
                 rozeta standard, distribuind aceeași forță pe o arie mult mai mare — sub limita
                 de presiune admisă de materialul izolant.
               </p>
@@ -302,10 +302,10 @@ export default function FlansaVataPage() {
                     {[
                       ["Material", "Polipropilenă (PP) cu stabilizatori UV"],
                       ["Formă", "Disc circular cu model spite duble"],
-                      ["Diametru exterior rozetă", "Ø140–160mm"],
+                      ["Diametru exterior rozetă", "Ø120–140mm"],
                       ["Culoare", "Gri închis RAL 7011 (aproximativ)"],
                       ["Gaură centrală", "Ø10mm (compatibil diblu Ø10mm)"],
-                      ["Suprafață de contact", "~154–200cm²"],
+                      ["Suprafață de contact", "~113–154cm²"],
                       ["Temperatură de utilizare", "-40°C … +80°C"],
                       ["Rezistență UV", "Stabilizat contra îmbătrânirii UV"],
                       ["Compatibil cu izolant", "Vată minerală (MW), EPS, EPS-G"],

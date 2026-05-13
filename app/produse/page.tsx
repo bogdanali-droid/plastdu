@@ -45,9 +45,9 @@ const PRODUSE_FABRICATE = [
     categorie: "Flanșe",
     fabricat: true,
     descriere:
-      "Disc plastic cu rozeta extinsă Ø140–160mm, model spite duble. Distribuție uniformă a forței de prindere " +
+      "Disc plastic cu rozeta extinsă Ø120–140mm, model spite duble. Distribuție uniformă a forței de prindere " +
       "pe vată minerală și polistiren. Gri închis.",
-    specificatii: ["Material: PP", "Diametru rozetă: Ø140–160mm", "Model: spite duble"],
+    specificatii: ["Material: PP", "Diametru rozetă: Ø120–140mm", "Model: spite duble"],
     variante: "Standard",
     livrare: "La cerere",
     badge: "Produs propriu",
@@ -114,7 +114,7 @@ const PRODUSE_DISTRIBUITE = [
   {
     titlu: "Colțar PVC cu plasă",
     categorie: "Profile",
-    imagine: "/images/produse/coltar-pvc/01.webp",
+    imagine: "/images/produse/coltar-pvc/01.jpg",
     descriere: "Profil de colț din PVC cu plasă din fibră de sticlă pentru armarea muchiilor fațadei.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
@@ -301,9 +301,6 @@ export default function ProdusePage() {
                 <p className="section-label">Portofoliu extins</p>
                 <h2>Produse distribuite</h2>
               </div>
-              <span className="text-sm text-slate-500 hidden sm:block">
-                {PRODUSE_DISTRIBUITE.length} produse
-              </span>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -339,6 +336,25 @@ export default function ProdusePage() {
                   </div>
                 </article>
               ))}
+            </div>
+
+            {/* Gama larga CTA */}
+            <div className="mt-10 bg-white rounded-2xl border border-neutral-border p-6 flex flex-col md:flex-row md:items-center gap-4 shadow-card">
+              <div className="flex-1">
+                <p className="font-semibold text-brand-blue mb-1">Gamă largă de produse pentru reabilitare termică</p>
+                <p className="text-sm text-slate-500">
+                  Oferim o gamă extinsă de produse specifice proiectelor de reabilitare. Dacă nu găsiți produsul dorit în catalog, contactați-ne — vă pregătim o ofertă personalizată inclusiv pentru produse care nu apar pe site.
+                </p>
+              </div>
+              <Link
+                href="/contact?subiect=cerere-produs"
+                className="inline-flex items-center gap-2 bg-brand-blue text-white font-semibold px-5 py-3 rounded-xl hover:bg-brand-blue/90 transition-colors flex-shrink-0"
+              >
+                Solicitați ofertă personalizată
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           </div>
         </section>
