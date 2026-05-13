@@ -28,7 +28,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.name}
         </h3>
         <p className="text-sm text-slate-500">
-          <span className="font-medium text-slate-700">{project.city}</span>
+          <span className="font-medium text-slate-700">{project.district}</span>
           &nbsp;·&nbsp;{project.year}
         </p>
       </div>

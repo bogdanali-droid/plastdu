@@ -270,7 +270,6 @@ export default function HomePage() {
                       src={produs.imagine}
                       alt={`${produs.titlu} — Plast Du IV`}
                       className="w-full h-full object-cover"
-                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                     />
                     {/* Icon fallback */}
                     <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">

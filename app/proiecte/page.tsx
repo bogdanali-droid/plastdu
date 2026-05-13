@@ -4,6 +4,7 @@ import type { Project } from "../../components/BucharestMap";
 import { MapSkeleton } from "../../components/BucharestMap";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ProjectCard from "./ProjectCard";
 
 /* ─── Metadata ───────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
