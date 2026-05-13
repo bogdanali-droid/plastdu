@@ -57,7 +57,11 @@
     max-width: 100%;
     height: auto;
     display: block;
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
   }
+
 
   /* Focus visible ring — accessibility */
   :focus-visible {
@@ -119,4 +123,34 @@
 /* ─── Print ──────────────────────────────────────────────────────────────── */
 @media print {
   .no-print { display: none !important; }
+}
+
+/* ─── Image Protection + Watermark ───────────────────────────────────────── */
+.img-watermark {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-watermark::after {
+  content: "PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV  PLAST DU-IV";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.18);
+  background: transparent;
+  transform: rotate(-35deg);
+  word-break: break-all;
+  line-height: 2.8;
+  pointer-events: none;
+  user-select: none;
+  white-space: normal;
+  overflow: hidden;
+  z-index: 10;
 }
