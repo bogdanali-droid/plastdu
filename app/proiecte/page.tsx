@@ -35,10 +35,10 @@ const DEMO_PROJECTS: Project[] = [
   {
     id: 2,
     name: "Reabilitare bloc — Buhuși",
-    district: "Buhuși, Bacău",
+    district: "Sector 3 – București",
     year: 2026,
-    lat: 46.7167,
-    lng: 26.7167,
+    lat: 44.4150,
+    lng: 26.1420,
     photo: "/images/proiecte/buhusi/01.jpg",
   },
   {
@@ -155,7 +155,7 @@ export default function ProiectePage() {
               "/images/proiecte/blocuri/04.jpg",
               "/images/proiecte/blocuri/05.jpg",
             ].map((src, i) => (
-              <div key={i} className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 border border-neutral-border">
+              <div key={i} className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 border border-neutral-border img-watermark">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={src}

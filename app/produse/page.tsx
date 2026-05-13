@@ -16,7 +16,7 @@ const PRODUSE_FABRICATE = [
     fabricat: true,
     descriere:
       "Diblu termoizolant cu cui din poliamidă Ø5.5mm, corp PP Ø10mm, rozetă Ø55mm. " +
-      "Ideal pentru fixarea polistirenului pe fațade ETICS.",
+      "Ideal pentru fixarea polistirenului pe fațade termoizolate.",
     specificatii: ["Corp: Polipropilenă", "Cui: Poliamidă Ø5.5mm", "Rozetă: Ø55mm / 2mm"],
     variante: "10x70 … 10x260ZM",
     livrare: "100 buc/pungă–cutie",
@@ -74,6 +74,7 @@ const PRODUSE_DISTRIBUITE = [
   {
     titlu: "Dibluri universale pentru BCA",
     categorie: "Dibluri",
+    imagine: "/images/produse/dibluri-plastic/02.jpg",
     descriere: "Dibluri cu expansiune controlată pentru fixări în BCA și zidărie ușoară.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
@@ -81,21 +82,80 @@ const PRODUSE_DISTRIBUITE = [
   {
     titlu: "Șuruburi autoforante",
     categorie: "Fixare",
-    descriere: "Șuruburi pentru profile metalice, carton-gips și aplicații uscate.",
+    imagine: "/images/produse/suruburi/01.jpg",
+    descriere: "Șuruburi pentru profile metalice, carton-gips și aplicații uscate. Cap Philips sau Torx.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
   },
   {
-    titlu: "Dibluri pentru fixare gips-carton",
+    titlu: "Dibluri pentru gips-carton",
     categorie: "Dibluri",
+    imagine: "/images/produse/dibluri-metalice/02.jpg",
     descriere: "Soluții de fixare pentru pereți din gips-carton, profile și montanți.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
   },
   {
-    titlu: "Ancore chimice",
+    titlu: "Ancore chimice (conexpand)",
     categorie: "Fixare",
+    imagine: "/images/produse/ancore/01.jpg",
     descriere: "Ancore cu rășină epoxidică sau poliester pentru fixări structurale în beton și zidărie.",
+    badge: "Distribuit",
+    badgeColor: "bg-slate-100 text-slate-600",
+  },
+  {
+    titlu: "Distanțieri pentru gresie",
+    categorie: "Accesorii",
+    imagine: "/images/produse/distantieri-gresie/01.jpg",
+    descriere: "Distanțieri din plastic pentru rosturi uniforme la montaj gresie și faianță.",
+    badge: "Distribuit",
+    badgeColor: "bg-slate-100 text-slate-600",
+  },
+  {
+    titlu: "Colțar PVC cu plasă",
+    categorie: "Profile",
+    imagine: "/images/produse/coltar-pvc/01.webp",
+    descriere: "Profil de colț din PVC cu plasă din fibră de sticlă pentru armarea muchiilor fațadei.",
+    badge: "Distribuit",
+    badgeColor: "bg-slate-100 text-slate-600",
+  },
+  {
+    titlu: "Profil de colț exterior",
+    categorie: "Profile",
+    imagine: "/images/produse/profil-colt/01.jpg",
+    descriere: "Profil metalic zincat pentru protecția și finisarea colțurilor pereților exteriori.",
+    badge: "Distribuit",
+    badgeColor: "bg-slate-100 text-slate-600",
+  },
+  {
+    titlu: "Tije filetate",
+    categorie: "Fixare",
+    imagine: "/images/produse/tije-filetate/01.jpg",
+    descriere: "Tije filetate M6–M16 din oțel zincat sau inox pentru montaje industriale și construcții.",
+    badge: "Distribuit",
+    badgeColor: "bg-slate-100 text-slate-600",
+  },
+  {
+    titlu: "Agățători pentru balcon",
+    categorie: "Accesorii",
+    imagine: "/images/produse/agatatori/01.jpg",
+    descriere: "Agățători din plastic rezistent UV pentru fixarea ghivecelor și ornamentelor pe balcon.",
+    badge: "Distribuit",
+    badgeColor: "bg-slate-100 text-slate-600",
+  },
+  {
+    titlu: "Capace pentru țeavă",
+    categorie: "Accesorii",
+    imagine: "/images/produse/capace-teava/01.jpg",
+    descriere: "Capace din plastic pentru protejarea capetelor țevilor în timpul transportului și depozitării.",
+    badge: "Distribuit",
+    badgeColor: "bg-slate-100 text-slate-600",
+  },
+  {
+    titlu: "Piulițe hexagonale",
+    categorie: "Fixare",
+    imagine: "/images/produse/piulite/01.jpg",
+    descriere: "Piulițe hexagonale zincat M4–M20, rezistente la coroziune, pentru structuri metalice.",
     badge: "Distribuit",
     badgeColor: "bg-slate-100 text-slate-600",
   },
@@ -120,7 +180,7 @@ export default function ProdusePage() {
           </h1>
           <p className="text-lg text-blue-100 max-w-2xl">
             Plast Du IV SRL produce și distribuie elemente de fixare pentru industria construcțiilor.
-            Soluții tehnice certificate pentru sisteme ETICS, termoizolații și lucrări de finisaj —
+            Soluții tehnice certificate pentru sisteme de termoizolație exterioară, termoizolații și lucrări de finisaj —
             livrate direct la depozit sau șantier.
           </p>
         </div>
@@ -170,7 +230,7 @@ export default function ProdusePage() {
                 key={p.slug}
                 className="card flex flex-col group hover:border-brand-blue/30"
               >
-                <div className="w-full h-44 bg-gradient-to-br from-blue-50 to-slate-100 rounded-xl mb-4 overflow-hidden relative">
+                <div className="w-full h-44 bg-gradient-to-br from-blue-50 to-slate-100 rounded-xl mb-4 overflow-hidden relative img-watermark">
                   {p.imagine ? (
                     <Image
                       src={p.imagine}
@@ -241,13 +301,22 @@ export default function ProdusePage() {
                 <p className="section-label">Portofoliu extins</p>
                 <h2>Produse distribuite</h2>
               </div>
+              <span className="text-sm text-slate-500 hidden sm:block">
+                {PRODUSE_DISTRIBUITE.length} produse
+              </span>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {PRODUSE_DISTRIBUITE.map((p) => (
                 <article key={p.titlu} className="card flex flex-col">
-                  <div className="w-full h-32 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl mb-4 flex items-center justify-center">
-                    <div className="text-3xl text-slate-200">📦</div>
+                  <div className="w-full h-36 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl mb-4 overflow-hidden relative img-watermark">
+                    <Image
+                      src={p.imagine}
+                      alt={p.titlu}
+                      fill
+                      className="object-contain p-3"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
                   </div>
 
                   <div className="flex items-center gap-2 mb-2">
