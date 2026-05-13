@@ -1,5 +1,13 @@
-# Plast Du IV SRL — Proiect Digital
+# Plast Du IV — Website
 
-Client: **PLAST DU IV SRL** | Site actual: [plastdu.ro](https://plastdu.ro)
+Site web oficial pentru Plast Du IV SRL — producător român de dibluri și flanșe pentru construcții.
 
-Acest repo conține studiul de piață, propunerea de ofertă și toate livrabilele pentru proiectul de digitalizare al clientului.
+## Stack
+
+- Next.js 14 App Router + TypeScript
+- Tailwind CSS
+- Cloudflare Pages
+
+## Deploy
+
+Auto-deploy pe `main` branch via GitHub Actions → Cloudflare Pages.
