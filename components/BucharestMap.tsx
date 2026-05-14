@@ -46,13 +46,11 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
     let L: typeof import("leaflet");
 
     (async () => {
-      // Dynamic imports — Leaflet rulează numai în browser
       L = (await import("leaflet")).default;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const MCG = await import("leaflet.markercluster") as any;
       const MarkerClusterGroup = MCG.MarkerClusterGroup ?? MCG.default?.MarkerClusterGroup ?? MCG.default;
 
-      // Fix default icon paths broken by webpack
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       delete (L.Icon.Default.prototype as any)._getIconUrl;
       L.Icon.Default.mergeOptions({
@@ -61,18 +59,17 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
         shadowUrl: "/leaflet/marker-shadow.png",
       });
 
-      // Iniţializare hartă centrată pe București
+      // Centrat pe România; se va ajusta automat după proiecte
       map = L.map(containerRef.current!, {
-        center: [44.4268, 26.1025],
-        zoom: 11,
-        minZoom: 10,
+        center: [45.9432, 24.9668],
+        zoom: 7,
+        minZoom: 4,
         maxZoom: 18,
         scrollWheelZoom: false,
       });
 
       mapRef.current = map;
 
-      // CartoDB Positron — design curat, B2B-friendly
       L.tileLayer(
         "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
         {
@@ -83,7 +80,6 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
         }
       ).addTo(map);
 
-      // Marker icon albastru custom
       const blueIcon = L.divIcon({
         className: "",
         html: `<div style="
@@ -99,7 +95,6 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
         popupAnchor: [0, -32],
       });
 
-      // Cluster icon custom — cerc albastru #006EB6 cu număr alb
       const clusterGroup = new MarkerClusterGroup({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         iconCreateFunction(cluster: any) {
@@ -128,7 +123,6 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
         zoomToBoundsOnClick: true,
       });
 
-      // Adaugă markeri cu popup
       projects.forEach((project) => {
         const marker = L.marker([project.lat, project.lng], { icon: blueIcon });
 
@@ -170,6 +164,16 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
       });
 
       map.addLayer(clusterGroup);
+
+      // Auto-fit bounds la toate proiectele
+      if (projects.length > 0) {
+        const bounds = L.latLngBounds(
+          projects.filter(p => p.lat && p.lng).map(p => [p.lat, p.lng] as [number, number])
+        );
+        if (bounds.isValid()) {
+          map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+        }
+      }
     })();
 
     return () => {
@@ -186,7 +190,7 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
       ref={containerRef}
       className="w-full rounded-2xl overflow-hidden shadow-card border border-neutral-border"
       style={{ height: 500 }}
-      aria-label="Hartă proiecte realizate în București"
+      aria-label="Hartă proiecte realizate în toată țara"
     />
   );
 }
