@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import GalerieProduseClient from "@/components/GalerieProduseClient";
 
-/* ─── Metadata + Schema.org ──────────────────────────────────────────────── */
 export const metadata: Metadata = {
   title: "Dibluri Cui Metalic Zincat — Fixare Polistiren și Vată Minerală",
   description:
@@ -23,11 +22,10 @@ export const metadata: Metadata = {
     description:
       "Dibluri cu cui din oțel zincat pentru fixarea polistirenului și vatei minerale. Fabricate în România.",
     url: "https://plastdu.ro/produse/dibluri-metalice",
-    images: [{ url: "/images/produse/diblu-metalic.jpg", width: 1200, height: 630 }],
+    images: [{ url: "/images/produse/dibluri-metalice/01.jpg", width: 1200, height: 630 }],
   },
 };
 
-/* ─── Schema.org Product JSON-LD ─────────────────────────────────────────── */
 const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
@@ -36,11 +34,8 @@ const productSchema = {
     "Diblu cu cui din oțel zincat Ø5.5mm, corp polipropilenă Ø10mm, rozetă Ø55mm / 2mm. " +
     "Utilizat pentru fixarea polistirenului și vatei minerale pe fațade. " +
     "Compatibil cu cărămidă plină, cărămidă cu goluri (ZM), BCA și beton.",
-  image: "https://plastdu.ro/images/produse/diblu-metalic.jpg",
-  brand: {
-    "@type": "Brand",
-    name: "Plast Du IV",
-  },
+  image: "https://plastdu.ro/images/produse/dibluri-metalice/01.jpg",
+  brand: { "@type": "Brand", name: "Plast Du IV" },
   manufacturer: {
     "@type": "Organization",
     name: "Plast Du IV SRL",
@@ -57,14 +52,10 @@ const productSchema = {
     "@type": "Offer",
     availability: "https://schema.org/InStock",
     url: "https://plastdu.ro/contact?produs=dibluri-metalice",
-    seller: {
-      "@type": "Organization",
-      name: "Plast Du IV SRL",
-    },
+    seller: { "@type": "Organization", name: "Plast Du IV SRL" },
   },
 };
 
-/* ─── Data ───────────────────────────────────────────────────────────────── */
 const VARIANTE = [
   { cod: "10x120", diametru: "Ø10mm", lungime: "120mm", adancime: "75mm", zona: "Standard", ambalare: "200 buc" },
   { cod: "10x140", diametru: "Ø10mm", lungime: "140mm", adancime: "90mm", zona: "Standard", ambalare: "200 buc" },
@@ -135,7 +126,12 @@ const APLICATII = [
   },
 ];
 
-/* ─── Page ───────────────────────────────────────────────────────────────── */
+const IMAGINI = [
+  "/images/produse/dibluri-metalice/01.jpg",
+  "/images/produse/dibluri-metalice/02.jpg",
+  "/images/produse/dibluri-metalice/03.jpg",
+];
+
 export default function DiblurMetalicePage() {
   return (
     <>
@@ -145,7 +141,6 @@ export default function DiblurMetalicePage() {
       />
       <Header />
       <main>
-        {/* ── Breadcrumb ──────────────────────────────────────────────────── */}
         <div className="bg-neutral-surface border-b border-neutral-border">
           <div className="container-site py-3">
             <nav className="flex items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">
@@ -158,38 +153,11 @@ export default function DiblurMetalicePage() {
           </div>
         </div>
 
-        {/* ── Hero produs ──────────────────────────────────────────────────── */}
         <section className="bg-white section-padding">
           <div className="container-site">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Imagine */}
-              <div className="flex flex-col gap-3">
-                <div className="relative w-full aspect-square max-w-lg mx-auto lg:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-slate-200 border border-neutral-border">
-                  <Image
-                    src="/images/produse/dibluri-metalice/01.jpg"
-                    alt="Diblu Cui Metalic Zincat — Plast Du IV"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-2 max-w-lg mx-auto lg:mx-0 w-full">
-                  {[2,3].map((n) => (
-                    <div key={n} className="relative aspect-square rounded-lg overflow-hidden border border-neutral-border bg-slate-100">
-                      <Image
-                        src={`/images/produse/dibluri-metalice/0${n}.jpg`}
-                        alt={`Diblu Cui Metalic — imagine ${n}`}
-                        fill
-                        className="object-cover"
-                        sizes="25vw"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              <GalerieProduseClient imagini={IMAGINI} alt="Diblu Cui Metalic Zincat — Plast Du IV" />
 
-              {/* Info */}
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <span className="bg-brand-accent/10 text-brand-accent text-xs font-semibold px-3 py-1 rounded-full">
@@ -206,7 +174,6 @@ export default function DiblurMetalicePage() {
                   superioară, protecție anticorozivă și compatibilitate extinsă cu toate tipurile de suport.
                 </p>
 
-                {/* Specificatii rapide */}
                 <dl className="grid grid-cols-2 gap-3 mb-8">
                   {[
                     { label: "Material corp", value: "Polipropilenă (PP)" },
@@ -223,7 +190,6 @@ export default function DiblurMetalicePage() {
                   ))}
                 </dl>
 
-                {/* CTA */}
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/contact?produs=dibluri-metalice"
@@ -246,7 +212,6 @@ export default function DiblurMetalicePage() {
           </div>
         </section>
 
-        {/* ── Avantaje cheie ───────────────────────────────────────────────── */}
         <section className="section-padding bg-neutral-surface">
           <div className="container-site">
             <p className="section-label">De ce oțel zincat?</p>
@@ -265,13 +230,11 @@ export default function DiblurMetalicePage() {
           </div>
         </section>
 
-        {/* ── Specificatii tehnice ─────────────────────────────────────────── */}
         <section className="section-padding bg-white">
           <div className="container-site">
             <div className="max-w-3xl">
               <p className="section-label">Date tehnice</p>
               <h2 className="mb-8">Specificații tehnice complete</h2>
-
               <div className="bg-white rounded-2xl border border-neutral-border shadow-card overflow-hidden">
                 <table className="w-full text-sm">
                   <thead>
@@ -311,16 +274,13 @@ export default function DiblurMetalicePage() {
           </div>
         </section>
 
-        {/* ── Variante disponibile ─────────────────────────────────────────── */}
         <section className="section-padding bg-neutral-surface">
           <div className="container-site">
             <p className="section-label">Gamă completă</p>
             <h2 className="mb-3">Variante disponibile</h2>
             <p className="text-slate-500 mb-8 max-w-xl">
               Variantele <strong>ZM (Zonă Mare)</strong> sunt obligatorii pentru zidărie cu cărămidă cu goluri.
-              Cutiile de 200 buc sunt optimizate pentru comenzi de volum în proiecte mari.
             </p>
-
             <div className="bg-white rounded-2xl border border-neutral-border shadow-card overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -337,21 +297,15 @@ export default function DiblurMetalicePage() {
                   {VARIANTE.map((v, i) => (
                     <tr key={v.cod} className={i % 2 === 0 ? "bg-white" : "bg-neutral-surface/50"}>
                       <td className="px-5 py-3.5">
-                        <span className="font-mono font-semibold text-brand-blue bg-brand-blue/5 px-2 py-0.5 rounded">
-                          {v.cod}
-                        </span>
+                        <span className="font-mono font-semibold text-brand-blue bg-brand-blue/5 px-2 py-0.5 rounded">{v.cod}</span>
                       </td>
                       <td className="px-5 py-3.5 text-slate-600">{v.diametru}</td>
                       <td className="px-5 py-3.5 text-slate-600">{v.lungime}</td>
                       <td className="px-5 py-3.5 text-slate-600">{v.adancime}</td>
                       <td className="px-5 py-3.5">
                         <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
-                          v.zona === "Zonă Mare"
-                            ? "bg-brand-accent/10 text-brand-accent"
-                            : "bg-slate-100 text-slate-600"
-                        }`}>
-                          {v.zona}
-                        </span>
+                          v.zona === "Zonă Mare" ? "bg-brand-accent/10 text-brand-accent" : "bg-slate-100 text-slate-600"
+                        }`}>{v.zona}</span>
                       </td>
                       <td className="px-5 py-3.5 text-slate-600">{v.ambalare}</td>
                     </tr>
@@ -362,16 +316,10 @@ export default function DiblurMetalicePage() {
           </div>
         </section>
 
-        {/* ── Aplicatii recomandate ────────────────────────────────────────── */}
         <section className="section-padding bg-white">
           <div className="container-site">
             <p className="section-label">Domenii de utilizare</p>
-            <h2 className="mb-3">Aplicații recomandate</h2>
-            <p className="text-slate-500 mb-10 max-w-xl">
-              Diblurile cu cui metalic zincat sunt versatile — acoperă atât aplicații standard pe beton,
-              cât și situații complexe pe zidărie cu goluri sau cu vată minerală ca izolant.
-            </p>
-
+            <h2 className="mb-10">Aplicații recomandate</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {APLICATII.map((ap) => (
                 <div key={ap.titlu} className="card">
@@ -384,12 +332,10 @@ export default function DiblurMetalicePage() {
           </div>
         </section>
 
-        {/* ── Comparatie cu plastic ────────────────────────────────────────── */}
         <section className="section-padding bg-neutral-surface">
           <div className="container-site">
             <p className="section-label">Alegerea corectă</p>
             <h2 className="mb-8">Plastic vs. Metalic — când să alegeți fiecare variantă</h2>
-
             <div className="bg-white rounded-2xl border border-neutral-border shadow-card overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -411,9 +357,7 @@ export default function DiblurMetalicePage() {
                     <tr key={criteriu} className={i % 2 === 0 ? "bg-white" : "bg-neutral-surface/50"}>
                       <td className="px-5 py-3.5 font-medium text-slate-700">{criteriu}</td>
                       <td className="px-5 py-3.5 text-center text-slate-600">
-                        <Link href="/produse/dibluri-plastic" className="hover:text-brand-blue underline underline-offset-2">
-                          {plastic}
-                        </Link>
+                        <Link href="/produse/dibluri-plastic" className="hover:text-brand-blue underline underline-offset-2">{plastic}</Link>
                       </td>
                       <td className="px-5 py-3.5 text-center font-semibold text-brand-blue">{metalic}</td>
                     </tr>
@@ -424,18 +368,13 @@ export default function DiblurMetalicePage() {
           </div>
         </section>
 
-        {/* ── CTA Banner ───────────────────────────────────────────────────── */}
         <section className="section-padding bg-brand-blue text-white">
           <div className="container-site">
             <div className="max-w-2xl">
-              <p className="text-brand-accent font-semibold text-sm uppercase tracking-widest mb-3">
-                Solicitați ofertă
-              </p>
-              <h2 className="text-white mb-4">
-                Aveți nevoie de dibluri cu cui metalic pentru proiectul dvs.?
-              </h2>
+              <p className="text-brand-accent font-semibold text-sm uppercase tracking-widest mb-3">Solicitați ofertă</p>
+              <h2 className="text-white mb-4">Aveți nevoie de dibluri cu cui metalic pentru proiectul dvs.?</h2>
               <p className="text-blue-100 mb-8">
-                Ofertăm prețuri competitive pentru comenzi în volum — direct producător,
+                Oferăm prețuri competitive pentru comenzi în volum — direct producător,
                 cu livrare la depozit sau șantier în toată România.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -449,10 +388,10 @@ export default function DiblurMetalicePage() {
                   </svg>
                 </Link>
                 <Link
-                  href="/aplicatii"
+                  href="/produse"
                   className="inline-flex items-center gap-2 border border-white/30 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/10 transition-colors"
                 >
-                  Vezi aplicații
+                  Toate produsele
                 </Link>
               </div>
             </div>
