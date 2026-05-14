@@ -7,7 +7,7 @@ function generatePassword(length = 12) {
   let pw = '';
   const arr = new Uint8Array(length);
   crypto.getRandomValues(arr);
-  for (const b of arr) pw += chars[b % chars.length];
+  for (let i = 0; i < arr.length; i++) pw += chars[arr[i] % chars.length];
   return pw;
 }
 
