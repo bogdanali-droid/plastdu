@@ -22,7 +22,13 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ password }),
       });
       if (res.ok) {
-        router.push('/admin');
+        const data = await res.json();
+        // First login with default password → force password change
+        if (data.firstLogin) {
+          router.push('/admin/change-password');
+        } else {
+          router.push('/admin');
+        }
       } else {
         const data = await res.json();
         setError(data.error || 'Autentificare eșuată');

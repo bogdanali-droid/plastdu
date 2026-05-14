@@ -22,7 +22,10 @@ export async function POST(req: Request) {
     .setExpirationTime('8h')
     .sign(secret);
 
-  return new Response(JSON.stringify({ ok: true }), {
+  // firstLogin = true when user is still on the default password (no KV override set)
+  const firstLogin = !kvOverride;
+
+  return new Response(JSON.stringify({ ok: true, firstLogin }), {
     headers: {
       'Content-Type': 'application/json',
       'Set-Cookie': `admin_session=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=28800`,
