@@ -22,7 +22,8 @@ function readExifGps(buffer: ArrayBuffer): { lat: number; lng: number } | null {
     offset += 2;
     if (marker === 0xFFE1) {
       const segLen = view.getUint16(offset);
-      const exifHeader = String.fromCharCode(...new Uint8Array(buffer, offset + 2, 4));
+      const hdr = new Uint8Array(buffer, offset + 2, 4);
+      const exifHeader = String.fromCharCode(hdr[0], hdr[1], hdr[2], hdr[3]);
       if (exifHeader !== 'Exif') { offset += segLen; continue; }
       const tiffStart = offset + 8;
       const byteOrder = view.getUint16(tiffStart);
@@ -151,7 +152,7 @@ export default function AdminProiectePage() {
   }
 
   async function deleteProiect(id: string) {
-    if (!confirm('Ștergi proiectul?')) return;
+    if (!confirm('Ştergi proiectul?')) return;
     const updated = proiecte.filter((p) => p.id !== id);
     setProiecte(updated);
     await fetch('/api/admin/content', {
@@ -257,7 +258,7 @@ export default function AdminProiectePage() {
                 <button onClick={() => editProiect(p)}
                   className="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-lg transition">Editează</button>
                 <button onClick={() => deleteProiect(p.id)}
-                  className="text-sm bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-lg transition">Șterge</button>
+                  className="text-sm bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-lg transition">Şterge</button>
               </div>
             </li>
           ))}
