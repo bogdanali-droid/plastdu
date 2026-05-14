@@ -98,6 +98,14 @@ const DEFAULT_DESPRE = {
   },
 };
 
+const DEFAULT_PROIECTE = [
+  {"id":1,"name":"Reabilitare termică — Str. Baicului","district":"Sector 2 – Str. Baicului","year":2026,"lat":44.4520,"lng":26.1180,"photo":"/images/proiecte/baicului/01.jpg","imagini":["/images/proiecte/baicului/01.jpg"]},
+  {"id":2,"name":"Reabilitare bloc — Buhuși","district":"Sector 3 – București","year":2026,"lat":44.4150,"lng":26.1420,"photo":"/images/proiecte/buhusi/01.jpg","imagini":["/images/proiecte/buhusi/01.jpg","/images/proiecte/buhusi/02.jpg","/images/proiecte/buhusi/03.jpg"]},
+  {"id":3,"name":"Reabilitare termică — Str. Octavian Goga","district":"Sector 3 – Str. Octavian Goga","year":2026,"lat":44.4200,"lng":26.1350,"photo":"/images/proiecte/octavian-goga/01.jpg","imagini":["/images/proiecte/octavian-goga/01.jpg","/images/proiecte/octavian-goga/02.jpg","/images/proiecte/octavian-goga/03.jpg","/images/proiecte/octavian-goga/04.jpg","/images/proiecte/octavian-goga/05.jpg"]},
+  {"id":4,"name":"Izolare bloc — Str. Ghica","district":"Sector 2 – Str. Ghica","year":2026,"lat":44.4600,"lng":26.1050,"photo":"/images/proiecte/ghica/01.jpg","imagini":["/images/proiecte/ghica/01.jpg"]},
+  {"id":5,"name":"Reabilitare blocuri — proiect multiplu","district":"București","year":2026,"lat":44.4400,"lng":26.0900,"photo":"/images/proiecte/blocuri/01.jpg","imagini":["/images/proiecte/blocuri/01.jpg","/images/proiecte/blocuri/02.jpg","/images/proiecte/blocuri/03.jpg","/images/proiecte/blocuri/04.jpg","/images/proiecte/blocuri/05.jpg"]}
+];
+
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const key = url.searchParams.get('key');
@@ -110,6 +118,7 @@ export async function GET(req: Request) {
     if (key === 'produse') defaultVal = DEFAULT_PRODUSE;
     else if (key === 'contact') defaultVal = DEFAULT_CONTACT;
     else if (key === 'despre') defaultVal = DEFAULT_DESPRE;
+    else if (key === 'proiecte') defaultVal = DEFAULT_PROIECTE;
     else return Response.json({ error: 'Unknown key' }, { status: 400 });
 
     try {
@@ -123,28 +132,31 @@ export async function GET(req: Request) {
 
   // Return all keys
   try {
-    const [produseRaw, contactRaw, despreRaw] = await Promise.all([
+    const [produseRaw, contactRaw, despreRaw, proiecteRaw] = await Promise.all([
       kv.get('produse'),
       kv.get('contact'),
       kv.get('despre'),
+      kv.get('proiecte'),
     ]);
     return Response.json({
       produse: produseRaw ? JSON.parse(produseRaw) : DEFAULT_PRODUSE,
       contact: contactRaw ? JSON.parse(contactRaw) : DEFAULT_CONTACT,
       despre: despreRaw ? JSON.parse(despreRaw) : DEFAULT_DESPRE,
+      proiecte: proiecteRaw ? JSON.parse(proiecteRaw) : DEFAULT_PROIECTE,
     });
   } catch {
     return Response.json({
       produse: DEFAULT_PRODUSE,
       contact: DEFAULT_CONTACT,
       despre: DEFAULT_DESPRE,
+      proiecte: DEFAULT_PROIECTE,
     });
   }
 }
 
 export async function PUT(req: Request) {
   const { key, data } = await req.json();
-  if (!key || !['produse', 'contact', 'despre'].includes(key)) {
+  if (!key || !['produse', 'contact', 'despre', 'proiecte'].includes(key)) {
     return Response.json({ error: 'Invalid key' }, { status: 400 });
   }
 

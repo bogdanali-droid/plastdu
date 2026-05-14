@@ -13,6 +13,18 @@ const sections = [
     color: 'bg-blue-50 text-blue-700',
   },
   {
+    href: '/admin/proiecte',
+    title: 'Proiecte',
+    description: 'Gestionați proiectele realizate cu GPS și galerie foto',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+    color: 'bg-purple-50 text-purple-700',
+  },
+  {
     href: '/admin/contact',
     title: 'Contact',
     description: 'Editați datele de contact și harta',
@@ -44,7 +56,7 @@ export default function AdminDashboard() {
         <p className="text-slate-500 mt-1">Bine ați venit în panoul de administrare Plast Du IV.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {sections.map((section) => (
           <Link
             key={section.href}
