@@ -19,13 +19,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Build
-        run: npx @cloudflare/next-on-pages@1
+        run: npx @cloudflare/next-on-pages@1.13.10
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
