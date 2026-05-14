@@ -15,31 +15,15 @@ export async function GET(
   }
 
   const contentType =
-    object.httpMetadata?.contentType || guessContentType(key);
+    object.httpMetadata?.contentType ||
+    (key.endsWith('.png') ? 'image/png' :
+     key.endsWith('.webp') ? 'image/webp' :
+     key.endsWith('.gif') ? 'image/gif' :
+     'image/jpeg');
 
-  return new Response(object.body, {
-    headers: {
-      'Content-Type': contentType,
-      'Cache-Control': 'public, max-age=31536000, immutable',
-    },
-  });
-}
+  const headers = new Headers();
+  headers.set('Content-Type', contentType);
+  headers.set('Cache-Control', 'public, max-age=31536000, immutable');
 
-function guessContentType(key: string): string {
-  const ext = key.split('.').pop()?.toLowerCase();
-  switch (ext) {
-    case 'jpg':
-    case 'jpeg':
-      return 'image/jpeg';
-    case 'png':
-      return 'image/png';
-    case 'webp':
-      return 'image/webp';
-    case 'gif':
-      return 'image/gif';
-    case 'svg':
-      return 'image/svg+xml';
-    default:
-      return 'application/octet-stream';
-  }
+  return new Response(object.body, { headers });
 }
