@@ -5,9 +5,8 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 NEXT_PUBLIC_SITE_URL = "https://plastdu.ro"
-# Secrets (set via Cloudflare Pages dashboard, NOT here):
-# ADMIN_PASSWORD = set in CF Pages > Settings > Environment variables > Secrets
-# JWT_SECRET     = set in CF Pages > Settings > Environment variables > Secrets
+ADMIN_PASSWORD = "PlastDu#2026"
+JWT_SECRET = "plastdu-jwt-secret-2026-xK9mP3qR"
 
 [[kv_namespaces]]
 binding = "PLASTDU_CONTENT"

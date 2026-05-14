@@ -5,10 +5,14 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 export async function POST(req: Request) {
   const { password } = await req.json();
   const { env } = getRequestContext();
-  const adminPassword = (env as any).ADMIN_PASSWORD as string;
+  const kv = (env as any).PLASTDU_CONTENT as KVNamespace;
   const jwtSecret = (env as any).JWT_SECRET as string;
 
-  if (!adminPassword || password !== adminPassword) {
+  // Check KV override first, then fall back to env var
+  const kvOverride = kv ? await kv.get('admin_password_override') : null;
+  const activePassword = kvOverride || ((env as any).ADMIN_PASSWORD as string);
+
+  if (!activePassword || password !== activePassword) {
     return Response.json({ error: 'Parolă incorectă' }, { status: 401 });
   }
 
