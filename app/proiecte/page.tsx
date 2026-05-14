@@ -10,10 +10,10 @@ import ProjectCard from "./ProjectCard";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 
 export const metadata: Metadata = {
-  title: "Proiecte Realizate în București",
+  title: "Proiecte Realizate în Toată țara",
   description:
-    "Produsele Plast Du IV sunt utilizate în reabilitarea termică a blocurilor din București. " +
-    "Vizualizați proiectele finalizate pe hartă interactivă a capitalei.",
+    "Produsele Plast Du IV sunt utilizate în reabilitarea termică a blocurilor din întreaga Românie. " +
+    "Vizualizați proiectele finalizate pe hartă interactivă.",
   alternates: { canonical: "https://plastdu.ro/proiecte" },
 };
 
@@ -28,10 +28,10 @@ interface StoredProject extends Project {
 
 const DEFAULT_PROJECTS: StoredProject[] = [
   {id:1,name:"Reabilitare termică — Str. Baicului",district:"Sector 2 – Str. Baicului",year:2026,lat:44.4520,lng:26.1180,photo:"/images/proiecte/baicului/01.jpg",imagini:["/images/proiecte/baicului/01.jpg"]},
-  {id:2,name:"Reabilitare bloc — Buhuși",district:"Sector 3 – București",year:2026,lat:44.4150,lng:26.1420,photo:"/images/proiecte/buhusi/01.jpg",imagini:["/images/proiecte/buhusi/01.jpg","/images/proiecte/buhusi/02.jpg","/images/proiecte/buhusi/03.jpg"]},
+  {id:2,name:"Reabilitare bloc — Buhuiş",district:"Buhuiş, Bacău",year:2026,lat:46.7167,lng:26.7000,photo:"/images/proiecte/buhusi/01.jpg",imagini:["/images/proiecte/buhusi/01.jpg","/images/proiecte/buhusi/02.jpg","/images/proiecte/buhusi/03.jpg"]},
   {id:3,name:"Reabilitare termică — Str. Octavian Goga",district:"Sector 3 – Str. Octavian Goga",year:2026,lat:44.4200,lng:26.1350,photo:"/images/proiecte/octavian-goga/01.jpg",imagini:["/images/proiecte/octavian-goga/01.jpg","/images/proiecte/octavian-goga/02.jpg","/images/proiecte/octavian-goga/03.jpg","/images/proiecte/octavian-goga/04.jpg","/images/proiecte/octavian-goga/05.jpg"]},
   {id:4,name:"Izolare bloc — Str. Ghica",district:"Sector 2 – Str. Ghica",year:2026,lat:44.4600,lng:26.1050,photo:"/images/proiecte/ghica/01.jpg",imagini:["/images/proiecte/ghica/01.jpg"]},
-  {id:5,name:"Reabilitare blocuri — proiect multiplu",district:"București",year:2026,lat:44.4400,lng:26.0900,photo:"/images/proiecte/blocuri/01.jpg",imagini:["/images/proiecte/blocuri/01.jpg","/images/proiecte/blocuri/02.jpg","/images/proiecte/blocuri/03.jpg","/images/proiecte/blocuri/04.jpg","/images/proiecte/blocuri/05.jpg"]},
+  {id:5,name:"Reabilitare blocuri — proiect multiplu",district:"Bucureşti",year:2026,lat:44.4400,lng:26.0900,photo:"/images/proiecte/blocuri/01.jpg",imagini:["/images/proiecte/blocuri/01.jpg","/images/proiecte/blocuri/02.jpg","/images/proiecte/blocuri/03.jpg","/images/proiecte/blocuri/04.jpg","/images/proiecte/blocuri/05.jpg"]},
 ];
 
 export default async function ProiectePage() {
@@ -53,11 +53,11 @@ export default async function ProiectePage() {
       <section className="bg-brand-blue-700 text-white py-16 px-4">
         <div className="max-w-container mx-auto text-center">
           <h1 className="text-display-md font-bold mb-4">
-            Proiecte realizate în București
+            Proiecte realizate în toată țara
           </h1>
           <p className="text-brand-blue-200 text-lg max-w-3xl mx-auto">
-            Produsele noastre sunt utilizate în reabilitarea termică a blocurilor din
-            București și din toată țara — Baicului, Ghica, Octavian Goga, Buhuși și multe altele.
+            Produsele noastre sunt utilizate în reabilitarea termică a blocurilor din întreaga Românie
+            — Bucureşti, Ilfov, Prahova, Bacău și multe alte județe.
           </p>
         </div>
       </section>
@@ -71,14 +71,14 @@ export default async function ProiectePage() {
                 id="map-heading"
                 className="text-display-sm font-bold text-brand-blue-700 mb-1"
               >
-                Distribuție în București
+                Distribuție națională
               </h2>
               <p className="text-slate-500 text-sm">
                 Faceți click pe markeri pentru detalii despre fiecare proiect.
               </p>
             </div>
             <p className="text-xs text-slate-400 italic shrink-0">
-              Locațiile sunt marcate automat din coordonatele GPS ale fotografiilor de șantier
+              Locațiile sunt marcate automat din coordonatele GPS ale fotografiilor de şantier
             </p>
           </div>
           <BucharestMap projects={projects} />
@@ -105,7 +105,7 @@ export default async function ProiectePage() {
             id="gallery-extra-heading"
             className="text-display-sm font-bold text-brand-blue-700 mb-6"
           >
-            Mai multe imagini din șantier
+            Mai multe imagini din şantier
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {allImagini.map((src, i) => (
@@ -113,7 +113,7 @@ export default async function ProiectePage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={src}
-                  alt={`Imagine șantier reabilitare termică ${i + 1}`}
+                  alt={`Imagine şantier reabilitare termică ${i + 1}`}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
@@ -125,11 +125,11 @@ export default async function ProiectePage() {
         {/* CTA */}
         <section className="bg-brand-blue-700 rounded-2xl p-8 md:p-12 text-center text-white">
           <h2 className="text-display-sm font-bold mb-3">
-            Lucrați pe un șantier de reabilitare în București?
+            Lucrați pe un şantier de reabilitare termică?
           </h2>
           <p className="text-brand-blue-200 mb-8 max-w-xl mx-auto">
-            Contactați-ne pentru o ofertă personalizată. Livrăm rapid în București
-            și Ilfov, cu prețuri competitive pentru comenzi en-gros.
+            Contactați-ne pentru o ofertă personalizată. Livrăm rapid în toată România,
+            cu prețuri competitive pentru comenzi en-gros.
           </p>
           <a
             href="/contact"
