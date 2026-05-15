@@ -1,16 +1,21 @@
 'use client';
+export const runtime = 'edge';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Cifra { valoare: string; eticheta: string; }
 interface DespreData { titlu: string; text: string; cifre: Cifra[]; imagini: string[]; }
+
+type UploadItem = { file: File; id: string; status: 'pending' | 'uploading' | 'done' | 'error'; error?: string };
 
 export default function AdminDesprePage() {
   const [data, setData] = useState<DespreData>({ titlu: '', text: '', cifre: [], imagini: [] });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [uploadQueue, setUploadQueue] = useState<UploadItem[]>([]);
+  const [isDragging, setIsDragging] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const dragCounter = useRef(0);
 
   useEffect(() => {
     fetch('/api/admin/content?key=despre')
@@ -28,15 +33,37 @@ export default function AdminDesprePage() {
     setSaving(false); setSaved(true);
   }
 
-  async function uploadImage(file: File) {
-    setUploading(true);
-    const fd = new FormData();
-    fd.append('file', file);
-    fd.append('path', `despre/${Date.now()}-${file.name}`);
-    const res = await fetch('/api/admin/images', { method: 'POST', body: fd });
-    const { url } = await res.json();
-    setData((d) => ({ ...d, imagini: [...d.imagini, url] }));
-    setUploading(false);
+  async function uploadFiles(files: File[]) {
+    const imageFiles = files.filter((f) => f.type.startsWith('image/'));
+    if (!imageFiles.length) return;
+
+    const items: UploadItem[] = imageFiles.map((file) => ({
+      file,
+      id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      status: 'pending',
+    }));
+    setUploadQueue((prev) => [...prev, ...items]);
+
+    for (const item of items) {
+      setUploadQueue((prev) => prev.map((q) => q.id === item.id ? { ...q, status: 'uploading' } : q));
+      try {
+        const fd = new FormData();
+        fd.append('file', item.file);
+        fd.append('path', `despre/${Date.now()}-${item.file.name}`);
+        const res = await fetch('/api/admin/images', { method: 'POST', body: fd });
+        const json = await res.json();
+        if (!res.ok || json.error) {
+          const errMsg = json.error || 'Upload eșuat';
+          setUploadQueue((prev) => prev.map((q) => q.id === item.id ? { ...q, status: 'error', error: errMsg } : q));
+        } else {
+          setData((d) => ({ ...d, imagini: [...d.imagini, json.url] }));
+          setUploadQueue((prev) => prev.map((q) => q.id === item.id ? { ...q, status: 'done' } : q));
+          setTimeout(() => setUploadQueue((prev) => prev.filter((q) => q.id !== item.id)), 2000);
+        }
+      } catch {
+        setUploadQueue((prev) => prev.map((q) => q.id === item.id ? { ...q, status: 'error', error: 'Eroare de rețea' } : q));
+      }
+    }
   }
 
   async function removeImage(url: string) {
@@ -54,6 +81,32 @@ export default function AdminDesprePage() {
     cifre[i] = { ...cifre[i], [field]: val };
     setData({ ...data, cifre });
   }
+
+  function handleDragEnter(e: React.DragEvent) {
+    e.preventDefault();
+    dragCounter.current++;
+    setIsDragging(true);
+  }
+
+  function handleDragLeave(e: React.DragEvent) {
+    e.preventDefault();
+    dragCounter.current--;
+    if (dragCounter.current === 0) setIsDragging(false);
+  }
+
+  function handleDragOver(e: React.DragEvent) {
+    e.preventDefault();
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    dragCounter.current = 0;
+    setIsDragging(false);
+    const files = Array.from(e.dataTransfer.files);
+    uploadFiles(files);
+  }
+
+  const uploadingCount = uploadQueue.filter((q) => q.status === 'pending' || q.status === 'uploading').length;
 
   return (
     <div className="max-w-2xl">
@@ -87,7 +140,7 @@ export default function AdminDesprePage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Imagini</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Imagini fabrică</label>
           <div className="flex flex-wrap gap-3 mb-3">
             {data.imagini.map((img, i) => (
               <div key={i} className="relative">
@@ -97,17 +150,60 @@ export default function AdminDesprePage() {
               </div>
             ))}
           </div>
-          <input ref={fileRef} type="file" accept="image/*" className="hidden"
-            onChange={(e) => e.target.files?.[0] && uploadImage(e.target.files[0])} />
-          <button onClick={() => fileRef.current?.click()} disabled={uploading}
-            className="text-sm bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition disabled:opacity-50">
-            {uploading ? 'Se încarcă...' : '+ Adaugă imagine'}
-          </button>
+
+          {/* Drag & drop zone */}
+          <div
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onClick={() => fileRef.current?.click()}
+            className={`cursor-pointer border-2 border-dashed rounded-xl p-6 text-center transition-colors ${
+              isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-blue-400 hover:bg-gray-50'
+            }`}
+          >
+            {isDragging ? (
+              <p className="text-blue-600 font-medium">Dă-i drumul!</p>
+            ) : (
+              <>
+                <p className="text-gray-500 text-sm">Trage imagini aici sau <span className="text-blue-600 underline">selectează fișiere</span></p>
+                <p className="text-gray-400 text-xs mt-1">Poți selecta mai multe imagini deodată</p>
+              </>
+            )}
+          </div>
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*"
+            multiple
+            className="hidden"
+            onChange={(e) => e.target.files && uploadFiles(Array.from(e.target.files))}
+          />
+
+          {/* Upload queue status */}
+          {uploadQueue.length > 0 && (
+            <div className="mt-3 space-y-1">
+              {uploadQueue.map((item) => (
+                <div key={item.id} className="flex items-center gap-2 text-sm">
+                  <span className="truncate max-w-xs text-gray-600">{item.file.name}</span>
+                  {item.status === 'pending' && <span className="text-gray-400">În așteptare...</span>}
+                  {item.status === 'uploading' && <span className="text-blue-600">Se încarcă...</span>}
+                  {item.status === 'done' && <span className="text-green-600">✓ Gata</span>}
+                  {item.status === 'error' && (
+                    <span className="text-red-500">
+                      ✕ {item.error}
+                      {item.error?.includes('R2') && <span className="text-xs block text-gray-400">Verifică binding-ul R2 în Cloudflare Pages → Settings → Functions</span>}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        <button onClick={save} disabled={saving}
+        <button onClick={save} disabled={saving || uploadingCount > 0}
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition disabled:opacity-50">
-          {saving ? 'Se salvează...' : 'Salvează'}
+          {saving ? 'Se salvează...' : uploadingCount > 0 ? `Așteaptă (${uploadingCount} imagini)...` : 'Salvează'}
         </button>
         {saved && <span className="text-green-600 text-sm ml-3">Salvat!</span>}
       </div>
