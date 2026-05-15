@@ -1,6 +1,6 @@
+'use client';
 export const runtime = 'edge';
 
-'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -29,16 +29,13 @@ export default function NewProdusDiribuitPage() {
     if (!file || !generatedSlug) { setError('Introduceți mai întâi titlul'); return; }
     setUploadingImg(true);
     const ext = file.name.split('.').pop() || 'jpg';
-    const path = `produse/${generatedSlug}/${Date.now()}.${ext}`;
     const fd = new FormData();
     fd.append('file', file);
-    fd.append('path', path);
+    fd.append('path', `produse/${generatedSlug}/${Date.now()}.${ext}`);
     try {
       const res = await fetch('/api/admin/images', { method: 'POST', body: fd });
-      if (res.ok) { const { url } = await res.json(); setImagine(url); }
-      else setError('Upload eșuat');
-    } catch { setError('Eroare upload'); }
-    finally { setUploadingImg(false); e.target.value = ''; }
+      if (res.ok) { const { url } = await res.json(); setImagine(url); } else setError('Upload eșuat');
+    } catch { setError('Eroare upload'); } finally { setUploadingImg(false); e.target.value = ''; }
   }
 
   async function handleSave() {
@@ -51,13 +48,8 @@ export default function NewProdusDiribuitPage() {
     if (allSlugs.includes(generatedSlug)) { setError(`Slug „${generatedSlug}” există deja.`); setSaving(false); return; }
     const newProdus = { slug: generatedSlug, titlu, categorie, descriere, imagine: imagine || '/images/produse/placeholder.jpg', badge: 'Distribuit' };
     const newData = { ...currentData, distribuite: [...currentData.distribuite, newProdus] };
-    const saveRes = await fetch('/api/admin/content', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key: 'produse', data: newData }),
-    });
-    if (saveRes.ok) router.push('/admin/produse');
-    else { setError('Eroare la salvare'); setSaving(false); }
+    const saveRes = await fetch('/api/admin/content', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: 'produse', data: newData }) });
+    if (saveRes.ok) router.push('/admin/produse'); else { setError('Eroare la salvare'); setSaving(false); }
   }
 
   return (
@@ -70,21 +62,18 @@ export default function NewProdusDiribuitPage() {
       <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-5">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Titlu *</label>
-          <input type="text" value={titlu} onChange={(e) => setTitlu(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" placeholder="ex: Dibluri metalice speciale" />
+          <input type="text" value={titlu} onChange={(e) => setTitlu(e.target.value)} className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" placeholder="ex: Dibluri metalice speciale" />
           {titlu && <p className="text-xs text-slate-400 mt-1">Slug: <code className="bg-slate-100 px-1 rounded">{generatedSlug}</code></p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Categorie</label>
-          <select value={categorie} onChange={(e) => setCategorie(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm">
+          <select value={categorie} onChange={(e) => setCategorie(e.target.value)} className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm">
             <option>Fixare</option><option>Accesorii</option><option>Profile</option><option>Dibluri</option><option>Flanșe</option>
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Descriere</label>
-          <textarea value={descriere} onChange={(e) => setDescriere(e.target.value)} rows={3}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" />
+          <textarea value={descriere} onChange={(e) => setDescriere(e.target.value)} rows={3} className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-2">Imagine</label>
@@ -96,8 +85,7 @@ export default function NewProdusDiribuitPage() {
         </div>
       </div>
       <div className="mt-6 flex gap-3">
-        <button onClick={handleSave} disabled={saving || !titlu.trim()}
-          className="bg-blue-700 hover:bg-blue-800 disabled:bg-blue-400 text-white font-semibold px-6 py-2.5 rounded-lg text-sm">
+        <button onClick={handleSave} disabled={saving || !titlu.trim()} className="bg-blue-700 hover:bg-blue-800 disabled:bg-blue-400 text-white font-semibold px-6 py-2.5 rounded-lg text-sm">
           {saving ? 'Se salvează...' : 'Adaugă produs'}
         </button>
         <Link href="/admin/produse" className="border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium px-6 py-2.5 rounded-lg text-sm">Anulează</Link>
