@@ -1,4 +1,5 @@
 'use client';
+export const runtime = 'edge';
 import { useEffect, useState, useRef } from 'react';
 
 interface Project {
@@ -119,7 +120,6 @@ export default function AdminProiectePage() {
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
 
-  // Form state
   const [form, setForm] = useState<typeof EMPTY_FORM>({ ...EMPTY_FORM });
   const [existingImages, setExistingImages] = useState<string[]>([]);
   const [newFiles, setNewFiles] = useState<File[]>([]);
@@ -179,7 +179,6 @@ export default function AdminProiectePage() {
     const previews = files.map((f) => URL.createObjectURL(f));
     setNewPreviews((prev) => [...prev, ...previews]);
 
-    // Try EXIF GPS from first new file only if GPS not already set
     if (gpsStatus !== 'found') {
       const gps = await extractGPS(files[0]);
       if (gps) {
@@ -228,14 +227,12 @@ export default function AdminProiectePage() {
     setFormError('');
     if (!form.name.trim()) { setFormError('Introduceți denumirea proiectului.'); return; }
     if (!form.lat || !form.lng) { setFormError('Coordonatele GPS sunt obligatorii.'); return; }
-    const allImages = [...existingImages];
     if (existingImages.length === 0 && newFiles.length === 0) {
       setFormError('Adăugați cel puțin o imagine.'); return;
     }
     setSaving(true);
     try {
       const id = editId ?? (projects.length > 0 ? Math.max(...projects.map((p) => p.id)) + 1 : 1);
-      // Upload new files
       const uploadedUrls: string[] = [];
       for (let i = 0; i < newFiles.length; i++) {
         const file = newFiles[i];
@@ -260,7 +257,6 @@ export default function AdminProiectePage() {
         photo: allImagini[0] ?? '',
         imagini: allImagini,
       };
-      // Load current list and update
       const kvRes = await fetch('/api/admin/content?key=proiecte');
       const kvJson = await kvRes.json();
       let list: Project[] = kvJson.data ?? DEFAULT_PROJECTS;
@@ -277,8 +273,8 @@ export default function AdminProiectePage() {
       setProjects(list);
       setShowForm(false);
       setEditId(null);
-    } catch (err: any) {
-      setFormError(err.message ?? 'Eroare la salvare');
+    } catch (err: unknown) {
+      setFormError(err instanceof Error ? err.message : 'Eroare la salvare');
     } finally {
       setSaving(false);
     }
@@ -292,7 +288,6 @@ export default function AdminProiectePage() {
       let list: Project[] = kvJson.data ?? DEFAULT_PROJECTS;
       const proj = list.find((p) => p.id === id);
       if (proj) {
-        // Delete images from R2
         for (const url of proj.imagini ?? [proj.photo]) {
           if (url.startsWith('/api/img/')) {
             const path = url.replace('/api/img/', '');
@@ -339,7 +334,6 @@ export default function AdminProiectePage() {
         )}
       </div>
 
-      {/* Add/Edit Form */}
       {showForm && (
         <div className="bg-white rounded-2xl border border-slate-200 mb-8 p-6">
           <h2 className="text-base font-semibold text-slate-800 mb-5">
@@ -402,7 +396,6 @@ export default function AdminProiectePage() {
             </div>
           </div>
 
-          {/* Image upload */}
           <div className="border border-dashed border-slate-300 rounded-xl p-4 mb-5">
             <p className="text-xs font-semibold text-slate-600 mb-2">Poze proiect</p>
             <input
@@ -424,7 +417,6 @@ export default function AdminProiectePage() {
               Alege fișiere
             </button>
 
-            {/* GPS status */}
             {gpsStatus === 'found' && (
               <p className="text-xs text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2 mb-3">
                 GPS detectat din EXIF: {form.lat}, {form.lng}
@@ -462,7 +454,6 @@ export default function AdminProiectePage() {
               </div>
             )}
 
-            {/* Existing images */}
             {existingImages.length > 0 && (
               <div className="mb-3">
                 <p className="text-xs text-slate-500 mb-2">Imagini existente (prima = principală):</p>
@@ -491,7 +482,6 @@ export default function AdminProiectePage() {
               </div>
             )}
 
-            {/* New file previews */}
             {newPreviews.length > 0 && (
               <div>
                 <p className="text-xs text-slate-500 mb-2">Imagini noi de adăugat:</p>
@@ -543,7 +533,6 @@ export default function AdminProiectePage() {
         </div>
       )}
 
-      {/* Projects list */}
       <section className="bg-white rounded-2xl border border-slate-200">
         <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
           <div>

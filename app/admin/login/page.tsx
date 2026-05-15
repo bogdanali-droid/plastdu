@@ -1,4 +1,5 @@
 'use client';
+export const runtime = 'edge';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -23,7 +24,6 @@ export default function AdminLoginPage() {
       });
       if (res.ok) {
         const data = await res.json();
-        // First login with default password → force password change
         if (data.firstLogin) {
           router.push('/admin/change-password');
         } else {

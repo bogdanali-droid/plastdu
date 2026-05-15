@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import Link from 'next/link';
 
 const sections = [
@@ -86,12 +87,12 @@ export default function AdminDashboard() {
           Modificările se publică imediat după salvare — conținutul este citit din KV la fiecare request.
         </p>
         <a
-          href="https://plastdu.ro"
+          href="https://plastdu.pages.dev"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-900"
         >
-          Vizitați plastdu.ro
+          Vizitați plastdu.pages.dev
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>

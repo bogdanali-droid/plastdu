@@ -1,4 +1,5 @@
 'use client';
+export const runtime = 'edge';
 import { useEffect, useState } from 'react';
 
 type Cifra = { val: string; label: string };
@@ -151,7 +152,6 @@ export default function AdminDesprePage() {
       )}
 
       <div className="space-y-6">
-        {/* Cifre de referință */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6">
           <h2 className="text-base font-semibold text-slate-800 mb-4">Cifre de referință</h2>
           <div className="space-y-3">
@@ -194,7 +194,6 @@ export default function AdminDesprePage() {
           </div>
         </div>
 
-        {/* Specializări */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6">
           <h2 className="text-base font-semibold text-slate-800 mb-4">Specializări</h2>
           <div className="space-y-2">
@@ -225,7 +224,6 @@ export default function AdminDesprePage() {
           </div>
         </div>
 
-        {/* Fabrică */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6">
           <h2 className="text-base font-semibold text-slate-800 mb-4">Fabrică</h2>
 

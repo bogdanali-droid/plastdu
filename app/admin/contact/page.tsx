@@ -1,4 +1,5 @@
 'use client';
+export const runtime = 'edge';
 import { useEffect, useState } from 'react';
 
 type Phone = { label: string; number: string; href: string };
@@ -89,7 +90,6 @@ export default function AdminContactPage() {
       )}
 
       <div className="space-y-6">
-        {/* Phones */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6">
           <h2 className="text-base font-semibold text-slate-800 mb-4">Numere de telefon</h2>
           <div className="space-y-4">
@@ -143,7 +143,6 @@ export default function AdminContactPage() {
           </div>
         </div>
 
-        {/* Basic fields */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
           <h2 className="text-base font-semibold text-slate-800 mb-2">Informații generale</h2>
 
