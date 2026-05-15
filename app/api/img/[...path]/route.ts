@@ -13,7 +13,7 @@ export async function GET(req: Request, { params }: { params: { path: string[] }
   const rangeHeader = req.headers.get('Range');
 
   try {
-    let object: R2ObjectBody | null = null;
+    let object: any = null;
 
     if (rangeHeader) {
       const match = rangeHeader.match(/bytes=(\d+)-(\d*)/);
@@ -21,7 +21,7 @@ export async function GET(req: Request, { params }: { params: { path: string[] }
         const offset = parseInt(match[1], 10);
         const endByte = match[2] ? parseInt(match[2], 10) : undefined;
         const length = endByte !== undefined ? endByte - offset + 1 : undefined;
-        object = await r2.get(path, { range: length !== undefined ? { offset, length } : { offset } });
+        object = await r2.get(path, { range: length !== undefined ? { offset, length } : { offset } } as any);
       }
     }
 
@@ -38,8 +38,8 @@ export async function GET(req: Request, { params }: { params: { path: string[] }
     headers.set('Cache-Control', 'public, max-age=31536000, immutable');
     headers.set('Accept-Ranges', 'bytes');
 
-    if (rangeHeader && (object as any).range) {
-      const r = (object as any).range as { offset: number; length: number };
+    if (rangeHeader && object.range) {
+      const r = object.range as { offset: number; length: number };
       const totalSize = object.size;
       const start = r.offset;
       const end = r.offset + r.length - 1;
