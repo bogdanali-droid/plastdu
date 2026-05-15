@@ -1,7 +1,6 @@
 export const runtime = 'edge';
 import { getRequestContext } from '@cloudflare/next-on-pages';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -30,6 +29,7 @@ const DEFAULT_DESPRE = {
   ],
   fabrica: {
     imagini: ['/images/fabrica/01.jpg', '/images/fabrica/04.jpg', '/images/fabrica/05.jpg'],
+    videoclipuri: [] as string[],
     adresa: 'Str. Ana Ipătescu nr. 44, Spațiul I4, Com. Jilava, Ilfov',
   },
 };
@@ -71,7 +71,11 @@ export default async function DespreNoiPage() {
     const { env } = getRequestContext();
     const kv = (env as any).PLASTDU_CONTENT as KVNamespace;
     const stored = await kv.get('despre');
-    if (stored) despre = JSON.parse(stored);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (!parsed.fabrica.videoclipuri) parsed.fabrica.videoclipuri = [];
+      despre = parsed;
+    }
   } catch {
     // use defaults
   }
@@ -79,6 +83,7 @@ export default async function DespreNoiPage() {
   const CIFRE = despre.cifre;
   const SPECIALIZARI = despre.specializari;
   const FABRICA = despre.fabrica;
+  const VIDEOCLIPURI: string[] = FABRICA.videoclipuri || [];
 
   return (
     <>
@@ -181,6 +186,29 @@ export default async function DespreNoiPage() {
           </div>
         </section>
 
+        {/* Videoclipuri fabrică */}
+        {VIDEOCLIPURI.length > 0 && (
+          <section className="section-padding bg-neutral-surface">
+            <div className="container-site">
+              <p className="section-label mb-3">Procesul de fabricație</p>
+              <h2 className="mb-8">Cum producem</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                {VIDEOCLIPURI.map((url: string, i: number) => (
+                  <div key={url} className="rounded-2xl overflow-hidden bg-black shadow-card">
+                    <video
+                      src={url}
+                      controls
+                      preload="metadata"
+                      className="w-full aspect-video"
+                      aria-label={`Videoclip fabricare ${i + 1}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="section-padding bg-neutral-surface">
           <div className="container-site">
             <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
@@ -206,7 +234,7 @@ export default async function DespreNoiPage() {
                 </div>
                 <h3 className="text-base mb-3">Viziunea noastră</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Să redefin im standardele industriei construcțiilor prin inovare, sustenabilitate
+                  Să redefinim standardele industriei construcțiilor prin inovare, sustenabilitate
                   și relații de parteneriat solide.
                 </p>
               </div>

@@ -151,6 +151,7 @@ const DEFAULT_DESPRE = {
   ],
   fabrica: {
     imagini: ['/images/fabrica/01.jpg', '/images/fabrica/04.jpg', '/images/fabrica/05.jpg'],
+    videoclipuri: [],
     adresa: 'Str. Ana Ipătescu nr. 44, Spațiul I4, Com. Jilava, Ilfov',
   },
 };
