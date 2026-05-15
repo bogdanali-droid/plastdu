@@ -3,7 +3,7 @@ import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export async function GET(req: Request, { params }: { params: { path: string[] } }) {
   const { env } = getRequestContext();
-  const r2 = (env as any).PLASTDU_IMAGES as R2Bucket | undefined;
+  const r2 = (env as any).PLASTDU_IMAGES as any;
 
   if (!r2) {
     return new Response('Storage not configured', { status: 503 });
@@ -21,7 +21,7 @@ export async function GET(req: Request, { params }: { params: { path: string[] }
         const offset = parseInt(match[1], 10);
         const endByte = match[2] ? parseInt(match[2], 10) : undefined;
         const length = endByte !== undefined ? endByte - offset + 1 : undefined;
-        object = await r2.get(path, { range: length !== undefined ? { offset, length } : { offset } } as any);
+        object = await r2.get(path, { range: length !== undefined ? { offset, length } : { offset } });
       }
     }
 
@@ -40,10 +40,9 @@ export async function GET(req: Request, { params }: { params: { path: string[] }
 
     if (rangeHeader && object.range) {
       const r = object.range as { offset: number; length: number };
-      const totalSize = object.size;
       const start = r.offset;
       const end = r.offset + r.length - 1;
-      headers.set('Content-Range', `bytes ${start}-${end}/${totalSize}`);
+      headers.set('Content-Range', `bytes ${start}-${end}/${object.size}`);
       headers.set('Content-Length', String(r.length));
       return new Response(object.body, { status: 206, headers });
     }
