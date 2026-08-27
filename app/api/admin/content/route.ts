@@ -156,6 +156,8 @@ const DEFAULT_DESPRE = {
   },
 };
 
+const DEFAULT_CERTIFICATE: { titlu: string; descriere: string; fisier: string; tip: 'imagine' | 'pdf' }[] = [];
+
 const DEFAULT_PROIECTE = [
   {"id":1,"name":"Reabilitare termică — Str. Baicului","district":"Sector 2 – Str. Baicului","year":2026,"lat":44.4520,"lng":26.1180,"photo":"/images/proiecte/baicului/01.jpg","imagini":["/images/proiecte/baicului/01.jpg"]},
   {"id":2,"name":"Reabilitare bloc — Buhuşi","district":"Sector 3 – Bucureşti","year":2026,"lat":44.4150,"lng":26.1420,"photo":"/images/proiecte/buhusi/01.jpg","imagini":["/images/proiecte/buhusi/01.jpg","/images/proiecte/buhusi/02.jpg","/images/proiecte/buhusi/03.jpg"]},
@@ -177,6 +179,7 @@ export async function GET(req: Request) {
     else if (key === 'contact') defaultVal = DEFAULT_CONTACT;
     else if (key === 'despre') defaultVal = DEFAULT_DESPRE;
     else if (key === 'proiecte') defaultVal = DEFAULT_PROIECTE;
+    else if (key === 'certificate') defaultVal = DEFAULT_CERTIFICATE;
     else return Response.json({ error: 'Unknown key' }, { status: 400 });
 
     if (!kv) return Response.json({ data: defaultVal });
@@ -196,21 +199,24 @@ export async function GET(req: Request) {
       contact: DEFAULT_CONTACT,
       despre: DEFAULT_DESPRE,
       proiecte: DEFAULT_PROIECTE,
+      certificate: DEFAULT_CERTIFICATE,
     });
   }
 
   try {
-    const [produseRaw, contactRaw, despreRaw, proiecteRaw] = await Promise.all([
+    const [produseRaw, contactRaw, despreRaw, proiecteRaw, certificateRaw] = await Promise.all([
       kv.get('produse'),
       kv.get('contact'),
       kv.get('despre'),
       kv.get('proiecte'),
+      kv.get('certificate'),
     ]);
     return Response.json({
       produse: produseRaw ? JSON.parse(produseRaw) : DEFAULT_PRODUSE,
       contact: contactRaw ? JSON.parse(contactRaw) : DEFAULT_CONTACT,
       despre: despreRaw ? JSON.parse(despreRaw) : DEFAULT_DESPRE,
       proiecte: proiecteRaw ? JSON.parse(proiecteRaw) : DEFAULT_PROIECTE,
+      certificate: certificateRaw ? JSON.parse(certificateRaw) : DEFAULT_CERTIFICATE,
     });
   } catch {
     return Response.json({
@@ -218,13 +224,14 @@ export async function GET(req: Request) {
       contact: DEFAULT_CONTACT,
       despre: DEFAULT_DESPRE,
       proiecte: DEFAULT_PROIECTE,
+      certificate: DEFAULT_CERTIFICATE,
     });
   }
 }
 
 export async function PUT(req: Request) {
   const { key, data } = await req.json();
-  if (!key || !['produse', 'contact', 'despre', 'proiecte'].includes(key)) {
+  if (!key || !['produse', 'contact', 'despre', 'proiecte', 'certificate'].includes(key)) {
     return Response.json({ error: 'Invalid key' }, { status: 400 });
   }
 

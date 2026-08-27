@@ -64,17 +64,24 @@ const CLIENTI = [
   },
 ];
 
+type Certificat = { titlu: string; descriere: string; fisier: string; tip: 'imagine' | 'pdf' };
+
 export default async function DespreNoiPage() {
   let despre = DEFAULT_DESPRE;
+  let certificate: Certificat[] = [];
 
   try {
     const { env } = getRequestContext();
-    const kv = (env as any).PLASTDU_CONTENT as KVNamespace;
-    const stored = await kv.get('despre');
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      if (!parsed.fabrica.videoclipuri) parsed.fabrica.videoclipuri = [];
-      despre = parsed;
+    const kv = (env as any).PLASTDU_CONTENT as KVNamespace | undefined;
+    if (kv) {
+      const stored = await kv.get('despre');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (!parsed.fabrica.videoclipuri) parsed.fabrica.videoclipuri = [];
+        despre = parsed;
+      }
+      const storedCert = await kv.get('certificate');
+      if (storedCert) certificate = JSON.parse(storedCert);
     }
   } catch {
     // use defaults
@@ -294,6 +301,44 @@ export default async function DespreNoiPage() {
             </div>
           </div>
         </section>
+
+        {/* Certificări */}
+        {certificate.length > 0 && (
+          <section className="section-padding bg-white">
+            <div className="container-site">
+              <p className="section-label mb-3">Calitate atestată</p>
+              <h2 className="mb-8">Certificări</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {certificate.map((c) => (
+                  <a
+                    key={c.fisier}
+                    href={c.fisier}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="card group block"
+                  >
+                    <div className="relative h-48 rounded-xl overflow-hidden bg-slate-100 mb-4 flex items-center justify-center">
+                      {c.tip === 'imagine' ? (
+                        <ImageWithFallback
+                          src={c.fisier}
+                          alt={c.titlu}
+                          className="object-contain"
+                          sizes="(max-width: 1024px) 100vw, 33vw"
+                        />
+                      ) : (
+                        <svg className="w-14 h-14 text-brand-blue/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>
+                      )}
+                    </div>
+                    <h3 className="text-base mb-1 group-hover:text-brand-accent transition-colors">{c.titlu}</h3>
+                    {c.descriere && <p className="text-sm text-slate-500 leading-relaxed">{c.descriere}</p>}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section-padding bg-brand-blue text-white">
           <div className="container-site text-center">
