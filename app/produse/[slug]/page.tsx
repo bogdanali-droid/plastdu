@@ -1,133 +1,147 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GalerieProduse from "./GalerieProduse";
+import { getRequestContext } from "@cloudflare/next-on-pages";
 
 export const runtime = 'edge';
 
-const PRODUSE: Record<
-  string,
-  {
-    titlu: string;
-    categorie: string;
-    descriere: string;
-    specificatii: string[];
-    variante: string;
-    livrare: string;
-    imagini: string[];
-  }
-> = {
-  "dibluri-plastic": {
-    titlu: "Dibluri Cui Plastic (Poliamidă)",
-    categorie: "Dibluri",
-    descriere:
-      "Diblu termoizolant cu cui din poliamidă Ø5.5mm, corp PP Ø10mm, rozetă Ø55mm. " +
-      "Ideal pentru fixarea polistirenului pe fațade termoizolate. Fabricat în România, conform standardelor europene.",
-    specificatii: [
-      "Corp: Polipropilenă (PP)",
-      "Cui: Poliamidă Ø5.5mm — termoizolant",
-      "Rozetă: Ø55mm / grosime 2mm",
-      "Adâncime de ancorare: min. 25mm în beton",
-      "Rezistență la smulgere: ≥ 0.6 kN (beton C20/25)",
-    ],
-    variante: "10×70, 10×80, 10×100, 10×120, 10×140, 10×160, 10×180, 10×200, 10×220, 10×240, 10×260ZM",
-    livrare: "100 buc / pungă sau cutie",
-    imagini: ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg","09.jpg","10.jpg","11.jpg","12.jpg","14.jpg"],
-  },
-  "dibluri-metalice": {
-    titlu: "Dibluri Cui Metalic Zincat",
-    categorie: "Dibluri",
-    descriere:
-      "Diblu cu cui din oțel zincat Ø5.5mm, corp PP Ø10mm, compatibil cu polistiren și vată minerală. " +
-      "Rezistență mecanică superioară în solicitări dinamice și structuri cu cerințe ridicate.",
-    specificatii: [
-      "Corp: Polipropilenă (PP)",
-      "Cui: Oțel zincat Ø5.5mm",
-      "Rozetă: Ø55mm / grosime 2mm",
-      "Adâncime de ancorare: min. 25mm în beton",
-      "Rezistență la smulgere: ≥ 0.8 kN (beton C20/25)",
-    ],
-    variante: "10×120, 10×140, 10×160, 10×180, 10×200, 10×220, 10×240, 10×260ZM",
-    livrare: "100–200 buc / cutie",
-    imagini: ["01.jpg","02.jpg","03.jpg"],
-  },
-  "flansa-vata": {
-    titlu: "Flanșă Vată Minerală",
-    categorie: "Flanșe",
-    descriere:
-      "Disc plastic cu rozetă extinsă Ø120–140mm, model spite duble. Distribuție uniformă a forței de prindere " +
-      "pe vată minerală și polistiren. Culoare gri închis. Fabricat din PP virgin.",
-    specificatii: [
-      "Material: Polipropilenă (PP)",
-      "Diametru rozetă: Ø120–140mm",
-      "Model: spite duble — distribuție uniformă",
-      "Compatibil cu dibluri Ø10mm",
-    ],
-    variante: "Standard Ø120mm, Standard Ø140mm",
-    livrare: "La cerere",
-    imagini: ["01.jpg","02.jpg","03.jpg"],
-  },
-  "flansa-osb": {
-    titlu: "Flanșă OSB / Capac (TSF-F55)",
-    categorie: "Flanșe",
-    descriere:
-      "Flanșă cu capac snap-on care acoperă capul diblului pentru un finisaj superior și aspect curat. " +
-      "Include șurub galvanizat. Cod produs: TSF-F55. Fabricat în România.",
-    specificatii: [
-      "Cod produs: TSF-F55",
-      "Sistem capac snap-on",
-      "Șurub galvanizat inclus",
-      "Material: PP + oțel zincat",
-    ],
-    variante: "TSF-F55",
-    livrare: "La cerere",
-    imagini: ["01.jpg","02.jpg","03.jpg"],
-  },
+type ProdusData = {
+  slug: string;
+  titlu: string;
+  categorie: string;
+  descriere: string;
+  imagine?: string;
+  galerie?: string[];
+  specificatii?: string[];
+  variante?: string;
+  livrare?: string;
+  badge?: string;
 };
 
-export function generateStaticParams() {
-  return Object.keys(PRODUSE).map((slug) => ({ slug }));
+async function getProdus(slug: string): Promise<ProdusData | null> {
+  try {
+    const { env } = getRequestContext();
+    const kv = (env as any).PLASTDU_CONTENT as KVNamespace | undefined;
+    if (!kv) return null;
+    const raw = await kv.get('produse');
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    const all = [...(data.fabricate || []), ...(data.distribuite || [])];
+    return all.find((p: any) => p.slug === slug) || null;
+  } catch {
+    return null;
+  }
 }
 
-export default function PagProdusDetal({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const produs = PRODUSE[params.slug];
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const produs = await getProdus(params.slug);
+  if (!produs) return { title: 'Produs indisponibil' };
+
+  const title = `${produs.titlu} — ${produs.categorie} | Plast Du IV`;
+  const description = produs.descriere.slice(0, 155) + (produs.descriere.length > 155 ? '...' : '');
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `https://plastdu.ro/produse/${params.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `https://plastdu.ro/produse/${params.slug}`,
+      type: 'website',
+      images: produs.imagine ? [{ url: produs.imagine, alt: produs.titlu }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: produs.imagine ? [produs.imagine] : undefined,
+    },
+  };
+}
+
+export default async function PagProdusDetal({ params }: { params: { slug: string } }) {
+  const produs = await getProdus(params.slug);
   if (!produs) notFound();
+
+  const imagineaMax = produs.imagine || '';
+  const galerie = produs.galerie || [];
+  const totalImagini = [imagineaMax, ...galerie].filter(Boolean);
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": produs.titlu,
+    "description": produs.descriere,
+    "category": produs.categorie,
+    "brand": { "@type": "Brand", "name": "Plast Du IV" },
+    "manufacturer": { "@type": "Organization", "name": "Plast Du IV SRL" },
+    "image": totalImagini.map((img) => (img.startsWith('http') ? img : `https://plastdu.ro${img}`)),
+    "url": `https://plastdu.ro/produse/${produs.slug}`,
+    "offers": {
+      "@type": "Offer",
+      "url": `https://plastdu.ro/produse/${produs.slug}`,
+      "priceCurrency": "RON",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": { "@type": "Organization", "name": "Plast Du IV SRL" },
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://plastdu.ro" },
+      { "@type": "ListItem", "position": 2, "name": "Produse", "item": "https://plastdu.ro/produse" },
+      { "@type": "ListItem", "position": 3, "name": produs.titlu, "item": `https://plastdu.ro/produse/${produs.slug}` },
+    ],
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+
       <Header />
       <main>
-        {/* Breadcrumb */}
         <section className="bg-neutral-surface border-b border-neutral-border">
-          <div className="container-site py-3 flex items-center gap-2 text-sm text-slate-500">
-            <Link href="/" className="hover:text-brand-blue transition-colors">Acasă</Link>
-            <span>/</span>
-            <Link href="/produse" className="hover:text-brand-blue transition-colors">Produse</Link>
-            <span>/</span>
-            <span className="text-slate-700 font-medium">{produs.titlu}</span>
-          </div>
+          <nav aria-label="Breadcrumb" className="container-site py-3">
+            <ol className="flex items-center gap-2 text-sm text-slate-500">
+              <li>
+                <Link href="/" className="hover:text-brand-blue transition-colors">Acasă</Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link href="/produse" className="hover:text-brand-blue transition-colors">Produse</Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-slate-700 font-medium">{produs.titlu}</li>
+            </ol>
+          </nav>
         </section>
 
-        {/* Hero produs */}
         <section className="section-padding bg-white">
           <div className="container-site">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
               <GalerieProduse
                 slug={params.slug}
-                imagini={produs.imagini}
+                imagini={totalImagini.length > 0 ? totalImagini.map(u => u.replace('/api/img/', '').split('/').pop() || u) : []}
                 titlu={produs.titlu}
               />
 
               <div className="flex flex-col gap-6">
                 <div>
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-accent/10 text-brand-accent">
-                      Produs propriu
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                      produs.badge === 'Produs propriu'
+                        ? 'bg-brand-accent/10 text-brand-accent'
+                        : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      {produs.badge || 'Produs'}
                     </span>
                     <span className="text-xs text-slate-400">{produs.categorie}</span>
                   </div>
@@ -135,30 +149,38 @@ export default function PagProdusDetal({
                   <p className="text-slate-600 leading-relaxed">{produs.descriere}</p>
                 </div>
 
-                <div className="bg-neutral-surface rounded-xl p-5 border border-neutral-border">
-                  <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
-                    Specificații tehnice
-                  </h2>
-                  <ul className="space-y-2">
-                    {produs.specificatii.map((s) => (
-                      <li key={s} className="flex items-start gap-2 text-sm text-slate-600">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-accent flex-shrink-0 mt-1.5" />
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {produs.specificatii && produs.specificatii.length > 0 && (
+                  <div className="bg-neutral-surface rounded-xl p-5 border border-neutral-border">
+                    <h2 className="text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
+                      Specificații tehnice
+                    </h2>
+                    <ul className="space-y-2">
+                      {produs.specificatii.map((s) => (
+                        <li key={s} className="flex items-start gap-2 text-sm text-slate-600">
+                          <span className="w-1.5 h-1.5 rounded-full bg-brand-accent flex-shrink-0 mt-1.5" />
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-blue-50 rounded-xl p-4">
-                    <p className="text-xs font-semibold text-brand-blue uppercase tracking-wide mb-1">Variante</p>
-                    <p className="text-sm text-slate-700">{produs.variante}</p>
+                {(produs.variante || produs.livrare) && (
+                  <div className="grid grid-cols-2 gap-4">
+                    {produs.variante && (
+                      <div className="bg-blue-50 rounded-xl p-4">
+                        <p className="text-xs font-semibold text-brand-blue uppercase tracking-wide mb-1">Variante</p>
+                        <p className="text-sm text-slate-700">{produs.variante}</p>
+                      </div>
+                    )}
+                    {produs.livrare && (
+                      <div className="bg-blue-50 rounded-xl p-4">
+                        <p className="text-xs font-semibold text-brand-blue uppercase tracking-wide mb-1">Livrare</p>
+                        <p className="text-sm text-slate-700">{produs.livrare}</p>
+                      </div>
+                    )}
                   </div>
-                  <div className="bg-blue-50 rounded-xl p-4">
-                    <p className="text-xs font-semibold text-brand-blue uppercase tracking-wide mb-1">Livrare</p>
-                    <p className="text-sm text-slate-700">{produs.livrare}</p>
-                  </div>
-                </div>
+                )}
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <Link

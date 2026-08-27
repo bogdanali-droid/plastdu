@@ -31,10 +31,13 @@ declare interface R2Object {
   httpMetadata?: { contentType?: string };
   key: string;
   size: number;
+  writeHttpMetadata(headers: Headers): void;
+  range?: { offset: number; length: number };
 }
 
 declare interface R2Bucket {
-  get(key: string): Promise<R2Object | null>;
+  head(key: string): Promise<R2Object | null>;
+  get(key: string, options?: { range?: { offset: number; length?: number } }): Promise<R2Object | null>;
   put(
     key: string,
     value: ArrayBuffer | ReadableStream | string | null,

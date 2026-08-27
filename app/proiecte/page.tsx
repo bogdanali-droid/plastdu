@@ -55,11 +55,16 @@ export default async function ProiectePage() {
     if (storedPoze) pozeProiecte = JSON.parse(storedPoze);
   } catch {}
 
+  // Poze cu GPS -> apar ca markeri pe hartă
   const pozeCuGps: PresencePoint[] = pozeProiecte
     .filter((p): p is PozaProiect & { lat: number; lng: number } => p.lat != null && p.lng != null)
     .map((p) => ({ url: p.url, lat: p.lat, lng: p.lng }));
 
-  const allImagini = projects.flatMap((p) => p.imagini ?? [p.photo]);
+  // Poze fără GPS → se altură galeriei "Mai multe imagini din şantier"
+  const pozeFaraGps = pozeProiecte.filter((p) => p.lat == null || p.lng == null);
+
+  const projectImagini = projects.flatMap((p) => p.imagini ?? [p.photo]);
+  const galerieSantier = [...projectImagini, ...pozeFaraGps.map((p) => p.url)];
 
   return (
     <>
@@ -73,7 +78,7 @@ export default async function ProiectePage() {
           </h1>
           <p className="text-brand-blue-200 text-lg max-w-3xl mx-auto">
             Produsele noastre sunt utilizate în reabilitarea termică a blocurilor din întreaga Românie
-            — Bucureşti, Ilfov, Prahova, Bacău și multe alte județe.
+            — Bucureşti, Ilfov, Prahova, Bacău şi multe alte județe.
           </p>
         </div>
       </section>
@@ -100,41 +105,6 @@ export default async function ProiectePage() {
           <BucharestMap projects={projects} presencePoints={pozeCuGps} />
         </section>
 
-        {/* Prezența noastră — poze bulk, cu sau fără GPS */}
-        {pozeProiecte.length > 0 && (
-          <section aria-labelledby="prezenta-heading">
-            <h2
-              id="prezenta-heading"
-              className="text-display-sm font-bold text-brand-blue-700 mb-1"
-            >
-              Prezența noastră
-            </h2>
-            <p className="text-slate-500 text-sm mb-6">
-              Fotografii de pe şantiere din toată țara, dovadă a prezenței Plast Du IV în numeroase locații.
-            </p>
-            <div
-              className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 ${
-                pozeProiecte.length > 20 ? "max-h-[720px] overflow-y-auto pr-1" : ""
-              }`}
-            >
-              {pozeProiecte.map((poza, i) => (
-                <div
-                  key={poza.url}
-                  className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 border border-neutral-border img-watermark"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={poza.url}
-                    alt={`Prezența Plast Du IV — fotografie şantier ${i + 1}`}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
         {/* Grid foto proiecte */}
         <section aria-labelledby="projects-heading">
           <h2
@@ -150,28 +120,34 @@ export default async function ProiectePage() {
           </div>
         </section>
 
-        {/* Galerie extinsă */}
-        <section aria-labelledby="gallery-extra-heading">
-          <h2
-            id="gallery-extra-heading"
-            className="text-display-sm font-bold text-brand-blue-700 mb-6"
-          >
-            Mai multe imagini din şantier
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {allImagini.map((src, i) => (
-              <div key={i} className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 border border-neutral-border img-watermark">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={src}
-                  alt={`Imagine şantier reabilitare termică ${i + 1}`}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Galerie extinsă — project photos + poze fără GPS */}
+        {galerieSantier.length > 0 && (
+          <section aria-labelledby="gallery-extra-heading">
+            <h2
+              id="gallery-extra-heading"
+              className="text-display-sm font-bold text-brand-blue-700 mb-6"
+            >
+              Mai multe imagini din şantier
+            </h2>
+            <div
+              className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 ${
+                galerieSantier.length > 20 ? "max-h-[720px] overflow-y-auto pr-1" : ""
+              }`}
+            >
+              {galerieSantier.map((src, i) => (
+                <div key={`${src}-${i}`} className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 border border-neutral-border img-watermark">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt={`Imagine şantier reabilitare termică ${i + 1}`}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* CTA */}
         <section className="bg-brand-blue-700 rounded-2xl p-8 md:p-12 text-center text-white">
