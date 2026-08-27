@@ -13,7 +13,8 @@ export const articol2: Articol = {
   categorie: "Calcul & normative",
   produsSlugs: ["dibluri-plastic", "dibluri-metalice"],
   hubLinks: [
-    { href: "/aplicatii#termoizolatie-polistiren", label: "Aplicații — Termoizolație polistiren" },
+    { href: "/sisteme/termoizolatie-eps", label: "Sistem termoizolație EPS" },
+    { href: "/produse/dibluri", label: "Toate diblurile" },
   ],
   relatedSlugs: [
     "cum-se-monteaza-diblul-pentru-polistiren",

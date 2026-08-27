@@ -13,7 +13,8 @@ export const articol4: Articol = {
   categorie: "Ghid produse",
   produsSlugs: ["flansa-vata", "dibluri-plastic"],
   hubLinks: [
-    { href: "/aplicatii#vata-minerala", label: "Aplicații — Fixare vată minerală" },
+    { href: "/sisteme/termoizolatie-vata-minerala", label: "Sistem termoizolație vată minerală" },
+    { href: "/produse/dibluri", label: "Toate diblurile" },
   ],
   relatedSlugs: [
     "diblu-plastic-vs-metalic-termoizolatie",

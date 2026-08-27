@@ -14,7 +14,7 @@ export const articol6: Articol = {
   produsSlugs: ["flansa-osb", "flansa-vata"],
   hubLinks: [
     { href: "/aplicatii#placi-osb", label: "Aplicații — Plăci OSB" },
-    { href: "/aplicatii#vata-minerala", label: "Aplicații — Fixare vată minerală" },
+    { href: "/sisteme/termoizolatie-vata-minerala", label: "Sistem termoizolație vată minerală" },
   ],
   relatedSlugs: [
     "ce-diblu-pentru-vata-minerala",
