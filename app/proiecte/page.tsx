@@ -2,7 +2,7 @@ export const runtime = 'edge';
 
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import type { Project } from "../../components/BucharestMap";
+import type { Project, PresencePoint } from "../../components/BucharestMap";
 import { MapSkeleton } from "../../components/BucharestMap";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -26,6 +26,13 @@ interface StoredProject extends Project {
   imagini: string[];
 }
 
+interface PozaProiect {
+  url: string;
+  lat?: number;
+  lng?: number;
+  data?: string;
+}
+
 const DEFAULT_PROJECTS: StoredProject[] = [
   {id:1,name:"Reabilitare termică — Str. Baicului",district:"Sector 2 – Str. Baicului",year:2026,lat:44.4520,lng:26.1180,photo:"/images/proiecte/baicului/01.jpg",imagini:["/images/proiecte/baicului/01.jpg"]},
   {id:2,name:"Reabilitare bloc — Buhuiş",district:"Buhuiş, Bacău",year:2026,lat:46.7167,lng:26.7000,photo:"/images/proiecte/buhusi/01.jpg",imagini:["/images/proiecte/buhusi/01.jpg","/images/proiecte/buhusi/02.jpg","/images/proiecte/buhusi/03.jpg"]},
@@ -36,12 +43,21 @@ const DEFAULT_PROJECTS: StoredProject[] = [
 
 export default async function ProiectePage() {
   let projects: StoredProject[] = DEFAULT_PROJECTS;
+  let pozeProiecte: PozaProiect[] = [];
   try {
     const { env } = getRequestContext();
     const kv = (env as any).PLASTDU_CONTENT as KVNamespace;
-    const stored = await kv.get('proiecte');
-    if (stored) projects = JSON.parse(stored);
+    const [storedProiecte, storedPoze] = await Promise.all([
+      kv.get('proiecte'),
+      kv.get('poze-proiecte'),
+    ]);
+    if (storedProiecte) projects = JSON.parse(storedProiecte);
+    if (storedPoze) pozeProiecte = JSON.parse(storedPoze);
   } catch {}
+
+  const pozeCuGps: PresencePoint[] = pozeProiecte
+    .filter((p): p is PozaProiect & { lat: number; lng: number } => p.lat != null && p.lng != null)
+    .map((p) => ({ url: p.url, lat: p.lat, lng: p.lng }));
 
   const allImagini = projects.flatMap((p) => p.imagini ?? [p.photo]);
 
@@ -81,8 +97,43 @@ export default async function ProiectePage() {
               Locațiile sunt marcate automat din coordonatele GPS ale fotografiilor de şantier
             </p>
           </div>
-          <BucharestMap projects={projects} />
+          <BucharestMap projects={projects} presencePoints={pozeCuGps} />
         </section>
+
+        {/* Prezența noastră — poze bulk, cu sau fără GPS */}
+        {pozeProiecte.length > 0 && (
+          <section aria-labelledby="prezenta-heading">
+            <h2
+              id="prezenta-heading"
+              className="text-display-sm font-bold text-brand-blue-700 mb-1"
+            >
+              Prezența noastră
+            </h2>
+            <p className="text-slate-500 text-sm mb-6">
+              Fotografii de pe şantiere din toată țara, dovadă a prezenței Plast Du IV în numeroase locații.
+            </p>
+            <div
+              className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 ${
+                pozeProiecte.length > 20 ? "max-h-[720px] overflow-y-auto pr-1" : ""
+              }`}
+            >
+              {pozeProiecte.map((poza, i) => (
+                <div
+                  key={poza.url}
+                  className="relative aspect-square rounded-xl overflow-hidden bg-slate-100 border border-neutral-border img-watermark"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={poza.url}
+                    alt={`Prezența Plast Du IV — fotografie şantier ${i + 1}`}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Grid foto proiecte */}
         <section aria-labelledby="projects-heading">

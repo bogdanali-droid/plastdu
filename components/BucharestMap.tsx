@@ -13,8 +13,15 @@ export interface Project {
   photo: string;
 }
 
+export interface PresencePoint {
+  url: string;
+  lat: number;
+  lng: number;
+}
+
 interface BucharestMapProps {
   projects: Project[];
+  presencePoints?: PresencePoint[];
 }
 
 /* ─── Loading skeleton ───────────────────────────────────────────────────── */
@@ -35,7 +42,7 @@ export function MapSkeleton() {
 }
 
 /* ─── Map component (client-only) ────────────────────────────────────────── */
-export default function BucharestMap({ projects }: BucharestMapProps) {
+export default function BucharestMap({ projects, presencePoints = [] }: BucharestMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<unknown>(null);
 
@@ -163,13 +170,41 @@ export default function BucharestMap({ projects }: BucharestMapProps) {
         clusterGroup.addLayer(marker);
       });
 
+      // Puncte de prezență (poze fără proiect asociat, doar coordonate GPS)
+      const presenceIcon = L.divIcon({
+        className: "",
+        html: `<div style="
+          width:12px;height:12px;
+          background:#60A5FA;
+          border:2px solid #ffffff;
+          border-radius:50%;
+          box-shadow:0 1px 4px rgba(0,110,182,0.5);
+        "></div>`,
+        iconSize: [12, 12],
+        iconAnchor: [6, 6],
+        popupAnchor: [0, -8],
+      });
+
+      presencePoints.forEach((point) => {
+        const marker = L.marker([point.lat, point.lng], { icon: presenceIcon });
+        if (point.url) {
+          marker.bindPopup(
+            `<img src="${point.url}" alt="" style="width:140px;height:100px;object-fit:cover;border-radius:6px;" loading="lazy" />`,
+            { maxWidth: 160 }
+          );
+        }
+        clusterGroup.addLayer(marker);
+      });
+
       map.addLayer(clusterGroup);
 
-      // Auto-fit bounds la toate proiectele
-      if (projects.length > 0) {
-        const bounds = L.latLngBounds(
-          projects.filter(p => p.lat && p.lng).map(p => [p.lat, p.lng] as [number, number])
-        );
+      // Auto-fit bounds la toate proiectele + puncte de prezență
+      const allPoints = [
+        ...projects.filter(p => p.lat && p.lng).map(p => [p.lat, p.lng] as [number, number]),
+        ...presencePoints.map(p => [p.lat, p.lng] as [number, number]),
+      ];
+      if (allPoints.length > 0) {
+        const bounds = L.latLngBounds(allPoints);
         if (bounds.isValid()) {
           map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
         }
