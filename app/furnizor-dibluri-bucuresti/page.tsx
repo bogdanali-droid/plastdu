@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Furnizor Dibluri și Materiale Construcții București — Plast Du IV Jilava',
+  title: 'Furnizor Dibluri și Materiale Construcții București — Jilava',
   description:
     'Producător și furnizor de dibluri, flanșe și materiale construcții în București și Ilfov. ' +
     'Livrare rapidă din stoc — Jilava (5 min de sectorul 4). Prețuri en-gros pentru constructori și distribuitori.',

@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
 export const metadata: Metadata = {
-  title: 'Reabilitare termică blocuri — Materiale și dibluri pentru proiecte edilitare | Plast Du IV',
+  title: 'Reabilitare termică blocuri — Materiale și dibluri pentru proiecte edilitare',
   description:
     'Furnizor de dibluri și flanșe pentru reabilitarea termică a blocurilor. Necesar de materiale ' +
     'per m² fațadă, sisteme EPS vs vată minerală, condiții pentru licitații publice.',

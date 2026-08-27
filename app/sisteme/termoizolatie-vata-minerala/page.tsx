@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
 export const metadata: Metadata = {
-  title: 'Sistem termoizolație vată minerală — Flanșe și dibluri pentru fixare | Plast Du IV',
+  title: 'Sistem termoizolație vată minerală — Flanșe și dibluri pentru fixare',
   description:
     'Flanșă vată minerală și diblu metalic pentru fixarea mecanică a vatei bazaltice pe fațadă. ' +
     'Producător român: cum se prinde vata minerală, câte fixări pe m² și accesorii.',

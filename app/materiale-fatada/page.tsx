@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
 export const metadata: Metadata = {
-  title: 'Materiale fațadă — Distanțieri, dibluri, ancore și accesorii construcții | Plast Du IV',
+  title: 'Materiale fațadă — Distanțieri, dibluri, ancore și accesorii construcții',
   description:
     'Hub complet de materiale pentru fațadă: dibluri, flanșe, distanțieri beton, profile PVC, colțare ' +
     'și ancore. Produse proprii și distribuite, livrate din stoc din Jilava, Ilfov.',

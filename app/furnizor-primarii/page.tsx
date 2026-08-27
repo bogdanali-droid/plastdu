@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
 export const metadata: Metadata = {
-  title: 'Furnizor materiale reabilitare pentru primării și proiecte edilitare | Plast Du IV',
+  title: 'Furnizor materiale reabilitare pentru primării și proiecte edilitare',
   description:
     'Furnizor român de dibluri și flanșe pentru licitații publice de reabilitare termică. ' +
     'Certificări ISO 9001/14001/45001, Coface, stoc permanent, livrare programată pe șantier.',

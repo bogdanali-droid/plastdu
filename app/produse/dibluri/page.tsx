@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
 export const metadata: Metadata = {
-  title: 'Dibluri pentru construcții — Ghid complet și matrice alegere | Plast Du IV',
+  title: 'Dibluri pentru construcții — Ghid complet și matrice alegere',
   description:
     'Diblu plastic vs metalic: matrice comparativă, ghid de alegere pe tip de suport (cărămidă, ' +
     'beton, BCA, gips-carton) și dibluri distribuite pentru cazuri speciale. Producător român.',

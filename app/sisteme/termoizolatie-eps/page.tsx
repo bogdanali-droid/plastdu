@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import ImageWithFallback from '@/components/ImageWithFallback';
 
 export const metadata: Metadata = {
-  title: 'Sistem termoizolație EPS/polistiren — Dibluri și accesorii producător | Plast Du IV',
+  title: 'Sistem termoizolație EPS/polistiren — Dibluri și accesorii producător',
   description:
     'Dibluri plastic, metalice și flanșe pentru sistemul de termoizolație EPS/polistiren. ' +
     'Producător român: câți dibluri pe m², etape montaj și accesorii necesare.',
