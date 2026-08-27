@@ -9,8 +9,7 @@ import ImageWithFallback from '@/components/ImageWithFallback';
 export const metadata: Metadata = {
   title: 'Despre Noi — Plast Du IV SRL',
   description:
-    'Plast Du IV SRL — producător român de dibluri și flanșe pentru construcții din 2017, Jilava, Ilfov. ' +
-    'Aflați mai multe despre misiunea, valorile și echipa noastră.',
+    'Plast Du IV SRL — producător român de dibluri și flanșe pentru construcții din 2017, Jilava, Ilfov.',
   alternates: { canonical: 'https://plastdu.ro/despre-noi' },
 };
 
@@ -34,13 +33,13 @@ const DEFAULT_DESPRE = {
   },
 };
 
-type Certificat = { titlu: string; descriere: string; fisier: string; tip: 'imagine' | 'pdf' };
+type Certificat = { titlu: string; descriere: string; fisier: string; imagineIcon?: string; tip: 'imagine' | 'pdf' };
 
 const DEFAULT_CERTIFICATE: Certificat[] = [
-  { titlu: 'ISO 9001 — Management Calitate', descriere: 'Certificare privind Sistemul de Management al Calității — procese standardizate și îmbunătățire continuă pe întregul flux de producție și livrare.', fisier: '', tip: 'pdf' },
-  { titlu: 'ISO 14001 — Management de Mediu', descriere: 'Certificare a Sistemului de Management de Mediu — utilizarea eficientă a resurselor, reciclarea materialelor plastice și reducerea amprentei ecologice în producție.', fisier: '', tip: 'pdf' },
-  { titlu: 'ISO 45001 — Sănătate și Securitate în Muncă', descriere: 'Certificare a Sistemului de Management al Sănătății și Securității Ocupaționale — protecția angajaților, evaluarea riscurilor și prevenirea accidentelor în fabrică.', fisier: '', tip: 'pdf' },
-  { titlu: 'Coface SME Certificate', descriere: 'Certificat de bonitate emis de Coface — recunoaștere a solidității financiare și a fiabilității comerciale a Plast Du IV SRL ca partener B2B de încredere.', fisier: '', tip: 'pdf' },
+  { titlu: 'ISO 9001 — Management Calitate', descriere: 'Certificare privind Sistemul de Management al Calității — procese standardizate și îmbunătățire continuă pe întregul flux de producție și livrare.', fisier: '', imagineIcon: '', tip: 'pdf' },
+  { titlu: 'ISO 14001 — Management de Mediu', descriere: 'Certificare a Sistemului de Management de Mediu — utilizarea eficientă a resurselor, reciclarea materialelor plastice și reducerea amprentei ecologice în producție.', fisier: '', imagineIcon: '', tip: 'pdf' },
+  { titlu: 'ISO 45001 — Sănătate și Securitate în Muncă', descriere: 'Certificare a Sistemului de Management al Sănătății și Securității Ocupaționale — protecția angajaților, evaluarea riscurilor și prevenirea accidentelor în fabrică.', fisier: '', imagineIcon: '', tip: 'pdf' },
+  { titlu: 'Coface SME Certificate', descriere: 'Certificat de bonitate emis de Coface — recunoaștere a solidității financiare și a fiabilității comerciale a Plast Du IV SRL ca partener B2B de încredere.', fisier: '', imagineIcon: '', tip: 'pdf' },
 ];
 
 function certBadge(titlu: string): { num: string; label: string; gradient: string } {
@@ -229,20 +228,24 @@ export default async function DespreNoiPage() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {certificate.map((c, idx) => {
                   const hasFile = c.fisier && c.fisier.length > 0;
+                  const hasIcon = c.imagineIcon && c.imagineIcon.length > 0;
                   const badge = certBadge(c.titlu);
                   const CardContent = (
                     <>
-                      <div className="relative h-48 rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-                        {hasFile && c.tip === 'imagine' ? (
-                          <div className="w-full h-full bg-slate-50 flex items-center justify-center border border-slate-100">
-                            <ImageWithFallback src={c.fisier} alt={c.titlu} className="object-contain" sizes="(max-width: 1024px) 100vw, 25vw" />
-                          </div>
+                      <div className="relative h-48 rounded-xl overflow-hidden mb-4 flex items-center justify-center bg-white border border-slate-200">
+                        {hasIcon ? (
+                          <img src={c.imagineIcon} alt={c.titlu} className="max-w-full max-h-full object-contain p-4" />
                         ) : (
                           <div className={`w-full h-full bg-gradient-to-br ${badge.gradient} flex flex-col items-center justify-center text-white`}>
-                            <p className="text-xs font-semibold tracking-widest opacity-80 mb-1">{badge.label}</p>
+                            <p className="text-xs font-bold tracking-widest text-white/90 mb-1">{badge.label}</p>
                             <p className="text-4xl font-black tracking-tight">{badge.num}</p>
-                            {hasFile && <p className="mt-3 text-[10px] uppercase tracking-widest opacity-70 flex items-center gap-1"><svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>Vezi PDF</p>}
                           </div>
+                        )}
+                        {hasFile && (
+                          <span className="absolute bottom-2 right-2 bg-brand-blue text-white text-[10px] uppercase tracking-widest font-semibold px-2 py-1 rounded shadow flex items-center gap-1">
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                            Vezi PDF
+                          </span>
                         )}
                       </div>
                       <h3 className="text-sm font-semibold mb-1 text-slate-800">{c.titlu}</h3>
