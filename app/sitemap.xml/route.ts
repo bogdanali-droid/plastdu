@@ -1,8 +1,18 @@
 export const runtime = 'edge';
 import { getRequestContext } from '@cloudflare/next-on-pages';
-import { ARTICOLE } from '@/lib/blog';
 
 const BASE_URL = 'https://plastdu.ro';
+
+const BLOG_SLUGS = [
+  'cum-se-monteaza-diblul-pentru-polistiren',
+  'cate-dibluri-pe-metru-patrat-termosistem',
+  'diblu-plastic-vs-metalic-termoizolatie',
+  'ce-diblu-pentru-vata-minerala',
+  'ce-diblu-pentru-gips-carton',
+  'flansa-osb-vs-flansa-vata-minerala',
+  'greseli-frecvente-la-montarea-diblurilor-termosistem',
+  'distantieri-beton-ghid-alegere',
+];
 
 const STATIC_ROUTES = [
   { path: '/', priority: 1.0, changefreq: 'weekly' },
@@ -14,6 +24,7 @@ const STATIC_ROUTES = [
   { path: '/aplicatii', priority: 0.8, changefreq: 'monthly' },
   { path: '/aplicatii/reabilitare-blocuri', priority: 0.9, changefreq: 'monthly' },
   { path: '/furnizor-primarii', priority: 0.9, changefreq: 'monthly' },
+  { path: '/furnizor-dibluri-bucuresti', priority: 0.9, changefreq: 'monthly' },
   { path: '/proiecte', priority: 0.8, changefreq: 'weekly' },
   { path: '/despre-noi', priority: 0.7, changefreq: 'monthly' },
   { path: '/contact', priority: 0.7, changefreq: 'monthly' },
@@ -28,13 +39,8 @@ export async function GET() {
     urls.push({ loc: `${BASE_URL}${r.path}`, priority: r.priority, changefreq: r.changefreq, lastmod: today });
   }
 
-  for (const articol of ARTICOLE) {
-    urls.push({
-      loc: `${BASE_URL}/blog/${articol.slug}`,
-      priority: 0.7,
-      changefreq: 'monthly',
-      lastmod: articol.date,
-    });
+  for (const slug of BLOG_SLUGS) {
+    urls.push({ loc: `${BASE_URL}/blog/${slug}`, priority: 0.7, changefreq: 'monthly', lastmod: today });
   }
 
   try {
