@@ -23,7 +23,7 @@ const DEFAULT_PRODUSE = {
       ],
       categorie: 'Dibluri',
       descriere:
-        'Diblu termoizolant cu cui din poliamidă, proiectat pentru fixarea termoizolațiilor din polistiren (EPS) pe fațade în sisteme ETICS. Corpul din polipropilenă asigură rezistență mecanică, iar cuiul din PA elimină complet punțile termice.',
+        'Diblu termoizolant cu cui din poliamidă, proiectat pentru fixarea termoizolațiilor din polistiren (EPS) pe fațade. Corpul din polipropilenă asigură rezistență mecanică, iar cuiul din PA elimină complet punțile termice.',
       specificatii: [
         'Corp: Polipropilenă (PP) — rezistentă UV, anti-îmbătrânire',
         'Cui: Poliamidă 6.6 (PA66) — termoizolant, fără punte termică',
@@ -144,7 +144,7 @@ const DEFAULT_DESPRE = {
     { val: 'B2B', label: 'Focus exclusiv' },
   ],
   specializari: [
-    'Producția de dibluri pentru polistiren (sisteme de termoizolație exterioară)',
+    'Producția de dibluri pentru polistiren (termoizolație exterioară EPS)',
     'Producția de dibluri pentru vată minerală',
     'Producția de distanțieri pentru beton',
     'Distribuția de materiale de construcții şi organe de asamblare',
@@ -156,7 +156,32 @@ const DEFAULT_DESPRE = {
   },
 };
 
-const DEFAULT_CERTIFICATE: { titlu: string; descriere: string; fisier: string; tip: 'imagine' | 'pdf' }[] = [];
+const DEFAULT_CERTIFICATE: { titlu: string; descriere: string; fisier: string; tip: 'imagine' | 'pdf' }[] = [
+  {
+    titlu: 'ISO 9001 — Management Calitate',
+    descriere: 'Certificare privind Sistemul de Management al Calității — procese standardizate și îmbunătățire continuă pe întregul flux de producție și livrare.',
+    fisier: '',
+    tip: 'pdf',
+  },
+  {
+    titlu: 'ISO 14001 — Management de Mediu',
+    descriere: 'Certificare a Sistemului de Management de Mediu — utilizarea eficientă a resurselor, reciclarea materialelor plastice și reducerea amprentei ecologice în producție.',
+    fisier: '',
+    tip: 'pdf',
+  },
+  {
+    titlu: 'ISO 45001 — Sănătate și Securitate în Muncă',
+    descriere: 'Certificare a Sistemului de Management al Sănătății și Securității Ocupaționale — protecția angajaților, evaluarea riscurilor și prevenirea accidentelor în fabrică.',
+    fisier: '',
+    tip: 'pdf',
+  },
+  {
+    titlu: 'Coface SME Certificate',
+    descriere: 'Certificat de bonitate emis de Coface — recunoaștere a solidității financiare și a fiabilității comerciale a Plast Du IV SRL ca partener B2B de încredere.',
+    fisier: '',
+    tip: 'pdf',
+  },
+];
 
 const DEFAULT_PROIECTE = [
   {"id":1,"name":"Reabilitare termică — Str. Baicului","district":"Sector 2 – Str. Baicului","year":2026,"lat":44.4520,"lng":26.1180,"photo":"/images/proiecte/baicului/01.jpg","imagini":["/images/proiecte/baicului/01.jpg"]},
