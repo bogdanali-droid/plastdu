@@ -8,6 +8,7 @@ const CERTIFICATE_SOURCES = [
     descriere: 'Certificare privind Sistemul de Management al Calității — procese standardizate și îmbunătățire continuă pe întregul flux de producție și livrare.',
     pdfId: '1GXmtSZODTRqlgmr4IigasNmwIJMdezqI',
     imageId: '1mEA7HH878yoQHzOWO7fFT-dGPa4h4iLS',
+    fallbackImageUrl: null as string | null,
   },
   {
     key: '14001',
@@ -15,6 +16,7 @@ const CERTIFICATE_SOURCES = [
     descriere: 'Certificare a Sistemului de Management de Mediu — utilizarea eficientă a resurselor, reciclarea materialelor plastice și reducerea amprentei ecologice în producție.',
     pdfId: '1zfVI-yeiVpGJ0zkEuPiQU6NNEbqdQIu3',
     imageId: '1Aqqqo89X2LLvRL5uiGB-O0TOpFR5WexP',
+    fallbackImageUrl: null as string | null,
   },
   {
     key: '45001',
@@ -22,6 +24,7 @@ const CERTIFICATE_SOURCES = [
     descriere: 'Certificare a Sistemului de Management al Sănătății și Securității Ocupaționale — protecția angajaților, evaluarea riscurilor și prevenirea accidentelor în fabrică.',
     pdfId: '1pl22JFAtEc4kpChU0a7lxbhYSBBAKQ9G',
     imageId: '1XsTgunSIkmFaQOr5dWYQ34BvfcYtaPZB',
+    fallbackImageUrl: null as string | null,
   },
   {
     key: 'sme',
@@ -29,6 +32,8 @@ const CERTIFICATE_SOURCES = [
     descriere: 'Certificat de bonitate emis de Coface — recunoaștere a solidității financiare și a fiabilității comerciale a Plast Du IV SRL ca partener B2B de încredere.',
     pdfId: '1egRfx8jcqHX12m7lzk3lXc0IRwmitBPB',
     imageId: null as string | null,
+    // Logo Coface oficial public (Wikipedia SVG)
+    fallbackImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coface_logo.svg/512px-Coface_logo.svg.png',
   },
 ];
 
@@ -39,6 +44,18 @@ async function fetchDriveFile(fileId: string): Promise<{ buffer: ArrayBuffer; co
     if (!res.ok) return { error: `HTTP ${res.status}` };
     const contentType = res.headers.get('Content-Type') || 'application/octet-stream';
     if (contentType.includes('text/html')) return { error: 'Drive returned HTML (file needs confirmation)' };
+    const buffer = await res.arrayBuffer();
+    return { buffer, contentType };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : 'Fetch failed' };
+  }
+}
+
+async function fetchPublicImage(url: string): Promise<{ buffer: ArrayBuffer; contentType: string } | { error: string }> {
+  try {
+    const res = await fetch(url, { redirect: 'follow' });
+    if (!res.ok) return { error: `HTTP ${res.status}` };
+    const contentType = res.headers.get('Content-Type') || 'image/png';
     const buffer = await res.arrayBuffer();
     return { buffer, contentType };
   } catch (e) {
@@ -57,13 +74,7 @@ export async function GET() {
   const kvEntries: any[] = [];
 
   for (const cert of CERTIFICATE_SOURCES) {
-    const entry: any = {
-      titlu: cert.titlu,
-      descriere: cert.descriere,
-      fisier: '',
-      imagineIcon: '',
-      tip: 'pdf' as const,
-    };
+    const entry: any = { titlu: cert.titlu, descriere: cert.descriere, fisier: '', imagineIcon: '', tip: 'pdf' as const };
     const log: any = { key: cert.key, pdf: null, image: null };
 
     if (cert.pdfId) {
@@ -83,20 +94,26 @@ export async function GET() {
       }
     }
 
-    if (cert.imageId) {
-      const imgPath = `certificate/${cert.key}.png`;
-      const existingImg = await r2.head(imgPath);
-      if (existingImg) {
-        log.image = { status: 'already-exists', path: imgPath };
+    const imgPath = `certificate/${cert.key}.png`;
+    const existingImg = await r2.head(imgPath);
+    if (existingImg) {
+      log.image = { status: 'already-exists', path: imgPath };
+      entry.imagineIcon = `/api/img/${imgPath}`;
+    } else if (cert.imageId) {
+      const imgResult = await fetchDriveFile(cert.imageId);
+      if ('error' in imgResult) log.image = { status: 'error-drive', error: imgResult.error };
+      else {
+        await r2.put(imgPath, imgResult.buffer, { httpMetadata: { contentType: 'image/png' } });
+        log.image = { status: 'uploaded-drive', size: imgResult.buffer.byteLength, path: imgPath };
         entry.imagineIcon = `/api/img/${imgPath}`;
-      } else {
-        const imgResult = await fetchDriveFile(cert.imageId);
-        if ('error' in imgResult) log.image = { status: 'error', error: imgResult.error };
-        else {
-          await r2.put(imgPath, imgResult.buffer, { httpMetadata: { contentType: 'image/png' } });
-          log.image = { status: 'uploaded', size: imgResult.buffer.byteLength, path: imgPath };
-          entry.imagineIcon = `/api/img/${imgPath}`;
-        }
+      }
+    } else if (cert.fallbackImageUrl) {
+      const imgResult = await fetchPublicImage(cert.fallbackImageUrl);
+      if ('error' in imgResult) log.image = { status: 'error-public', error: imgResult.error };
+      else {
+        await r2.put(imgPath, imgResult.buffer, { httpMetadata: { contentType: imgResult.contentType } });
+        log.image = { status: 'uploaded-public', size: imgResult.buffer.byteLength, path: imgPath };
+        entry.imagineIcon = `/api/img/${imgPath}`;
       }
     }
 
@@ -108,7 +125,7 @@ export async function GET() {
 
   return Response.json({
     ok: true,
-    message: 'Bootstrap complet. Certificatele au fost descărcate din Drive și încărcate în R2. KV populat cu imagineIcon (PNG) + fisier (PDF).',
+    message: 'Bootstrap complet. Include acum logo Coface din sursă publică.',
     results,
     kvEntries,
   });
