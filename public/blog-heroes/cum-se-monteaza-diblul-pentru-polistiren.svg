@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#1a3c5e"/>
+<circle cx="1420" cy="780" r="260" fill="#f97316" opacity=".15"/>
+<g stroke="#ffffff" stroke-width="4" opacity=".5">
+<rect x="1120" y="160" width="120" height="560" fill="none"/>
+<rect x="1000" y="160" width="120" height="560" fill="none" stroke-dasharray="6 6"/>
+</g>
+<line x1="900" y1="440" x2="1130" y2="440" stroke="#f97316" stroke-width="14" stroke-linecap="round"/>
+<circle cx="900" cy="440" r="26" fill="#f97316"/>
+<polygon points="1130,420 1170,440 1130,460" fill="#f97316"/>
+<text x="120" y="380" fill="#ffffff" font-family="Arial,sans-serif" font-weight="700" font-size="72">MONTAJ DIBLU</text>
+<text x="120" y="460" fill="#f97316" font-family="Arial,sans-serif" font-weight="700" font-size="72">PE POLISTIREN</text>
+</svg>

@@ -41,7 +41,7 @@ export default async function BlogArticolPage({ params }: { params: { slug: stri
   const articol = getArticol(params.slug);
   if (!articol) notFound();
 
-  const { imagine, titlu: titluProdus } = await getImagineProdus(articol.produsSlugs[0]);
+  const { imagine } = await getImagineProdus(articol.produsSlugs[0]);
   const conexe = getArticoleConexe(articol);
   const minute = readingTime(articol);
   const url = `https://plastdu.ro/blog/${articol.slug}`;
@@ -130,8 +130,13 @@ export default async function BlogArticolPage({ params }: { params: { slug: stri
           {/* Imagine principala */}
           <section className="bg-white pb-10">
             <div className="container-site max-w-3xl">
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden img-watermark bg-neutral-surface">
-                <ImageWithFallback src={imagine} alt={titluProdus} sizes="(max-width: 1024px) 100vw, 768px" />
+              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-neutral-surface">
+                <ImageWithFallback
+                  src={`/blog-heroes/${articol.slug}.svg`}
+                  alt={articol.h1}
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 768px"
+                />
               </div>
             </div>
           </section>

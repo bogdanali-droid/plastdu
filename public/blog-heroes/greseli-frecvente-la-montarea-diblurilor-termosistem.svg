@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#1a3c5e"/>
+<circle cx="1420" cy="780" r="260" fill="#f97316" opacity=".15"/>
+<circle cx="1080" cy="300" r="36" fill="none" stroke="#f97316" stroke-width="8"/>
+<line x1="1062" y1="282" x2="1098" y2="318" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+<line x1="1098" y1="282" x2="1062" y2="318" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+<circle cx="1080" cy="450" r="36" fill="none" stroke="#22c55e" stroke-width="8"/>
+<path d="M1062 452 l14 14 l28 -34" stroke="#22c55e" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="120" y="380" fill="#ffffff" font-family="Arial,sans-serif" font-weight="700" font-size="72">GREȘELI</text>
+<text x="120" y="460" fill="#f97316" font-family="Arial,sans-serif" font-weight="700" font-size="72">FRECVENTE</text>
+</svg>

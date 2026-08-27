@@ -90,8 +90,13 @@ export default async function BlogHubPage() {
                   href={`/blog/${a.slug}`}
                   className="card group flex flex-col overflow-hidden !p-0"
                 >
-                  <div className="relative w-full aspect-[16/10] img-watermark bg-neutral-surface">
-                    <ImageWithFallback src={a.imagine} alt={a.titlu} sizes="(max-width: 640px) 100vw, 33vw" />
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-neutral-surface">
+                    <ImageWithFallback
+                      src={`/blog-heroes/${a.slug}.svg`}
+                      alt={a.titlu}
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                    />
                   </div>
                   <div className="p-5 flex flex-col flex-1">
                     <div className="flex items-center gap-2 mb-2">

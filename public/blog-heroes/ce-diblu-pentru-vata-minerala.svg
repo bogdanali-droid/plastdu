@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#1a3c5e"/>
+<circle cx="1420" cy="780" r="260" fill="#f97316" opacity=".15"/>
+<rect x="960" y="180" width="380" height="500" fill="none" stroke="#ffffff" stroke-width="4" opacity=".5"/>
+<g stroke="#ffffff" stroke-width="3" opacity=".4">
+<path d="M980 240 q40 30 80 0 q40 -30 80 0 q40 30 80 0 q40 -30 80 0" fill="none"/>
+<path d="M980 320 q40 30 80 0 q40 -30 80 0 q40 30 80 0 q40 -30 80 0" fill="none"/>
+<path d="M980 400 q40 30 80 0 q40 -30 80 0 q40 30 80 0 q40 -30 80 0" fill="none"/>
+</g>
+<circle cx="1150" cy="560" r="70" fill="#f97316"/>
+<circle cx="1150" cy="560" r="20" fill="#1a3c5e"/>
+<text x="120" y="380" fill="#ffffff" font-family="Arial,sans-serif" font-weight="700" font-size="70">DIBLU PENTRU</text>
+<text x="120" y="460" fill="#f97316" font-family="Arial,sans-serif" font-weight="700" font-size="70">VATĂ MINERALĂ</text>
+</svg>
