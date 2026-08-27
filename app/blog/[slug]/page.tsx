@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import BlogBlocks from "@/components/BlogBlocks";
-import { ARTICOLE, getArticol, getArticoleConexe, readingTime, PRODUSE_FALLBACK } from "@/lib/blog";
+import { ARTICOLE, getArticol, getArticoleConexe, readingTime, PRODUSE_FALLBACK, getBlogHeroImage } from "@/lib/blog";
 import { getImagineProdus } from "@/lib/blog/produse-kv";
 
 export function generateStaticParams() {
@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   if (!articol) return {};
 
   const { imagine } = await getImagineProdus(articol.produsSlugs[0]);
+  const heroImagine = getBlogHeroImage(articol.slug, imagine);
   const url = `https://plastdu.ro/blog/${articol.slug}`;
 
   return {
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: articol.metaTitle,
       description: articol.metaDescription,
       url,
-      images: [{ url: imagine, width: 1200, height: 630 }],
+      images: [{ url: heroImagine, width: 1200, height: 630 }],
       type: "article",
       publishedTime: articol.date,
     },
@@ -42,6 +43,7 @@ export default async function BlogArticolPage({ params }: { params: { slug: stri
   if (!articol) notFound();
 
   const { imagine } = await getImagineProdus(articol.produsSlugs[0]);
+  const heroImagine = getBlogHeroImage(articol.slug, imagine);
   const conexe = getArticoleConexe(articol);
   const minute = readingTime(articol);
   const url = `https://plastdu.ro/blog/${articol.slug}`;
@@ -56,7 +58,7 @@ export default async function BlogArticolPage({ params }: { params: { slug: stri
     "@type": "Article",
     headline: articol.h1,
     description: articol.metaDescription,
-    image: [`https://plastdu.ro${imagine}`],
+    image: [heroImagine.startsWith("http") ? heroImagine : `https://plastdu.ro${heroImagine}`],
     datePublished: articol.date,
     dateModified: articol.date,
     author: { "@type": "Organization", name: "Plast Du IV SRL" },
@@ -132,7 +134,7 @@ export default async function BlogArticolPage({ params }: { params: { slug: stri
             <div className="container-site max-w-3xl">
               <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-neutral-surface">
                 <ImageWithFallback
-                  src={`/blog-heroes/${articol.slug}.svg`}
+                  src={heroImagine}
                   alt={articol.h1}
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 768px"

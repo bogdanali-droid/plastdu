@@ -6,7 +6,7 @@ import { getRequestContext } from "@cloudflare/next-on-pages";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImageWithFallback from "@/components/ImageWithFallback";
-import { ARTICOLE, readingTime, PRODUSE_FALLBACK, type ArticolSumar } from "@/lib/blog";
+import { ARTICOLE, readingTime, PRODUSE_FALLBACK, getBlogHeroImage, type ArticolSumar } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Blog tehnic — Ghiduri montaj dibluri, flanșe și termoizolație",
@@ -32,7 +32,10 @@ const FALLBACK_SUMAR: ArticolSumar[] = ARTICOLE.map((a) => ({
   excerpt: a.excerpt,
   data: a.date,
   categorie: a.categorie,
-  imagine: PRODUSE_FALLBACK[a.produsSlugs[0]]?.imagine ?? "/images/produse/dibluri-plastic/01.jpg",
+  imagine: getBlogHeroImage(
+    a.slug,
+    PRODUSE_FALLBACK[a.produsSlugs[0]]?.imagine ?? "/images/produse/dibluri-plastic/01.jpg"
+  ),
 }));
 
 async function getArticoleSumar(): Promise<ArticolSumar[]> {
@@ -92,7 +95,7 @@ export default async function BlogHubPage() {
                 >
                   <div className="relative w-full aspect-[16/10] overflow-hidden bg-neutral-surface">
                     <ImageWithFallback
-                      src={`/blog-heroes/${a.slug}.svg`}
+                      src={a.imagine}
                       alt={a.titlu}
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, 33vw"

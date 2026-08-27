@@ -9,6 +9,7 @@ import { articol7 } from "./article-7";
 import { articol8 } from "./article-8";
 
 export * from "./types";
+export * from "./heroes";
 
 export const ARTICOLE: Articol[] = [
   articol1,
