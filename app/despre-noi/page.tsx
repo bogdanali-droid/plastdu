@@ -197,7 +197,7 @@ export default async function DespreNoiPage() {
         </section>
 
         {certificate.length > 0 && (
-          <section className="section-padding bg-neutral-surface">
+          <section id="certificari" className="section-padding bg-neutral-surface scroll-mt-24">
             <div className="container-site">
               <p className="section-label mb-3">Calitate atestată</p>
               <h2 className="mb-8">Certificări</h2>
