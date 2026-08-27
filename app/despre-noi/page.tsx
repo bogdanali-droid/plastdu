@@ -196,32 +196,8 @@ export default async function DespreNoiPage() {
           </div>
         </section>
 
-        <section className="section-padding bg-neutral-surface">
-          <div className="container-site">
-            <div className="grid md:grid-cols-2 gap-10 items-start max-w-4xl">
-              <div>
-                <p className="section-label mb-3">Unde ne găsiți</p>
-                <h2 className="mb-6">Sediu și fabrică</h2>
-                <div className="space-y-4 text-sm text-slate-600">
-                  <div><p className="font-semibold text-slate-800 mb-1">Sediu & Depozit</p><p>Str. Ana Ipătescu nr. 44, Spațiul B2</p><p>Com. Jilava, Ilfov</p></div>
-                  <div><p className="font-semibold text-slate-800 mb-1">Fabrică</p><p>{FABRICA.adresa}</p></div>
-                  <div className="pt-2"><a href="tel:+40724658491" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">0724 658 491</a><a href="tel:+40728211578" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">0728 211 578</a><a href="mailto:office@plastdu.ro" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">office@plastdu.ro</a></div>
-                </div>
-              </div>
-              <div className="bg-white rounded-2xl p-6 border border-neutral-border shadow-card">
-                <p className="text-sm font-semibold text-brand-blue mb-4">Program de lucru</p>
-                <div className="space-y-2 text-sm text-slate-600">
-                  <div className="flex justify-between"><span>Luni — Vineri</span><span className="font-medium text-slate-800">08:00 — 17:00</span></div>
-                  <div className="flex justify-between"><span>Sâmbătă</span><span className="font-medium text-slate-500">Închis</span></div>
-                  <div className="flex justify-between"><span>Duminică</span><span className="font-medium text-slate-500">Închis</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {certificate.length > 0 && (
-          <section className="section-padding bg-white">
+          <section className="section-padding bg-neutral-surface">
             <div className="container-site">
               <p className="section-label mb-3">Calitate atestată</p>
               <h2 className="mb-8">Certificări</h2>
@@ -253,15 +229,39 @@ export default async function DespreNoiPage() {
                     </>
                   );
                   return hasFile ? (
-                    <a key={idx} href={c.fisier} target="_blank" rel="noopener noreferrer" className="card group block hover:shadow-md transition-shadow">{CardContent}</a>
+                    <a key={idx} href={c.fisier} target="_blank" rel="noopener noreferrer" className="card group block hover:shadow-md transition-shadow bg-white">{CardContent}</a>
                   ) : (
-                    <div key={idx} className="card">{CardContent}</div>
+                    <div key={idx} className="card bg-white">{CardContent}</div>
                   );
                 })}
               </div>
             </div>
           </section>
         )}
+
+        <section className="section-padding bg-white">
+          <div className="container-site">
+            <div className="grid md:grid-cols-2 gap-10 items-start max-w-4xl">
+              <div>
+                <p className="section-label mb-3">Unde ne găsiți</p>
+                <h2 className="mb-6">Sediu și fabrică</h2>
+                <div className="space-y-4 text-sm text-slate-600">
+                  <div><p className="font-semibold text-slate-800 mb-1">Sediu & Depozit</p><p>Str. Ana Ipătescu nr. 44, Spațiul B2</p><p>Com. Jilava, Ilfov</p></div>
+                  <div><p className="font-semibold text-slate-800 mb-1">Fabrică</p><p>{FABRICA.adresa}</p></div>
+                  <div className="pt-2"><a href="tel:+40724658491" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">0724 658 491</a><a href="tel:+40728211578" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">0728 211 578</a><a href="mailto:office@plastdu.ro" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">office@plastdu.ro</a></div>
+                </div>
+              </div>
+              <div className="bg-white rounded-2xl p-6 border border-neutral-border shadow-card">
+                <p className="text-sm font-semibold text-brand-blue mb-4">Program de lucru</p>
+                <div className="space-y-2 text-sm text-slate-600">
+                  <div className="flex justify-between"><span>Luni — Vineri</span><span className="font-medium text-slate-800">08:00 — 17:00</span></div>
+                  <div className="flex justify-between"><span>Sâmbătă</span><span className="font-medium text-slate-500">Închis</span></div>
+                  <div className="flex justify-between"><span>Duminică</span><span className="font-medium text-slate-500">Închis</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="section-padding bg-brand-blue text-white">
           <div className="container-site text-center">
