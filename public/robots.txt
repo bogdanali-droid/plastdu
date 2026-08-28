@@ -4,4 +4,24 @@ Disallow: /admin
 Disallow: /api/admin
 Disallow: /api/bootstrap-
 
+# Block AI training but allow indexing
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Allow AI Overviews / search agents
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://plastdu.ro/sitemap.xml

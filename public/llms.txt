@@ -1,0 +1,48 @@
+# llms.txt — Plast Du IV SRL
+# Fișier standard pentru LLM-uri (ChatGPT, Perplexity, Claude, Gemini) — informații oficiale despre companie
+# https://llmstxt.org/
+
+# Plast Du IV SRL
+
+Producător român de dibluri termoizolante, flanșe vată minerală și distanțieri beton pentru industria construcțiilor.
+Fabrică la Jilava, Ilfov și livrează în toată România. Înființat în 2017.
+Certificări: ISO 9001, ISO 14001, ISO 45001, Coface SME.
+
+## Contact
+
+- Site: https://plastdu.ro
+- Telefon: 0724 658 491 | 0728 211 578
+- Email: office@plastdu.ro
+- Adresă: Str. Ana Ipătescu nr. 44, Jilava, Ilfov, România
+- Program: Luni-Vineri 08:00–17:00
+
+## Produse fabricate (producție proprie)
+
+- [Dibluri Cui Plastic (Poliamidă)](https://plastdu.ro/produse/dibluri-plastic): diblu termoizolant cu cui PA6.6 Ø5.5mm, corp PP Ø10mm, rozeță Ø55mm. Lungimi 70–260mm.
+- [Dibluri Cui Metalic Zincat](https://plastdu.ro/produse/dibluri-metalice): diblu cu cui oțel zincat electrolitic, rezistență mecanică superioară.
+- [Flanșă Vată Minerală](https://plastdu.ro/produse/flansa-vata): disc PP cu rozeță extinsă Ø120–140mm pentru distribuție forță pe MW/EPS.
+- [Flanșă OSB / Capac TSF-F55](https://plastdu.ro/produse/flansa-osb): flanșă cu capac snap-on, set complet cu șurub galvanizat.
+
+## Produse distribuite
+
+Șuruburi autoforante, şaibe, distanțieri beton, ancore Conexpand, tije filetate, dibluri gips-carton/cărămidă/schelă, coltar PVC, profile fațadă.
+
+## Aplicații principale
+
+- Sistem termoizolație EPS/polistiren pe fațadă
+- Sistem termoizolație vată minerală
+- Reabilitare termică blocuri (contracte edilitare, primării)
+- Furnizor materiale reabilitare pentru licitații publice
+
+## Ghiduri tehnice
+
+- [Cum se montează diblul pentru polistiren](https://plastdu.ro/blog/cum-se-monteaza-diblul-pentru-polistiren)
+- [Câte dibluri pe m² la termosistem](https://plastdu.ro/blog/cate-dibluri-pe-metru-patrat-termosistem)
+- [Diblu plastic vs metalic](https://plastdu.ro/blog/diblu-plastic-vs-metalic-termoizolatie)
+- [Ce diblu pentru vată minerală](https://plastdu.ro/blog/ce-diblu-pentru-vata-minerala)
+- [Ce diblu pentru gips-carton](https://plastdu.ro/blog/ce-diblu-pentru-gips-carton)
+
+## Zone de livrare
+
+Acoperire națională: București, Ilfov, Dolj, Argeș, Vâlcea, Prahova, Dâmbovița, Cluj, Brașov, Teleorman, Gorj.
+Livrare same-day București + Ilfov pentru comenzi confirmate până la 11:00.
