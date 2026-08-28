@@ -1,0 +1,27 @@
+# Cloudflare Pages _redirects file
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Force non-www (www.plastdu.ro → plastdu.ro)
+https://www.plastdu.ro/* https://plastdu.ro/:splat 301
+
+# Legacy Cloudflare Pages domain → primary domain
+https://plastdu.pages.dev/* https://plastdu.ro/:splat 301
+
+# Common typo redirects
+/produs/* /produse/:splat 301
+/product/* /produse/:splat 301
+/products/* /produse/:splat 301
+
+# Legacy category paths
+/dibluri/* /produse/dibluri 301
+/flanse/* /produse 301
+
+# Legacy blog paths
+/articol/* /blog/:splat 301
+/articole /blog 301
+
+# Localization landing shortcuts
+/bucuresti /furnizor-dibluri-bucuresti 301
+/cluj /furnizor-dibluri-cluj 301
+/constanta /furnizor-dibluri-constanta 301
+/brasov /furnizor-dibluri-brasov 301
