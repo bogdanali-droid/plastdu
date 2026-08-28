@@ -36,11 +36,17 @@ async function getProdus(slug: string): Promise<ProdusData | null> {
   }
 }
 
+function toAbsoluteUrl(img: string): string {
+  if (img.startsWith('http://') || img.startsWith('https://')) return img;
+  if (img.startsWith('/')) return `https://plastdu.ro${img}`;
+  return `https://plastdu.ro/${img}`;
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const produs = await getProdus(params.slug);
   if (!produs) return { title: 'Produs indisponibil' };
 
-  const title = `${produs.titlu} — ${produs.categorie} | Plast Du IV`;
+  const title = `${produs.titlu} — ${produs.categorie}`;
   const description = produs.descriere.slice(0, 155) + (produs.descriere.length > 155 ? '...' : '');
 
   return {
@@ -52,13 +58,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description,
       url: `https://plastdu.ro/produse/${params.slug}`,
       type: 'website',
-      images: produs.imagine ? [{ url: produs.imagine, alt: produs.titlu }] : undefined,
+      images: produs.imagine ? [{ url: toAbsoluteUrl(produs.imagine), alt: produs.titlu }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: produs.imagine ? [produs.imagine] : undefined,
+      images: produs.imagine ? [toAbsoluteUrl(produs.imagine)] : undefined,
     },
   };
 }
@@ -69,8 +75,9 @@ export default async function PagProdusDetal({ params }: { params: { slug: strin
 
   const imagineaMax = produs.imagine || '';
   const galerie = produs.galerie || [];
-  const totalImagini = [imagineaMax, ...galerie].filter(Boolean);
+  const totalImagini = [imagineaMax, ...galerie].filter(Boolean).map(toAbsoluteUrl);
 
+  // Product schema WITHOUT offers — B2B products, prices on request only
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -78,17 +85,10 @@ export default async function PagProdusDetal({ params }: { params: { slug: strin
     "description": produs.descriere,
     "category": produs.categorie,
     "brand": { "@type": "Brand", "name": "Plast Du IV" },
-    "manufacturer": { "@type": "Organization", "name": "Plast Du IV SRL" },
-    "image": totalImagini.map((img) => (img.startsWith('http') ? img : `https://plastdu.ro${img}`)),
+    "manufacturer": { "@type": "Organization", "name": "Plast Du IV SRL", "url": "https://plastdu.ro" },
+    "image": totalImagini.length > 0 ? totalImagini : [`https://plastdu.ro/logo.png`],
     "url": `https://plastdu.ro/produse/${produs.slug}`,
-    "offers": {
-      "@type": "Offer",
-      "url": `https://plastdu.ro/produse/${produs.slug}`,
-      "priceCurrency": "RON",
-      "availability": "https://schema.org/InStock",
-      "itemCondition": "https://schema.org/NewCondition",
-      "seller": { "@type": "Organization", "name": "Plast Du IV SRL" },
-    },
+    "sku": produs.slug,
   };
 
   const breadcrumbSchema = {
