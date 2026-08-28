@@ -1,9 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import type { Project } from "@/components/BucharestMap";
+import { PROJECT_CASE_STUDY_SLUGS } from "@/lib/proiecte/case-studies";
 
 export default function ProjectCard({ project }: { project: Project }) {
-  return (
+  const caseStudySlug = PROJECT_CASE_STUDY_SLUGS[project.name];
+
+  const card = (
     <article className="bg-white rounded-2xl shadow-card border border-neutral-border overflow-hidden hover:shadow-card-hover transition-shadow">
       <div className="aspect-video bg-slate-100 flex items-center justify-center overflow-hidden img-watermark">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -31,7 +35,25 @@ export default function ProjectCard({ project }: { project: Project }) {
           <span className="font-medium text-slate-700">{project.district}</span>
           &nbsp;·&nbsp;{project.year}
         </p>
+        {caseStudySlug && (
+          <span className="inline-flex items-center gap-1 text-xs font-semibold text-brand-accent mt-3">
+            Vezi studiu de caz
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+        )}
       </div>
     </article>
   );
+
+  if (caseStudySlug) {
+    return (
+      <Link href={`/proiecte/${caseStudySlug}`} className="block">
+        {card}
+      </Link>
+    );
+  }
+
+  return card;
 }
