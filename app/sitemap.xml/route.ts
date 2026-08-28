@@ -49,6 +49,9 @@ const STATIC_ROUTES = [
   { path: '/faq', priority: 0.8, changefreq: 'monthly' },
   { path: '/calculator-dibluri', priority: 0.8, changefreq: 'monthly' },
   { path: '/proiecte/reabilitare-bloc-buhusi', priority: 0.7, changefreq: 'monthly' },
+  { path: '/proiecte/reabilitare-termica-baicului', priority: 0.7, changefreq: 'monthly' },
+  { path: '/proiecte/reabilitare-termica-octavian-goga', priority: 0.7, changefreq: 'monthly' },
+  { path: '/proiecte/izolare-bloc-ghica', priority: 0.7, changefreq: 'monthly' },
   { path: '/blog/rss.xml', priority: 0.5, changefreq: 'daily' },
   { path: '/comparativ-produse', priority: 0.7, changefreq: 'monthly' },
 ];
