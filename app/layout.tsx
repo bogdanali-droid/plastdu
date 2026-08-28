@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import CookieConsent from "@/components/CookieConsent";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://plastdu.ro"),
@@ -204,6 +205,7 @@ export default function RootLayout({
         {children}
         <WhatsAppFloat />
         <CookieConsent />
+        <StickyMobileCTA />
         <script dangerouslySetInnerHTML={{ __html: `
           document.addEventListener('contextmenu', function(e) {
             if (e.target && e.target.tagName === 'IMG') e.preventDefault();
