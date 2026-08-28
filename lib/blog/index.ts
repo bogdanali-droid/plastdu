@@ -7,6 +7,14 @@ import { articol5 } from "./article-5";
 import { articol6 } from "./article-6";
 import { articol7 } from "./article-7";
 import { articol8 } from "./article-8";
+import { articol9 } from "./article-9";
+import { articol10 } from "./article-10";
+import { articol11 } from "./article-11";
+import { articol12 } from "./article-12";
+import { articol13 } from "./article-13";
+import { articol14 } from "./article-14";
+import { articol15 } from "./article-15";
+import { articol16 } from "./article-16";
 
 export * from "./types";
 export * from "./heroes";
@@ -20,6 +28,14 @@ export const ARTICOLE: Articol[] = [
   articol6,
   articol7,
   articol8,
+  articol9,
+  articol10,
+  articol11,
+  articol12,
+  articol13,
+  articol14,
+  articol15,
+  articol16,
 ];
 
 export function getArticol(slug: string): Articol | undefined {

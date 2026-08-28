@@ -22,6 +22,22 @@ export const BLOG_HEROES: Record<string, string> = {
     "https://images.unsplash.com/photo-1533427221277-ccf4a4e89bc8",
   "distantieri-beton-ghid-alegere":
     "https://images.unsplash.com/photo-1582540730843-f4418d96ccbe",
+  "ancore-chimice-vs-mecanice":
+    "https://images.unsplash.com/photo-1504148455328-c376907d081c",
+  "suruburi-autoforante-ghid":
+    "https://images.unsplash.com/photo-1530124566582-a618bc2615dc",
+  "capace-teava-protectie-santier":
+    "https://images.unsplash.com/photo-1621905251189-08b45d6a269e",
+  "coltar-pvc-cu-plasa-montaj":
+    "https://images.unsplash.com/photo-1541976590-713941681591",
+  "piulite-hexagonale-clase-rezistenta":
+    "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1",
+  "calcul-necesar-materiale-reabilitare-bloc":
+    "https://images.unsplash.com/photo-1541888946425-d81bb19240f5",
+  "diferenta-diblu-8mm-vs-10mm":
+    "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
+  "agrement-tehnic-dibluri-explicat":
+    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789",
 };
 
 const UNSPLASH_PARAMS = "w=1600&h=900&fit=crop&auto=format&q=80";
