@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FaqSearch, { type FaqEntry } from "@/components/FaqSearch";
+import NewsletterForm from "@/components/NewsletterForm";
 import { ARTICOLE } from "@/lib/blog";
 import { HUB_FAQ } from "@/lib/faq/hub-faq";
 import { classifyFaq } from "@/lib/faq/classify";
@@ -93,6 +94,18 @@ export default function FaqPage() {
         <section className="section-padding bg-neutral-surface">
           <div className="container-site max-w-4xl">
             <FaqSearch items={allFaq} />
+          </div>
+        </section>
+
+        {/* Newsletter */}
+        <section className="section-padding bg-white">
+          <div className="container-site max-w-xl text-center">
+            <h2 className="mb-3">Primești ghidurile tehnice direct pe email</h2>
+            <p className="text-slate-600 mb-6">
+              Abonează-te și primești noile ghiduri de montaj, comparații de produse și calcule de consum,
+              imediat ce le publicăm.
+            </p>
+            <NewsletterForm />
           </div>
         </section>
 

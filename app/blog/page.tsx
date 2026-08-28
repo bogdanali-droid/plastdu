@@ -6,6 +6,7 @@ import { getRequestContext } from "@cloudflare/next-on-pages";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ImageWithFallback from "@/components/ImageWithFallback";
+import NewsletterForm from "@/components/NewsletterForm";
 import { ARTICOLE, readingTime, PRODUSE_FALLBACK, getBlogHeroImage, type ArticolSumar } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -124,6 +125,18 @@ export default async function BlogHubPage() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Newsletter */}
+        <section className="section-padding bg-white">
+          <div className="container-site max-w-xl text-center">
+            <h2 className="mb-3">Primești ghidurile tehnice direct pe email</h2>
+            <p className="text-slate-600 mb-6">
+              Abonează-te și primești noile ghiduri de montaj, comparații de produse și calcule de consum,
+              imediat ce le publicăm.
+            </p>
+            <NewsletterForm />
           </div>
         </section>
 
