@@ -188,6 +188,12 @@ export default function RootLayout({
   return (
     <html lang="ro" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Blog Plast Du IV"
+          href="/blog/rss.xml"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}

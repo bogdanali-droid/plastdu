@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import ImageWithFallback from '@/components/ImageWithFallback';
+import ProductSearch from '@/components/ProductSearch';
 import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -41,6 +42,12 @@ export default function ProduseFiltruClient({ fabricate, distribuite }: Props) {
               Soluții tehnice certificate pentru sisteme de termoizolație exterioară, termoizolații și lucrări de finisaj —
               livrate direct la depozit sau șantier.
             </p>
+          </div>
+        </section>
+
+        <section className="bg-white py-8 border-b border-neutral-border">
+          <div className="container-site">
+            <ProductSearch />
           </div>
         </section>
 
