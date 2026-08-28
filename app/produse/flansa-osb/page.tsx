@@ -3,6 +3,8 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GalerieProduseClient from "@/components/GalerieProduseClient";
+import ProductFAQ, { buildFaqSchema } from "@/components/ProductFAQ";
+import { PRODUSE_FAQ } from "@/lib/produse/faq";
 
 export const metadata: Metadata = {
   title: "Flanșă OSB cu Capac TSF-F55 — Fixare cu Finisaj Superior",
@@ -90,10 +92,14 @@ const IMAGINI = [
   "/images/produse/flansa-osb/03.jpg",
 ];
 
+const faq = PRODUSE_FAQ["flansa-osb"];
+const faqSchema = buildFaqSchema(faq);
+
 export default function FlansaOsbPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Header />
       <main>
         <div className="bg-neutral-surface border-b border-neutral-border">
@@ -218,6 +224,8 @@ export default function FlansaOsbPage() {
             </div>
           </div>
         </section>
+
+        <ProductFAQ faq={faq} />
 
         <section className="section-padding bg-brand-blue text-white">
           <div className="container-site">

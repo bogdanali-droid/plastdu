@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GalerieProduse from "./GalerieProduse";
 import { getRequestContext } from "@cloudflare/next-on-pages";
+import ProductFAQ, { buildFaqSchema } from "@/components/ProductFAQ";
+import { getProdusFaq } from "@/lib/produse/faq";
 
 export const runtime = 'edge';
 
@@ -120,10 +122,16 @@ export default async function PagProdusDetal({ params }: { params: { slug: strin
     ],
   };
 
+  const faq = getProdusFaq(produs.slug);
+  const faqSchema = faq ? buildFaqSchema(faq) : null;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faqSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
 
       <Header />
       <main>
@@ -222,6 +230,8 @@ export default async function PagProdusDetal({ params }: { params: { slug: strin
             </div>
           </div>
         </section>
+
+        {faq && <ProductFAQ faq={faq} />}
 
         {related.length > 0 && (
           <section className="section-padding bg-neutral-surface">

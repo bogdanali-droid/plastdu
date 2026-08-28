@@ -3,6 +3,8 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GalerieProduseClient from "@/components/GalerieProduseClient";
+import ProductFAQ, { buildFaqSchema } from "@/components/ProductFAQ";
+import { PRODUSE_FAQ } from "@/lib/produse/faq";
 
 export const metadata: Metadata = {
   title: "Dibluri Cui Plastic (Poliamidă) — Fixare Termoizolație ETICS",
@@ -63,12 +65,19 @@ const IMAGINI = [
   "/images/produse/dibluri-plastic/14.jpg",
 ];
 
+const faq = PRODUSE_FAQ["dibluri-plastic"];
+const faqSchema = buildFaqSchema(faq);
+
 export default function DiblurPlasticPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Header />
       <main>
@@ -227,6 +236,8 @@ export default function DiblurPlasticPage() {
             </div>
           </div>
         </section>
+
+        <ProductFAQ faq={faq} />
 
         {/* CTA */}
         <section className="section-padding bg-brand-blue text-white">
