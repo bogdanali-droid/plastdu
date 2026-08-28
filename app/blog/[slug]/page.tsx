@@ -92,12 +92,49 @@ export default async function BlogArticolPage({ params }: { params: { slug: stri
       }
     : null;
 
+  // Auto-detect HowTo schema — extract steps from H3 blocks starting with "Pasul N —"
+  const howToSteps: { name: string; text: string; position: number }[] = [];
+  let currentStep: { name: string; text: string; position: number } | null = null;
+  for (const block of articol.blocks) {
+    const b = block as any;
+    if (b.type === "h3" && typeof b.text === "string" && /^Pasul\s+\d+/i.test(b.text)) {
+      if (currentStep) howToSteps.push(currentStep);
+      currentStep = { name: b.text.replace(/^Pasul\s+\d+\s*[—–-]\s*/i, ""), text: "", position: howToSteps.length + 1 };
+    } else if (currentStep && b.type === "p" && typeof b.text === "string") {
+      if (!currentStep.text) currentStep.text = b.text;
+    } else if (b.type === "h2" && currentStep) {
+      howToSteps.push(currentStep);
+      currentStep = null;
+    }
+  }
+  if (currentStep) howToSteps.push(currentStep);
+
+  const howToSchema = howToSteps.length >= 3
+    ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: articol.h1,
+        description: articol.metaDescription,
+        image: heroImagine.startsWith("http") ? heroImagine : `https://plastdu.ro${heroImagine}`,
+        totalTime: `PT${minute}M`,
+        step: howToSteps.map((s) => ({
+          "@type": "HowToStep",
+          position: s.position,
+          name: s.name,
+          text: s.text,
+        })),
+      }
+    : null;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
+      {howToSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       )}
       <Header />
       <main>
