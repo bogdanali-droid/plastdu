@@ -6,27 +6,52 @@ import Footer from "@/components/Footer";
 
 /* ─── Metadata ───────────────────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  title: "Aplicații Tehnice — Termoizolație, Vată Minerală, OSB, Gips-Carton",
+  title: "Aplicații — Unde se folosesc produsele Plast Du IV",
   description:
-    "Ghid tehnic pentru alegerea diblurilor și flanșelor în funcție de aplicație: " +
-    "termoizolație polistiren, fixare vată minerală, plăci OSB, gips-carton. " +
-    "Informații pentru ingineri, șefi de șantier și firme de construcții.",
+    "Ghid tehnic pentru alegerea diblurilor, flanșelor și accesoriilor în funcție de aplicație: " +
+    "fațadă exterioară, izolații interioare, structuri metalice, construcții civile, industrial " +
+    "și reabilitare edilitară. Informații pentru ingineri, șefi de șantier și firme de construcții.",
   keywords: [
     "aplicatii dibluri constructii",
     "termoizolatie polistiren",
     "fixare vata minerala",
     "placi OSB diblu",
     "gips carton fixare",
+    "structuri metalice fixare",
+    "reabilitare edilitara materiale",
     "alegere diblu constructii",
   ],
   alternates: { canonical: "https://plastdu.ro/aplicatii" },
   openGraph: {
-    title: "Aplicații Tehnice Dibluri și Flanșe | Plast Du IV",
+    title: "Aplicații — Unde se folosesc produsele Plast Du IV",
     description:
-      "Ghid tehnic complet pentru alegerea corectă a diblurilor și flanșelor în funcție de aplicație și suport.",
+      "Ghid tehnic complet pentru alegerea corectă a diblurilor, flanșelor și accesoriilor în funcție de aplicație și suport.",
     url: "https://plastdu.ro/aplicatii",
   },
 };
+
+const APLICATII_FAQ = [
+  {
+    q: "Cum aleg produsul potrivit pentru aplicația mea?",
+    a: "Identificați mai întâi materialul izolant sau structural (polistiren, vată minerală, OSB, gips-carton, structură metalică), apoi tipul de suport (beton, cărămidă, BCA, metal). Fiecare secțiune de mai jos recomandă produsele principale pentru combinația respectivă.",
+  },
+  {
+    q: "Ce diferență e între dibluri pentru fațadă și dibluri pentru structuri interioare?",
+    a: "Diblurile pentru fațadă (termoizolație) sunt gândite pentru fixarea plăcilor izolante prin adeziv, cu rozetă care distribuie forța pe material moale. Diblurile pentru structuri interioare (gips-carton, profile metalice) au dimensiuni și forțe de extragere diferite, adaptate suportului de beton sau zidărie.",
+  },
+  {
+    q: "Produsele Plast Du IV sunt potrivite și pentru proiecte industriale?",
+    a: "Da — pe lângă gama de dibluri și flanșe pentru termoizolație, distribuim șuruburi autoforante, tije filetate, piulițe și șaibe folosite frecvent la structuri metalice și fixări industriale.",
+  },
+  {
+    q: "Lucrați cu firme de construcții și primării pentru proiecte de reabilitare?",
+    a: "Da, livrăm materiale pentru reabilitarea termică a blocurilor de locuințe și clădirilor publice, cu documentația tehnică necesară pentru dosarele de licitație publică.",
+  },
+  {
+    q: "Unde găsesc informații despre montaj pas cu pas?",
+    a: "Ghidurile din secțiunea Blog detaliază montajul pas cu pas pentru fiecare tip de produs — dibluri, flanșe, colțare, profile de soclu și dilatație.",
+  },
+];
 
 /* ─── Date aplicatii ─────────────────────────────────────────────────────── */
 interface Aplicatie {
@@ -227,6 +252,117 @@ const APLICATII: Aplicatie[] = [
       "Sistemele de tavane suspendate necesită calcul de sarcini separat — consultați proiectantul.",
     ],
   },
+
+  /* ── 5. Structuri Metalice ────────────────────────────────────────────── */
+  {
+    id: "structuri-metalice",
+    titlu: "Structuri Metalice",
+    subtitlu: "Fixare, asamblare și protecție la coroziune pentru structuri din oțel",
+    culoareAccent: "text-amber-700",
+    culoareBg: "bg-amber-50",
+    culoareBorder: "border-amber-200",
+    culoareDot: "bg-amber-600",
+    imagine: "/images/produse/saibe/03.jpg",
+    descriereTehnica: [
+      "Structurile metalice — hale industriale, poduri rulante, platforme, cadre de susținere — necesită elemente de fixare cu clase de rezistență certificate și protecție anticorozivă adecvată mediului de exploatare. Șuruburile autoforante, tijele filetate, piulițele hexagonale și șaibele sunt elemente uzuale în asamblarea și mentenanța acestor structuri.",
+      "Alegerea corectă a clasei de rezistență (6, 8 sau 10 pentru piulițe și șuruburi) depinde de solicitarea calculată în proiectul de structură. Șaiba corect dimensionată previne amprentarea materialului de bază și distribuie forța de strângere pe suprafața de contact, reducând riscul de slăbire a îmbinării la vibrații.",
+      "Protecția anticorozivă (zincare) este obligatorie pentru elementele expuse la exterior sau în medii cu umiditate ridicată. Tijele filetate se folosesc frecvent pentru ancorarea suporților suspendați și a echipamentelor tehnice pe structura metalică existentă.",
+    ],
+    parametriTehnici: [
+      { param: "Clase de rezistență piulițe/șuruburi", val: "6, 8, 10 (conform proiect structură)" },
+      { param: "Protecție anticorozivă", val: "Zincare electrolitică / termică, în funcție de expunere" },
+      { param: "Tije filetate — diametre uzuale", val: "M8–M20, lungimi la cerere" },
+      { param: "Șaibe recomandate", val: "DIN 125 (standard), DIN 9021 (distribuție forță mare)" },
+      { param: "Șuruburi autoforante — aplicație", val: "Fixare tablă cutată, panouri sandwich pe structură" },
+    ],
+    produse: [
+      {
+        href: "/produse/suruburi-autoforante",
+        titlu: "Șuruburi autoforante",
+        descriere: "Fixare rapidă fără preforare, pentru tablă și panouri pe structuri metalice.",
+        principal: true,
+      },
+      {
+        href: "/produse/tije-filetate",
+        titlu: "Tije filetate",
+        descriere: "Ancorare suporți suspendați și echipamente tehnice pe structura existentă.",
+        principal: false,
+      },
+      {
+        href: "/produse/piulite-hexagonale",
+        titlu: "Piulițe hexagonale",
+        descriere: "Clase de rezistență 6, 8 și 10, oțel zincat, pentru asamblări structurale.",
+        principal: false,
+      },
+      {
+        href: "/produse/saibe",
+        titlu: "Șaibe",
+        descriere: "Plate și zimțate, oțel zincat, distribuție corectă a forței de strângere.",
+        principal: false,
+      },
+    ],
+    noteTehnician: [
+      "Verificați clasa de rezistență cerută în proiectul de structură înainte de a comanda șuruburi/piulițe.",
+      "Folosiți șaibă DIN 9021 la fixări pe table subțiri sau materiale cu risc de deformare locală.",
+      "Elementele de fixare expuse la exterior necesită protecție anticorozivă corespunzătoare clasei de mediu.",
+      "La structuri cu vibrații (poduri rulante, utilaje), combinați piulița cu șaibă zimțată sau soluție de blocare dedicată.",
+    ],
+  },
+
+  /* ── 6. Reabilitare Edilitară / Construcții Civile ────────────────────── */
+  {
+    id: "reabilitare-edilitara",
+    titlu: "Reabilitare Edilitară",
+    subtitlu: "Construcții civile, blocuri de locuințe și clădiri publice",
+    culoareAccent: "text-brand-blue",
+    culoareBg: "bg-brand-blue/5",
+    culoareBorder: "border-brand-blue/20",
+    culoareDot: "bg-brand-blue",
+    imagine: "/images/produse/coltar-pvc/01.jpg",
+    descriereTehnica: [
+      "Proiectele de reabilitare termică a blocurilor de locuințe și clădirilor publice (primării, școli, spitale) combină termoizolația fațadei cu lucrări de finisaj — profile de colț, distanțieri pentru elementele din beton armat reparate și accesorii de protecție a suprafețelor expuse la trafic pietonal.",
+      "Pe șantierele de reabilitare edilitară, volumul de materiale necesare e ridicat și termenele sunt strânse, motiv pentru care planificarea cantităților (dibluri, colțare, distanțieri) direct din proiectul tehnic evită opririle de șantier pentru reaprovizionare.",
+      "Colțarul PVC cu plasă protejează muchiile fațadei nou-termoizolate de fisurare, iar distanțierii pentru armătură sunt esențiali la reparațiile locale de beton (balcoane, cornișe, elemente structurale degradate) frecvente pe blocurile vechi.",
+    ],
+    parametriTehnici: [
+      { param: "Aplicații tipice", val: "Blocuri de locuințe, școli, spitale, sedii de primărie" },
+      { param: "Colțar protecție fațadă", val: "PVC cu plasă din fibră de sticlă" },
+      { param: "Distanțieri reparații beton", val: "Conform acoperirii cerute în proiect (mm)" },
+      { param: "Documentație necesară", val: "Fișe tehnice, declarații de conformitate pentru dosarul de licitație" },
+    ],
+    produse: [
+      {
+        href: "/produse/dibluri-plastic",
+        titlu: "Dibluri Cui Plastic (Poliamidă)",
+        descriere: "Soluția de volum pentru termoizolația fațadelor pe blocuri și clădiri publice.",
+        principal: true,
+      },
+      {
+        href: "/produse/coltar-pvc",
+        titlu: "Colțar PVC cu plasă",
+        descriere: "Protecție colțuri fațadă nou-termoizolată, montaj rapid în masa de șpaclu.",
+        principal: true,
+      },
+      {
+        href: "/produse/distantieri-gresie",
+        titlu: "Distanțieri",
+        descriere: "Pentru rosturi și reparații locale de beton pe elementele existente.",
+        principal: false,
+      },
+      {
+        href: "/produse/profil-colt-exterior",
+        titlu: "Profil de colț exterior",
+        descriere: "Finisaje exterioare și interioare pe muchiile clădirii reabilitate.",
+        principal: false,
+      },
+    ],
+    noteTehnician: [
+      "Pentru licitații publice, pregătiți din timp documentația tehnică — fișe și declarații de conformitate.",
+      "Calculați necesarul de materiale direct din proiectul tehnic pentru a evita opriri de șantier.",
+      "Pe clădiri înalte sau expuse la vânt, verificați densitatea de dibluri conform zonei de colț/câmp curent.",
+      "Colțarul de protecție se montează imediat după stratul de plasă armată, înainte de finisajul decorativ.",
+    ],
+  },
 ];
 
 /* ─── Sub-component: Notă tehnică ────────────────────────────────────────── */
@@ -253,16 +389,37 @@ function NotaTehnica({ note }: { note: string[] }) {
 }
 
 /* ─── Page ───────────────────────────────────────────────────────────────── */
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Acasă", item: "https://plastdu.ro/" },
+    { "@type": "ListItem", position: 2, name: "Aplicații", item: "https://plastdu.ro/aplicatii" },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: APLICATII_FAQ.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function AplicatiiPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Header />
       <main>
         {/* ── Hero ────────────────────────────────────────────────────────── */}
         <section className="bg-brand-blue text-white section-padding">
           <div className="container-site">
             <p className="section-label !text-brand-accent/80 mb-3">Ghid tehnic</p>
-            <h1 className="text-display-lg text-white mb-4">Aplicații tehnice</h1>
+            <h1 className="text-display-lg text-white mb-4">Aplicații — Unde se folosesc produsele Plast Du IV</h1>
             <p className="text-lg text-blue-100 max-w-2xl mb-8">
               Ghid tehnic pentru alegerea corectă a diblurilor și flanșelor în funcție de
               tipul aplicației, materialul izolant și suportul structural.
@@ -483,6 +640,8 @@ export default function AplicatiiPage() {
                     ["Vată minerală fațadă", "MW lamelă / tablie", "Orice suport", "Diblu metalic + Flanșă Ø120–140mm"],
                     ["OSB pe structură lemn", "—", "Grinzi / montanți lemn", "Flanșă OSB TSF-F55 + șurub galvanizat"],
                     ["Gips-carton (profile)", "—", "Beton, zidărie", "Dibluri Ø10mm (plastic sau metalic)"],
+                    ["Structuri metalice", "—", "Oțel", "Șuruburi autoforante, tije filetate, piulițe, șaibe"],
+                    ["Reabilitare edilitară", "EPS / Vată", "Blocuri, clădiri publice", "Dibluri + colțar PVC + distanțieri"],
                   ].map(([aplicatie, material, suport, produs], i) => (
                     <tr key={aplicatie} className={i % 2 === 0 ? "bg-white/5" : ""}>
                       <td className="px-5 py-3.5 font-medium text-white">{aplicatie}</td>
@@ -511,6 +670,49 @@ export default function AplicatiiPage() {
               >
                 Consultanță tehnică gratuită
               </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── FAQ ──────────────────────────────────────────────────────────── */}
+        <section className="section-padding bg-neutral-surface">
+          <div className="container-site max-w-3xl">
+            <p className="section-label">Întrebări frecvente</p>
+            <h2 className="mb-8">Ce mai vor să știe cititorii</h2>
+            <div className="space-y-4">
+              {APLICATII_FAQ.map((f) => (
+                <div key={f.q} className="bg-white rounded-2xl border border-neutral-border p-5">
+                  <h3 className="text-base font-semibold text-slate-800 mb-2">{f.q}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{f.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Resurse conexe ───────────────────────────────────────────────── */}
+        <section className="section-padding bg-white">
+          <div className="container-site">
+            <p className="section-label">Continuă documentarea</p>
+            <h2 className="mb-8">Resurse conexe</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { href: "/sisteme/termoizolatie-eps", titlu: "Sistem termoizolație EPS", desc: "Hub tehnic dedicat" },
+                { href: "/sisteme/termoizolatie-vata-minerala", titlu: "Sistem termoizolație vată minerală", desc: "Hub tehnic dedicat" },
+                { href: "/aplicatii/reabilitare-blocuri", titlu: "Reabilitare blocuri", desc: "Landing dedicat" },
+                { href: "/calculator-dibluri", titlu: "Calculator dibluri", desc: "Câte buc/m² ai nevoie" },
+                { href: "/blog", titlu: "Blog — ghiduri tehnice", desc: "22 articole de specialitate" },
+                { href: "/faq", titlu: "FAQ complet", desc: "Toate întrebările într-un loc" },
+                { href: "/materiale-fatada", titlu: "Materiale fațadă", desc: "Distanțieri, ancore, profile" },
+                { href: "/proiecte", titlu: "Proiecte realizate", desc: "Studii de caz din șantier" },
+              ].map((r) => (
+                <Link key={r.href} href={r.href} className="card group !p-5">
+                  <h3 className="text-sm font-semibold text-brand-blue mb-1 group-hover:text-brand-accent transition-colors">
+                    {r.titlu}
+                  </h3>
+                  <p className="text-xs text-slate-500">{r.desc}</p>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

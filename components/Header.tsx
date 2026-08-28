@@ -30,6 +30,7 @@ const NAV_ITEMS: NavItem[] = [
     { href: "/furnizor-dibluri-brasov", label: "Furnizor Brașov", desc: "Zonă montană + izolații superioare" },
   ]},
   { href: "/blog", label: "Ghiduri" },
+  { href: "/faq", label: "FAQ" },
   { href: "/proiecte", label: "Proiecte" },
   { href: "/despre-noi", label: "Despre noi" },
   { href: "/contact", label: "Contact" },
