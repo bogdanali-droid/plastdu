@@ -20,6 +20,12 @@ const BLOG_SLUGS = [
   'calcul-necesar-materiale-reabilitare-bloc',
   'diferenta-diblu-8mm-vs-10mm',
   'agrement-tehnic-dibluri-explicat',
+  'tipuri-saibe-din-standarde',
+  'ce-distantier-pentru-fier-beton-10mm',
+  'cum-montezi-profil-de-soclu',
+  'dilatia-termosistem-cand-e-necesara',
+  'coltar-pvc-vs-coltar-aluminiu',
+  'agatatori-carlige-tipuri-portanta',
 ];
 
 const STATIC_ROUTES = [
@@ -40,6 +46,9 @@ const STATIC_ROUTES = [
   { path: '/despre-noi', priority: 0.7, changefreq: 'monthly' },
   { path: '/contact', priority: 0.7, changefreq: 'monthly' },
   { path: '/blog', priority: 0.8, changefreq: 'weekly' },
+  { path: '/faq', priority: 0.8, changefreq: 'monthly' },
+  { path: '/calculator-dibluri', priority: 0.8, changefreq: 'monthly' },
+  { path: '/proiecte/reabilitare-bloc-buhusi', priority: 0.7, changefreq: 'monthly' },
 ];
 
 export async function GET() {

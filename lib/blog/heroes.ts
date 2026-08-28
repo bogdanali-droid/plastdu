@@ -38,6 +38,18 @@ export const BLOG_HEROES: Record<string, string> = {
     "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
   "agrement-tehnic-dibluri-explicat":
     "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789",
+  "tipuri-saibe-din-standarde":
+    "https://images.unsplash.com/photo-1591129841117-3adfd313e34f",
+  "ce-distantier-pentru-fier-beton-10mm":
+    "https://images.unsplash.com/photo-1541976590-713941681591",
+  "cum-montezi-profil-de-soclu":
+    "https://images.unsplash.com/photo-1620641622071-e2a3a5f6c4a6",
+  "dilatia-termosistem-cand-e-necesara":
+    "https://images.unsplash.com/photo-1600585152220-90363fe7e115",
+  "coltar-pvc-vs-coltar-aluminiu":
+    "https://images.unsplash.com/photo-1504307651254-35680f356dfd",
+  "agatatori-carlige-tipuri-portanta":
+    "https://images.unsplash.com/photo-1622480916113-9000ac49b79d",
 };
 
 const UNSPLASH_PARAMS = "w=1600&h=900&fit=crop&auto=format&q=80";

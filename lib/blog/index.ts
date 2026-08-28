@@ -15,6 +15,12 @@ import { articol13 } from "./article-13";
 import { articol14 } from "./article-14";
 import { articol15 } from "./article-15";
 import { articol16 } from "./article-16";
+import { articol17 } from "./article-17";
+import { articol18 } from "./article-18";
+import { articol19 } from "./article-19";
+import { articol20 } from "./article-20";
+import { articol21 } from "./article-21";
+import { articol22 } from "./article-22";
 
 export * from "./types";
 export * from "./heroes";
@@ -36,6 +42,12 @@ export const ARTICOLE: Articol[] = [
   articol14,
   articol15,
   articol16,
+  articol17,
+  articol18,
+  articol19,
+  articol20,
+  articol21,
+  articol22,
 ];
 
 export function getArticol(slug: string): Articol | undefined {
