@@ -14,6 +14,7 @@ const NAV_ITEMS: NavItem[] = [
     { href: "/produse", label: "Toate produsele", desc: "Catalog complet" },
     { href: "/produse/dibluri", label: "Ghid dibluri", desc: "Matrice alegere & comparativ" },
     { href: "/materiale-fatada", label: "Materiale fațadă", desc: "Distanțieri, ancore, profile" },
+    { href: "/calculator-dibluri", label: "Calculator dibluri", desc: "Câte buc/m² ai nevoie" },
   ]},
   { href: "/sisteme", label: "Sisteme", children: [
     { href: "/sisteme/termoizolatie-eps", label: "Termoizolație EPS", desc: "Dibluri pentru polistiren" },

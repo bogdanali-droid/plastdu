@@ -36,6 +36,24 @@ async function getProdus(slug: string): Promise<ProdusData | null> {
   }
 }
 
+async function getRelatedProduse(currentSlug: string, categorie: string, limit = 4): Promise<ProdusData[]> {
+  try {
+    const { env } = getRequestContext();
+    const kv = (env as any).PLASTDU_CONTENT as KVNamespace | undefined;
+    if (!kv) return [];
+    const raw = await kv.get('produse');
+    if (!raw) return [];
+    const data = JSON.parse(raw);
+    const all = [...(data.fabricate || []), ...(data.distribuite || [])] as ProdusData[];
+    const sameCategory = all.filter((p) => p.slug !== currentSlug && p.categorie === categorie);
+    if (sameCategory.length >= limit) return sameCategory.slice(0, limit);
+    const others = all.filter((p) => p.slug !== currentSlug && p.categorie !== categorie);
+    return [...sameCategory, ...others].slice(0, limit);
+  } catch {
+    return [];
+  }
+}
+
 function toAbsoluteUrl(img: string): string {
   if (img.startsWith('http://') || img.startsWith('https://')) return img;
   if (img.startsWith('/')) return `https://plastdu.ro${img}`;
@@ -73,6 +91,7 @@ export default async function PagProdusDetal({ params }: { params: { slug: strin
   const produs = await getProdus(params.slug);
   if (!produs) notFound();
 
+  const related = await getRelatedProduse(produs.slug, produs.categorie, 4);
   const imagineaMax = produs.imagine || '';
   const galerie = produs.galerie || [];
   const totalImagini = [imagineaMax, ...galerie].filter(Boolean).map(toAbsoluteUrl);
@@ -203,6 +222,29 @@ export default async function PagProdusDetal({ params }: { params: { slug: strin
             </div>
           </div>
         </section>
+
+        {related.length > 0 && (
+          <section className="section-padding bg-neutral-surface">
+            <div className="container-site">
+              <p className="section-label mb-3">Produse similare</p>
+              <h2 className="mb-8">Alte produse din categoria {produs.categorie}</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {related.map((r) => (
+                  <Link key={r.slug} href={`/produse/${r.slug}`} className="card group block bg-white hover:shadow-md transition-shadow">
+                    {r.imagine && (
+                      <div className="relative aspect-square rounded-xl overflow-hidden bg-slate-50 mb-3 img-watermark">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={r.imagine} alt={r.titlu} className="w-full h-full object-cover" loading="lazy" />
+                      </div>
+                    )}
+                    <p className="text-xs text-slate-400 mb-1">{r.categorie}</p>
+                    <h3 className="text-sm font-semibold text-slate-800 group-hover:text-brand-blue transition-colors">{r.titlu}</h3>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section-padding bg-brand-blue text-white">
           <div className="container-site text-center">
