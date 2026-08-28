@@ -86,8 +86,27 @@ export default async function DespreNoiPage() {
   const FABRICA = despre.fabrica;
   const VIDEOCLIPURI: string[] = FABRICA.videoclipuri || [];
 
+  const videoSchemas = VIDEOCLIPURI.map((url, i) => ({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: `Proces de fabricație Plast Du IV — Videoclip ${i + 1}`,
+    description:
+      "Procesul de producție al diblurilor și flanșelor la fabrica Plast Du IV din Jilava, Ilfov.",
+    thumbnailUrl: "https://plastdu.ro/images/fabrica/01.jpg",
+    uploadDate: "2026-08-27",
+    contentUrl: url.startsWith("http") ? url : `https://plastdu.ro${url}`,
+    publisher: { "@type": "Organization", name: "Plast Du IV SRL" },
+  }));
+
   return (
     <>
+      {videoSchemas.map((schema, i) => (
+        <script
+          key={`video-schema-${i}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <Header />
       <main>
         <section className="bg-brand-blue text-white section-padding">
