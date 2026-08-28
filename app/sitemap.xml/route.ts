@@ -12,6 +12,14 @@ const BLOG_SLUGS = [
   'flansa-osb-vs-flansa-vata-minerala',
   'greseli-frecvente-la-montarea-diblurilor-termosistem',
   'distantieri-beton-ghid-alegere',
+  'ancore-chimice-vs-mecanice',
+  'suruburi-autoforante-ghid',
+  'capace-teava-protectie-santier',
+  'coltar-pvc-cu-plasa-montaj',
+  'piulite-hexagonale-clase-rezistenta',
+  'calcul-necesar-materiale-reabilitare-bloc',
+  'diferenta-diblu-8mm-vs-10mm',
+  'agrement-tehnic-dibluri-explicat',
 ];
 
 const STATIC_ROUTES = [
@@ -25,6 +33,9 @@ const STATIC_ROUTES = [
   { path: '/aplicatii/reabilitare-blocuri', priority: 0.9, changefreq: 'monthly' },
   { path: '/furnizor-primarii', priority: 0.9, changefreq: 'monthly' },
   { path: '/furnizor-dibluri-bucuresti', priority: 0.9, changefreq: 'monthly' },
+  { path: '/furnizor-dibluri-constanta', priority: 0.9, changefreq: 'monthly' },
+  { path: '/furnizor-dibluri-cluj', priority: 0.9, changefreq: 'monthly' },
+  { path: '/furnizor-dibluri-brasov', priority: 0.9, changefreq: 'monthly' },
   { path: '/proiecte', priority: 0.8, changefreq: 'weekly' },
   { path: '/despre-noi', priority: 0.7, changefreq: 'monthly' },
   { path: '/contact', priority: 0.7, changefreq: 'monthly' },
@@ -32,7 +43,7 @@ const STATIC_ROUTES = [
 ];
 
 export async function GET() {
-  const today = '2026-08-27';
+  const today = '2026-08-28';
   const urls: { loc: string; priority: number; changefreq: string; lastmod?: string }[] = [];
 
   for (const r of STATIC_ROUTES) {
