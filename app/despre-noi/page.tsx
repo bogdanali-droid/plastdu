@@ -265,7 +265,7 @@ export default async function DespreNoiPage() {
                 <p className="section-label mb-3">Unde ne găsiți</p>
                 <h2 className="mb-6">Sediu și fabrică</h2>
                 <div className="space-y-4 text-sm text-slate-600">
-                  <div><p className="font-semibold text-slate-800 mb-1">Sediu & Depozit</p><p>Str. Ana Ipătescu nr. 44, Spațiul B2</p><p>Com. Jilava, Ilfov</p></div>
+                  <div><p className="font-semibold text-slate-800 mb-1">Sediu & Depozit</p><p>Str. Ana Ipătescu nr. 44, Spațiul B2</p><p>Com. Jilava, Ilfov</p><p className="text-xs text-slate-500 mt-1">📱 GPS: <strong>nr. 35</strong> — intrarea complex</p></div>
                   <div><p className="font-semibold text-slate-800 mb-1">Fabrică</p><p>{FABRICA.adresa}</p></div>
                   <div className="pt-2"><a href="tel:+40724658491" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">0724 658 491</a><a href="tel:+40728211578" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">0728 211 578</a><a href="mailto:office@plastdu.ro" className="block font-semibold text-brand-blue hover:text-brand-accent transition-colors">office@plastdu.ro</a></div>
                 </div>

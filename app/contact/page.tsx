@@ -29,7 +29,7 @@ const DEFAULT_CONTACT = {
   schedule: 'Luni – Vineri, 08:00 – 17:00 | Sâmbătă – Duminică: Închis',
   whatsapp: 'https://wa.me/40724658491',
   mapsEmbed:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2854.2!2d26.0792!3d44.3449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ffb4b5e7a1f%3A0xa4e0f5c8d3b72e1a!2sStrada%20Ana%20Ip%C4%83tescu%2044%2C%20Jilava%2C%20Ilfov!5e0!3m2!1sro!2sro!4v1700000000000!5m2!1sro!2sro',
+    'https://www.google.com/maps?q=Strada+Ana+Ip%C4%83tescu+35,+Jilava&output=embed',
 };
 
 const JUDETE_LIVRARE = [
@@ -187,6 +187,7 @@ export default async function ContactPage() {
                 <div>
                   <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Adresă</p>
                   <p className="text-brand-blue-700 font-semibold">{ADDRESS}</p>
+                  <p className="text-xs text-slate-500 mt-1">📱 Pentru GPS/navigație folosiți <strong>Str. Ana Ipătescu nr. 35, Jilava</strong> — intrarea în complexul industrial.</p>
                 </div>
               </div>
 
